@@ -8,5 +8,6 @@
     fzf
     tree
     lazygit
+	 fastfetch
   ];
 }
