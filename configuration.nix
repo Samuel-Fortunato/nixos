@@ -45,12 +45,6 @@
 	  systemPackages = with pkgs; [
 		 gh
 		 yazi
-		 gcc
-		 tree-sitter
-		 ripgrep
-		 clang-tools
-		 pyright
-		 texlab
 		 wl-clipboard
 		 vim
 		 kitty
@@ -69,10 +63,6 @@
 	  ];
   };
 
-  programs.neovim = {
-	 enable = true;
-	 defaultEditor = true;
-  };
 
   programs.git = {
 	  enable = true;
@@ -86,12 +76,21 @@
   services.displayManager.ly.enable = true;
 
 
-	home-manager.users.samuel = {
-	  home.username = "samuel";
-	  home.homeDirectory = "/home/samuel";
+home-manager.users.samuel = {
+  home.username = "samuel";
+  home.homeDirectory = "/home/samuel";
 
-	  home.stateVersion = "26.05";
-	};
+  home.stateVersion = "26.05";
+
+home.packages = with pkgs; [
+  neovim
+  gcc
+  tree-sitter
+  clang-tools
+  pyright
+  texlab
+];
+};
 
 system.stateVersion = "26.05"; # Did you read the comment?
 }
