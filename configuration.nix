@@ -85,6 +85,14 @@
 
   services.displayManager.ly.enable = true;
 
-  system.stateVersion = "26.05"; # Did you read the comment?
+
+	home-manager.users.samuel = {
+	  home.username = "samuel";
+	  home.homeDirectory = "/home/samuel";
+
+	  home.stateVersion = "26.05";
+	};
+
+system.stateVersion = "26.05"; # Did you read the comment?
 }
 
