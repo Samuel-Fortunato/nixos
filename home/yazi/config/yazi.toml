@@ -1,0 +1,5 @@
+[open]
+prepend_rules = [
+	# Folder
+	{ url = "*/", use = [ "open", "reveal", "edit" ] },
+]

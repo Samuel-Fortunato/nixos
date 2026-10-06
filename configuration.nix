@@ -56,18 +56,8 @@
       VISUAL = "nvim";
     };
     systemPackages = with pkgs; [
-      gh
-      yazi
       wl-clipboard
-      vim
-      kitty
-      stow
-      zoxide
-      google-chrome
       glib
-      fzf
-      tree
-      lazygit
     ];
   };
 
@@ -85,8 +75,9 @@
   home-manager.users.samuel = {
     imports = [
       ./home/neovim
+      ./home/hyprland
+		./home/yazi
 		./home/noctalia.nix
-		./home/hyprland
 		./home/packages.nix
     ];
 
