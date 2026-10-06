@@ -66,7 +66,6 @@
       google-chrome
       glib
       fzf
-      noctalia
       tree
       lazygit
     ];
@@ -86,6 +85,7 @@
   home-manager.users.samuel = {
     imports = [
       ./home/neovim
+		./home/noctalia.nix
     ];
 
     home.username = "samuel";
