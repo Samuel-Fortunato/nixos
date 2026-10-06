@@ -87,6 +87,7 @@
       ./home/neovim
 		./home/noctalia.nix
 		./home/hyprland
+		./home/packages.nix
     ];
 
     home.username = "samuel";
