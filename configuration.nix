@@ -62,12 +62,8 @@
       vim
       kitty
       stow
-      rofi
-      pywal16
-      python3
       zoxide
       google-chrome
-      awww
       glib
       fzf
       noctalia
