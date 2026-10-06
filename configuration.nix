@@ -86,6 +86,7 @@
     imports = [
       ./home/neovim
 		./home/noctalia.nix
+		./home/hyprland
     ];
 
     home.username = "samuel";
