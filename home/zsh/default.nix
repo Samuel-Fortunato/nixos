@@ -2,6 +2,10 @@
   programs.zsh = {
     enable = true;
 
+    shellAliases = {
+      ncf = "nvim ~/.config/nvim/";
+    };
+
     initContent = ''
       function y() {
         local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
