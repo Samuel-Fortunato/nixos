@@ -4,7 +4,6 @@
     yazi
     vim
     kitty
-    stow
     google-chrome
     fzf
     tree
