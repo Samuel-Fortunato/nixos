@@ -87,6 +87,7 @@ home.packages = with pkgs; [
   gcc
   tree-sitter
   clang-tools
+  nixfmt
   pyright
   texlab
 ];
