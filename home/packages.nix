@@ -5,7 +5,6 @@
     vim
     kitty
     stow
-    zoxide
     google-chrome
     fzf
     tree

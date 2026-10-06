@@ -32,6 +32,7 @@
   time.timeZone = "Europe/Lisbon";
 
   programs.hyprland.enable = true;
+  programs.zsh.enable = true;
 
   nixpkgs.config.allowUnfree = true;
   nix.settings.experimental-features = [
@@ -42,6 +43,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.samuel = {
     isNormalUser = true;
+	 shell = pkgs.zsh;
     extraGroups = [
       "wheel"
       "networkmanager"
@@ -77,6 +79,7 @@
       ./home/neovim
       ./home/hyprland
 		./home/yazi
+		./home/zsh
 		./home/noctalia.nix
 		./home/packages.nix
     ];
