@@ -1,0 +1,79 @@
+-- -- lua/snippets/tex/physics.lua
+-- -- Physics / quantum-mechanics snippets using the `physics` LaTeX package.
+-- -- All fire in math mode.
+--
+-- local H    = require("snippets.tex._helpers")
+-- local ls   = require("luasnip")
+-- local t    = H.t
+-- local i    = H.i
+-- local fmta = H.fmta
+--
+-- local function ma(trig, nodes, opts)
+-- 	return H.maths(trig, nodes, opts)
+-- end
+-- local function ms(trig, nodes, opts)
+-- 	return H.msnip(trig, nodes, opts)
+-- end
+--
+-- local snips = {}
+--
+-- -- ─── Bra-ket notation ─────────────────────────────────────────────────────────
+-- table.insert(snips, ma("bra",  fmta("\\bra{<>}", { i(1) })))
+-- table.insert(snips, ma("ket",  fmta("\\ket{<>}", { i(1) })))
+-- table.insert(snips, ma("brk",  fmta("\\braket{<>}{<>}", { i(1), i(2) })))
+-- table.insert(snips, ma("ev",   fmta("\\expval{<>}", { i(1) })))
+-- table.insert(snips, ma("mel",  fmta("\\mel{<>}{<>}{<>}", { i(1), i(2), i(3) })))
+--
+-- -- ─── Vector calculus ──────────────────────────────────────────────────────────
+-- table.insert(snips, ma("div",  t("\\divergence ")))
+-- table.insert(snips, ma("grad", t("\\gradient ")))
+-- table.insert(snips, ma("curl", t("\\curl ")))
+-- table.insert(snips, ma("lapl", t("\\laplacian ")))
+--
+-- -- ─── Derivatives ──────────────────────────────────────────────────────────────
+-- table.insert(snips, ma("dv",   fmta("\\dv{<>}{<>}", { i(1), i(2) })))
+-- table.insert(snips, ma("pdv",  fmta("\\pdv{<>}{<>}", { i(1), i(2) })))
+-- table.insert(snips, ma("fdv",  fmta("\\fdv{<>}{<>}", { i(1), i(2) })))
+--
+-- -- ─── Commutators & Poisson ────────────────────────────────────────────────────
+-- table.insert(snips, ma("comm", fmta("\\comm{<>}{<>}", { i(1), i(2) })))
+-- table.insert(snips, ma("acomm",fmta("\\acomm{<>}{<>}", { i(1), i(2) })))
+-- table.insert(snips, ma("pb",   fmta("\\pb{<>}{<>}", { i(1), i(2) })))
+--
+-- -- ─── Norms / inner products ───────────────────────────────────────────────────
+-- table.insert(snips, ma("norm", fmta("\\norm{<>}", { i(1) })))
+-- table.insert(snips, ma("abs2", fmta("\\abs{<>}", { i(1) })))
+-- table.insert(snips, ma("ip",   fmta("\\ip{<>}{<>}", { i(1), i(2) })))
+--
+-- -- ─── Tensors ──────────────────────────────────────────────────────────────────
+-- table.insert(snips, ma("tens", fmta("\\tensor{<>}{<>}", { i(1), i(2) })))
+--
+-- -- ─── Feynman slash ────────────────────────────────────────────────────────────
+-- table.insert(snips, ma("sl",   fmta("\\slashed{<>}", { i(1) })))
+--
+-- -- ─── Hamiltonian / Lagrangian ─────────────────────────────────────────────────
+-- table.insert(snips, ma("Ham",  t("\\mathcal{H}")))
+-- table.insert(snips, ma("Lag",  t("\\mathcal{L}")))
+-- table.insert(snips, ma("Sch",  t("\\mathcal{S}")))
+--
+-- -- ─── Common operators ─────────────────────────────────────────────────────────
+-- table.insert(snips, ma("Tr",   t("\\Tr ")))
+-- table.insert(snips, ma("dag2", t("^{\\dagger}")))
+-- table.insert(snips, ma("cc2",  t("^{*}")))
+--
+-- -- ─── Units (manual, if not using siunitx) ─────────────────────────────────────
+-- local units = {
+-- 	{ "um",   "\\mu m" },
+-- 	{ "nm",   "\\text{ nm}" },
+-- 	{ "eV",   "\\text{ eV}" },
+-- 	{ "keV",  "\\text{ keV}" },
+-- 	{ "MeV",  "\\text{ MeV}" },
+-- 	{ "GeV",  "\\text{ GeV}" },
+-- 	{ "TeV",  "\\text{ TeV}" },
+-- 	{ "fm2",  "\\text{ fm}" },
+-- }
+-- for _, pair in ipairs(units) do
+-- 	table.insert(snips, ma(pair[1], t(pair[2])))
+-- end
+--
+-- return snips

@@ -1,0 +1,102 @@
+-- -- lua/snippets/tex/matrices.lua
+-- -- Matrix / table environment snippets.
+--
+-- local H    = require("snippets.tex._helpers")
+-- local ls   = require("luasnip")
+-- local t    = H.t
+-- local i    = H.i
+-- local f    = H.f
+-- local c    = H.c
+-- local sn   = H.sn
+-- local d    = H.d
+-- local fmta = H.fmta
+-- local fmt  = H.fmt
+--
+-- --- Build an N×M matrix body.
+-- local function mat_body(rows, cols, env)
+-- 	local lines = {}
+-- 	for r = 1, rows do
+-- 		local row = {}
+-- 		for c2 = 1, cols do
+-- 			table.insert(row, string.format("(%d,%d)", r, c2))
+-- 		end
+-- 		local line = "\t" .. table.concat(row, " & ")
+-- 		if r < rows then line = line .. " \\\\" end
+-- 		table.insert(lines, line)
+-- 	end
+-- 	return string.format("\\begin{%s}\n%s\n\\end{%s}", env, table.concat(lines, "\n"), env)
+-- end
+--
+-- --- Dynamic node that generates insert nodes for each cell.
+-- local function make_matrix(rows, cols, env)
+-- 	return d(1, function()
+-- 		local nodes = {}
+-- 		local idx = 1
+-- 		for r = 1, rows do
+-- 			if r > 1 then table.insert(nodes, t({ "", "\t" })) end
+-- 			for c2 = 1, cols do
+-- 				if c2 > 1 then table.insert(nodes, t(" & ")) end
+-- 				table.insert(nodes, i(idx, ""))
+-- 				idx = idx + 1
+-- 			end
+-- 			if r < rows then table.insert(nodes, t(" \\\\")) end
+-- 		end
+-- 		return sn(nil, nodes)
+-- 	end, {})
+-- end
+--
+-- --- Generic matrix snippet builder.
+-- local function mat_snip(trig, env, rows, cols, desc)
+-- 	return ls.snippet(
+-- 		{ trig = trig, desc = desc, condition = H.in_math },
+-- 		fmta(string.format("\\begin{%s}\n\t<>\n\\end{%s}", env, env), {
+-- 			make_matrix(rows, cols, env),
+-- 		})
+-- 	)
+-- end
+--
+-- -- ─── pmatrix, bmatrix, Bmatrix, vmatrix, Vmatrix ────────────────────────────
+-- local envs = {
+-- 	-- { "pmat", "pmatrix" },
+-- 	-- { "bmat", "bmatrix" },
+-- 	-- { "Bmat", "Bmatrix" },
+-- 	-- { "vmat", "vmatrix" },
+-- 	-- { "Vmat", "Vmatrix" },
+-- 	-- { "smat", "smallmatrix" },
+-- }
+--
+-- local snips = {}
+--
+-- for _, pair in ipairs(envs) do
+-- 	local trig, env = pair[1], pair[2]
+-- 	-- 2×2
+-- 	table.insert(snips, mat_snip(trig .. "2", env, 2, 2, env .. " 2x2"))
+-- 	-- 3×3
+-- 	table.insert(snips, mat_snip(trig .. "3", env, 3, 3, env .. " 3x3"))
+-- 	-- 2×1 column vector
+-- 	table.insert(snips, mat_snip(trig .. "c2", env, 2, 1, env .. " col 2"))
+-- 	-- 3×1 column vector
+-- 	table.insert(snips, mat_snip(trig .. "c3", env, 3, 1, env .. " col 3"))
+-- end
+--
+-- -- ─── Generic matrix with user-specified dimensions ───────────────────────────
+-- -- Trigger: mat<rows><cols>  e.g. mat23 → 2×3 matrix
+-- -- table.insert(snips, H.msnip("mat", fmta([[
+-- -- \begin{pmatrix}
+-- -- 	<>
+-- -- \end{pmatrix}]], { i(1) }), { desc = "generic pmatrix" }))
+--
+-- -- ─── Array environment ────────────────────────────────────────────────────────
+-- table.insert(snips, H.msnip("arr", fmta([[
+-- \begin{array}{<>}
+-- 	<>
+-- \end{array}]], { i(1, "cc"), i(2) })))
+--
+-- -- ─── Cases ────────────────────────────────────────────────────────────────────
+-- table.insert(snips, H.msnip("cases", fmta([[
+-- \begin{cases}
+-- 	<> & \text{if } <> \\
+-- 	<> & \text{otherwise}
+-- \end{cases}]], { i(1), i(2), i(3) })))
+--
+-- return snips

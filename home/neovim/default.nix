@@ -1,14 +1,25 @@
-{ pkgs, ... }:
+{ pkgs, ... }: {
+  programs.neovim = {
+    enable = true;
+    defaultEditor = true;
+    viAlias = true;
+    vimAlias = true;
+	 # sideloadInitLua = true;
 
-{
-  home.packages = with pkgs; [
-    neovim
-    gcc
-    tree-sitter
-    clang-tools
-    pyright
-    texlab
-    nixfmt
-	 ripgrep
-  ];
+    extraPackages = with pkgs; [
+      # neovim
+      gcc
+      tree-sitter
+      clang-tools
+      pyright
+      texlab
+      nixfmt
+      ripgrep
+    ];
+  };
+
+  xdg.configFile."nvim" = {
+    source = ./config;
+    recursive = true;
+  };
 }
