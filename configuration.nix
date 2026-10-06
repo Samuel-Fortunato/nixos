@@ -43,6 +43,7 @@
 		 VISUAL = "nvim";
 	  };
 	  systemPackages = with pkgs; [
+		 gh
 		 yazi
 		 gcc
 		 tree-sitter
