@@ -54,7 +54,6 @@
 		 wl-clipboard
 		 vim
 		 kitty
-		 git
 		 stow
 		 rofi
 		 pywal16
