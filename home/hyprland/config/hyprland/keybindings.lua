@@ -124,7 +124,7 @@ hl.bind(mainMod .. " + SHIFT + E", hl.dsp.exec_cmd(prog.guiFileManager))
 hl.bind(mainMod .. "+P", hl.dsp.exec_cmd(ipc .. "panel-toggle session"))
 hl.bind(mainMod .. "+V", hl.dsp.exec_cmd(ipc .. "panel-toggle clipboard"))
 hl.bind(mainMod .. "+T", hl.dsp.exec_cmd(ipc .. "panel-toggle wallpaper"))
-hl.bind("SUPER + ALT_l", hl.dsp.exec_cmd("noctalia msg panel-toggle control-center"), {
+hl.bind("CTRL + SUPER_l", hl.dsp.exec_cmd("noctalia msg panel-toggle control-center"), {
 	description = "Toggle Noctalia Control Center"
 })
 
