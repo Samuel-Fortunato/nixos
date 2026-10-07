@@ -9,5 +9,6 @@
       ./noctalia.nix
       ./packages.nix
       ./kitty.nix
+		./xdg.nix
   ];
 }
