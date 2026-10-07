@@ -3,11 +3,11 @@
     gh
     yazi
     vim
-    kitty
     google-chrome
     fzf
     tree
     lazygit
-	 fastfetch
+    fastfetch
+    nerd-fonts.jetbrains-mono
   ];
 }

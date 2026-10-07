@@ -86,6 +86,7 @@
       ./home/zsh.nix
       ./home/noctalia.nix
       ./home/packages.nix
+		./home/kitty.nix
     ];
 
     home.username = "samuel";
