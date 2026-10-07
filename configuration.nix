@@ -77,16 +77,11 @@
   };
 
   services.displayManager.ly.enable = true;
+  services.power-profiles-daemon.enable = true;
 
   home-manager.users.samuel = {
     imports = [
-      ./home/neovim
-      ./home/hyprland
-      ./home/yazi
-      ./home/zsh.nix
-      ./home/noctalia.nix
-      ./home/packages.nix
-		./home/kitty.nix
+      ./home
     ];
 
     home.username = "samuel";
