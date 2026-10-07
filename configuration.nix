@@ -31,7 +31,10 @@
   networking.networkmanager.enable = true;
   time.timeZone = "Europe/Lisbon";
 
-  programs.hyprland.enable = true;
+  programs.hyprland = {
+    enable = true;
+    withUWSM = true;
+  };
   programs.zsh.enable = true;
 
   nixpkgs.config.allowUnfree = true;
@@ -41,13 +44,15 @@
   ];
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.samuel = {
-    isNormalUser = true;
-	 shell = pkgs.zsh;
-    extraGroups = [
-      "wheel"
-      "networkmanager"
-    ];
+  users = {
+	 defaultUserShell = pkgs.zsh;
+    users.samuel = {
+      isNormalUser = true;
+      extraGroups = [
+        "wheel"
+        "networkmanager"
+      ];
+    };
   };
 
   # List packages installed in system profile. You can use https://search.nixos.org/ to find more packages (and options).
@@ -78,10 +83,10 @@
     imports = [
       ./home/neovim
       ./home/hyprland
-		./home/yazi
-		./home/zsh
-		./home/noctalia.nix
-		./home/packages.nix
+      ./home/yazi
+      ./home/zsh
+      ./home/noctalia.nix
+      ./home/packages.nix
     ];
 
     home.username = "samuel";
