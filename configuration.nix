@@ -78,6 +78,13 @@
 
   services.displayManager.ly.enable = true;
   services.power-profiles-daemon.enable = true;
+  services.accounts-daemon.enable = true;
+  services.upower = {
+    enable = true;
+    allowRiskyCriticalPowerAction = true;
+    criticalPowerAction = "Suspend";
+  };
+  security.polkit.enable = true;
 
   home-manager.users.samuel = {
     imports = [
