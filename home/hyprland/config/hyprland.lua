@@ -10,5 +10,6 @@ require("hyprland.keybindings")
 require("hyprland.windows-and-workspaces")
 
 
--- For Noctalia Color templates
-require("noctalia").apply_theme()
+-- For Noctalia color templates
+local ok, noctalia = pcall(require, "noctalia")
+if ok then noctalia.apply_theme() end

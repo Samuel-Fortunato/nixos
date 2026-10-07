@@ -3,10 +3,10 @@ return {
 	name = "catppuccin",
 	lazy = false,
 	-- enabled = false,
-	priority = 1000,
-	opts = { flavour = "mocha", },
-	config = function(_, opts)
+	priority = 100,
+	opts = { },
+	config = function (_,_)
 		require("catppuccin")
-		vim.cmd.colorscheme "catppuccin"
+		vim.cmd.colorscheme "catppuccin-nvim"
 	end
 }

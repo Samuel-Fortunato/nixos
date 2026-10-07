@@ -3,7 +3,10 @@
     enable = true;
     font = {
       name = "JetBrainsMono Nerd Font";
-      size = 12;
+		size = 11;
     };
+    extraConfig = ''
+      globinclude themes/noctalia.conf
+      	'';
   };
 }
