@@ -11,6 +11,14 @@
     ./hardware-configuration.nix
   ];
 
+  hardware.graphics.enable = true;
+  services.xserver.videoDrivers = [ "nvidia" ];
+  hardware.nvidia = {
+    modesetting.enable = true;
+	 open = true;
+	 powerManagement.enable = false;
+  };
+
   boot.loader.grub = {
     enable = true;
     device = "nodev";
