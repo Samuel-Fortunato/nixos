@@ -131,6 +131,7 @@ hl.bind("CTRL + SUPER_l", hl.dsp.exec_cmd("noctalia msg panel-toggle control-cen
 hl.bind(mainMod .. "+PERIOD", hl.dsp.exec_cmd(ipc .. "notification-clear-active"))
 hl.bind(mainMod .. "+SHIFT+PERIOD", hl.dsp.exec_cmd(ipc .. "notification-invoke-latest"))
 hl.bind(mainMod .. "+CTRL+PERIOD", hl.dsp.exec_cmd(ipc .. "notification-dnd-toggle"))
+hl.bind(mainMod .. "+N", hl.dsp.exec_cmd(ipc .. "panel-toggle control-center notifications"))
 
 hl.bind(mainMod .. "+Space", hl.dsp.exec_cmd(ipc .. "panel-toggle launcher"))
 hl.bind(mainMod .. "+comma", hl.dsp.exec_cmd(ipc .. "settings-toggle"))
