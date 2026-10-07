@@ -31,77 +31,6 @@ hl.window_rule({
 	no_focus = true,
 })
 
--- Layer rules also return a handle.
--- local overlayLayerRule = hl.layer_rule({
---     name  = "no-anim-overlay",
---     match = { namespace = "^my-overlay$" },
---     no_anim = true,
--- })
--- overlayLayerRule:set_enabled(false)
-
-
--- -- Workspaces 1-5 always on the first monitor detected
--- for i = 1, 5 do
--- 	hl.workspace_rule({ workspace = tostring(i), monitor = "eDP-2" })
--- end
--- --
--- -- -- Workspaces 6-10 always on the second monitor IF it exists
--- -- -- If index:1 doesn't exist, Hyprland will default these to index:0
--- for i = 6, 10 do
--- 	hl.workspace_rule({ workspace = tostring(i), monitor = "HDMI-A-1" })
--- end
--- hl.workspace_rule({ workspace = "1", monitor = "eDP-2" })
--- hl.workspace_rule({ workspace = "2", monitor = "eDP-2" })
--- hl.workspace_rule({ workspace = "3", monitor = "eDP-2" })
--- hl.workspace_rule({ workspace = "4", monitor = "eDP-2" })
--- hl.workspace_rule({ workspace = "5", monitor = "eDP-2" })
---
--- hl.workspace_rule({ workspace = "6", monitor = "HDMI-A-1" })
--- hl.workspace_rule({ workspace = "7", monitor = "HDMI-A-1" })
--- hl.workspace_rule({ workspace = "8", monitor = "HDMI-A-1" })
--- hl.workspace_rule({ workspace = "9", monitor = "HDMI-A-1" })
--- hl.workspace_rule({ workspace = "10", monitor = "HDMI-A-1" })
-
-
--- Hyprland-run windowrule
-hl.window_rule({
-	name  = "move-hyprland-run",
-	match = { class = "hyprland-run" },
-
-	move  = "20 monitor_h-120",
-	float = true,
-})
-
-hl.window_rule({
-	name = "volume-control",
-	match = { class = "^(org.pulseaudio.pavucontrol)$" },
-
-	float = true,
-	pin = true,
-	size = { 880, 600 },
-	center = true,
-})
-
-hl.window_rule({
-	name = "bluetooth-manager",
-	match = { class = "^(blueman-manager)$" },
-
-	float = true,
-	pin = true,
-	size = { 600, 400 },
-	center = true,
-})
-
-hl.window_rule({
-	name = "network-manager",
-	match = { class = "^(org.nmrs.ui)$" },
-
-	float = true,
-	pin = true,
-	size = { 600, 500 },
-	center = true,
-})
-
 hl.window_rule({
 	name = "calculator",
 
@@ -116,3 +45,24 @@ hl.window_rule({
 	match = { class = "chrome-nngceckbapebfimnlniiiahkandclblb-Default" },
 	float = true,
 })
+
+hl.window_rule({
+    match = { class = "dev.noctalia.Noctalia" },
+    float = true,
+    size = { 1080, 920 },
+})
+
+hl.layer_rule({
+  name = "noctalia",
+  match = {
+    namespace = "^noctalia-(bar-.+|notification|dock|panel|attached-panel|osd|window-switcher)$",
+  },
+  no_anim = true,
+  ignore_alpha = 0.5,
+  blur = true,
+  blur_popups = true,
+})
+
+hl.workspace_rule({ workspace = "W", persistent = true, default_name = "whatsapp" })
+hl.workspace_rule({ workspace = "S", persistent = true, default_name = "spotify" })
+hl.workspace_rule({ workspace = "A", persistent = true, default_name = "scratchpad" })

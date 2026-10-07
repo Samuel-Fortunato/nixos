@@ -4,26 +4,18 @@ local prog = require("hyprland.programs")
 ---------------------
 
 local mainMod = "SUPER" -- Sets "Windows" key as main modifier
+local ipc = "noctalia msg "
 
 -- Example binds, see https://wiki.hypr.land/Configuring/Basics/Binds/ for more
-hl.bind(mainMod .. " + RETURN", hl.dsp.exec_cmd(prog.terminal))
 hl.bind(mainMod .. " + Q", hl.dsp.window.close())
 local shutdownHyprlandBind = hl.bind(mainMod .. " + M",
 	hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
 shutdownHyprlandBind:set_enabled(false)
-hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(prog.fileManager))
-hl.bind(mainMod .. " + SHIFT + E", hl.dsp.exec_cmd(prog.guiFileManager))
--- hl.bind(mainMod .. " + SPACE", hl.dsp.exec_cmd(prog.menu))
--- hl.bind(mainMod .. " + SHIFT + SPACE", hl.dsp.exec_cmd(prog.run))
 
 hl.bind(mainMod .. " + D", hl.dsp.window.float())
-hl.bind(mainMod .. " + SHIFT + D", hl.dsp.window.pseudo())
+hl.bind(mainMod .. " + SHIFT + D", hl.dsp.window.pin())
 hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen({ mode = "maximized" }))
 hl.bind(mainMod .. " + SHIFT + F", hl.dsp.window.fullscreen({ mode = "fullscreen" }))
-hl.bind(mainMod .. "+ BACKSLASH",
-	hl.dsp.exec_cmd(
-		"killall -SIGUSR1 waybar && if [ -f /tmp/waybar_hidden ]; then rm /tmp/waybar_hidden; else touch /tmp/waybar_hidden; fi"),
-	{})
 
 -- Move focus with mainMod + arrow keys
 hl.bind(mainMod .. " + h", hl.dsp.focus({ direction = "left" }))
@@ -31,10 +23,10 @@ hl.bind(mainMod .. " + l", hl.dsp.focus({ direction = "right" }))
 hl.bind(mainMod .. " + k", hl.dsp.focus({ direction = "up" }))
 hl.bind(mainMod .. " + j", hl.dsp.focus({ direction = "down" }))
 -- focus next window
-hl.bind("SUPER + Tab", function()
-	hl.dispatch(hl.dsp.window.cycle_next())
-	hl.dispatch(hl.dsp.window.bring_to_top())
-end)
+-- hl.bind("SUPER + Tab", function()
+-- 	hl.dispatch(hl.dsp.window.cycle_next())
+-- 	hl.dispatch(hl.dsp.window.bring_to_top())
+-- end)
 
 
 -- Move windows arround
@@ -93,22 +85,17 @@ hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })
 hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
 -- Laptop multimedia keys for volume and LCD brightness
-hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"),
-	{ locked = true, repeating = true })
-hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"),
-	{ locked = true, repeating = true })
-hl.bind("XF86AudioMute", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"),
-	{ locked = true, repeating = true })
-hl.bind("XF86AudioMicMute", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"),
-	{ locked = true, repeating = true })
-hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%+"), { locked = true, repeating = true })
-hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%-"), { locked = true, repeating = true })
+hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd(ipc .. "volume-up"))
+hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd(ipc .. "volume-down"))
+hl.bind("XF86AudioMute", hl.dsp.exec_cmd(ipc .. "volume-mute"))
+hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd(ipc .. "brightness-up"))
+hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd(ipc .. "brightness-down"))
 
 -- Requires playerctl
-hl.bind("XF86AudioNext", hl.dsp.exec_cmd("playerctl next"), { locked = true })
-hl.bind("XF86AudioPause", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
-hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
-hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"), { locked = true })
+hl.bind("XF86AudioNext", hl.dsp.exec_cmd(ipc .. "media next"), { locked = true })
+hl.bind("XF86AudioPlay", hl.dsp.exec_cmd(ipc .. "media toggle"), { locked = true })
+hl.bind("XF86AudioStop", hl.dsp.exec_cmd(ipc .. "media next-player"), { locked = true })
+hl.bind("XF86AudioPrev", hl.dsp.exec_cmd(ipc .. "media previous"), { locked = true })
 
 -- Rotate monitor
 hl.bind(mainMod .. " + SHIFT + Down", hl.dsp.exec_cmd(
@@ -126,23 +113,28 @@ hl.bind(mainMod .. " + SHIFT + Left", hl.dsp.exec_cmd(
 
 -- apps
 hl.bind(mainMod .. " + ccedilla", hl.dsp.exec_cmd(prog.browser))
--- hl.bind(mainMod .. " + P", hl.dsp.exec_cmd(prog.power))
+hl.bind(mainMod .. " + RETURN", hl.dsp.exec_cmd(prog.terminal))
 hl.bind("XF86Calculator", hl.dsp.exec_cmd(prog.calculator))
-hl.bind("PRINT", hl.dsp.exec_cmd(prog.print))
--- hl.bind(mainMod .. " + T", hl.dsp.exec_cmd(prog.theme))
--- hl.bind(mainMod .. " + PERIOD", hl.dsp.exec_cmd(prog.notifClose))
--- hl.bind(mainMod .. " + SHIFT + PERIOD", hl.dsp.exec_cmd(prog.notifPop))
--- hl.bind(mainMod .. " + CTRL + PERIOD", function()
--- 	hl.dispatch(hl.dsp.exec_cmd([[
--- 		if dunstctl is-paused | grep -q "false"; then
--- 			notify-send -t 2000 "Notifications" "Do not disturb enabled"
--- 			sleep 2
--- 			dunstctl set-paused true
--- 		else
--- 			dunstctl set-paused false
--- 			notify-send -t 2000 "Notifications" "Do not disturb disabled"
--- 			fi
---     ]]))
--- end)
--- hl.bind(mainMod .. " + V", hl.dsp.exec_cmd(prog.clipboardHystory))
--- hl.bind(mainMod .. " + SHIFT + R", hl.dsp.exec_cmd("killall reload.sh && " .. prog.waybar))
+hl.bind("PRINT", hl.dsp.exec_cmd(ipc .. "screenshot-region"))
+hl.bind("CTRL + PRINT", hl.dsp.exec_cmd(ipc .. "screenshot-fullscreen pick"))
+hl.bind("SHIFT + PRINT", hl.dsp.exec_cmd(ipc .. "screenshot-annotate"))
+hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(prog.fileManager))
+hl.bind(mainMod .. " + SHIFT + E", hl.dsp.exec_cmd(prog.guiFileManager))
+
+hl.bind(mainMod .. "+P", hl.dsp.exec_cmd(ipc .. "panel-toggle session"))
+hl.bind(mainMod .. "+V", hl.dsp.exec_cmd(ipc .. "panel-toggle clipboard"))
+hl.bind(mainMod .. "+T", hl.dsp.exec_cmd(ipc .. "panel-toggle wallpaper"))
+hl.bind("SUPER + ALT_l", hl.dsp.exec_cmd("noctalia msg panel-toggle control-center"), {
+	description = "Toggle Noctalia Control Center"
+})
+
+hl.bind(mainMod .. "+PERIOD", hl.dsp.exec_cmd(ipc .. "notification-clear-active"))
+hl.bind(mainMod .. "+SHIFT+PERIOD", hl.dsp.exec_cmd(ipc .. "notification-invoke-latest"))
+hl.bind(mainMod .. "+CTRL+PERIOD", hl.dsp.exec_cmd(ipc .. "notification-dnd-toggle"))
+
+hl.bind(mainMod .. "+Space", hl.dsp.exec_cmd(ipc .. "panel-toggle launcher"))
+hl.bind(mainMod .. "+comma", hl.dsp.exec_cmd(ipc .. "settings-toggle"))
+
+hl.bind("ALT + Tab", hl.dsp.exec_cmd(ipc .. "window-switcher hold"))
+hl.bind("CTRL + ESCAPE", hl.dsp.exec_cmd(ipc .. "panel-toggle control-center system"))
+hl.bind(mainMod .. " + BACKSLASH", hl.dsp.exec_cmd(ipc .. "bar-toggle"))
