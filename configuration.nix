@@ -1,5 +1,3 @@
-# Edit this configuration file to define what should be installed on your system. Help is available in the configuration.nix(5) man page, on https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
-
 {
   config,
   lib,
@@ -45,7 +43,7 @@
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users = {
-	 defaultUserShell = pkgs.zsh;
+    defaultUserShell = pkgs.zsh;
     users.samuel = {
       isNormalUser = true;
       extraGroups = [
@@ -62,6 +60,7 @@
       EDITOR = "nvim";
       VISUAL = "nvim";
     };
+    pathsToLink = [ "/share/zsh" ];
     systemPackages = with pkgs; [
       wl-clipboard
       glib
@@ -84,7 +83,7 @@
       ./home/neovim
       ./home/hyprland
       ./home/yazi
-      ./home/zsh
+      ./home/zsh.nix
       ./home/noctalia.nix
       ./home/packages.nix
     ];
