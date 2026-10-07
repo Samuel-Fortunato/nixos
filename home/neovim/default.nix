@@ -7,7 +7,7 @@
 	 # sideloadInitLua = true;
 
     extraPackages = with pkgs; [
-      # neovim
+		lua-language-server
       gcc
       tree-sitter
       clang-tools
