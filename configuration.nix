@@ -19,6 +19,16 @@
 	 powerManagement.enable = false;
   };
 
+  hardware.bluetooth = {
+    enable = true;
+	 powerOnBoot = true;
+  };
+  services.pipewire = {
+    enable = true;
+	 pulse.enable = true;
+	 alsa.enable = true;
+  };
+
   boot.loader.grub = {
     enable = true;
     device = "nodev";

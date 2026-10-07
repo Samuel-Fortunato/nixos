@@ -10,5 +10,6 @@
     lazygit
     fastfetch
     nerd-fonts.jetbrains-mono
+    spotify
   ];
 }
