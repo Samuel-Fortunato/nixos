@@ -20,3 +20,8 @@ hl.monitor({
 	-- position = "auto-center-up",
 	scale    = 1,
 })
+
+hl.monitor({
+	output = "Virtual-1";
+	mode = "1600x1200@60"
+})
