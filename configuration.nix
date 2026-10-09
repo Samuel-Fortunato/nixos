@@ -15,18 +15,18 @@
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware.nvidia = {
     modesetting.enable = true;
-	 open = true;
-	 powerManagement.enable = false;
+    open = true;
+    powerManagement.enable = false;
   };
 
   hardware.bluetooth = {
     enable = true;
-	 powerOnBoot = true;
+    powerOnBoot = true;
   };
   services.pipewire = {
     enable = true;
-	 pulse.enable = true;
-	 alsa.enable = true;
+    pulse.enable = true;
+    alsa.enable = true;
   };
 
   boot.loader.grub = {
@@ -40,6 +40,9 @@
     canTouchEfiVariables = true;
     efiSysMountPoint = "/boot";
   };
+
+  virtualisation.libvirtd.enable = true;
+  programs.virt-manager.enable = true;
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
@@ -67,6 +70,7 @@
       extraGroups = [
         "wheel"
         "networkmanager"
+        "libvirtd"
       ];
     };
   };
@@ -80,8 +84,8 @@
     };
     pathsToLink = [ "/share/zsh" ];
     systemPackages = with pkgs; [
-		neovim
-		git
+      neovim
+      git
       wl-clipboard
       glib
     ];
@@ -96,7 +100,12 @@
     };
   };
 
-  services.displayManager.ly.enable = true;
+  services.displayManager.ly = {
+    enable = true;
+    settings = {
+      bigclock = true;
+    };
+  };
   services.power-profiles-daemon.enable = true;
   services.accounts-daemon.enable = true;
   services.upower = {
@@ -104,18 +113,11 @@
     allowRiskyCriticalPowerAction = true;
     criticalPowerAction = "Suspend";
   };
-  security.polkit.enable = true;
-
-  home-manager.users.samuel = {
-    imports = [
-      ./home
-    ];
-
-    home.username = "samuel";
-    home.homeDirectory = "/home/samuel";
-
-    home.stateVersion = "26.05";
+  services.logind = {
+    powerKey = "suspend";
+    lidSwitch = "ignore";
   };
+  security.polkit.enable = true;
 
   system.stateVersion = "26.05"; # Did you read the comment?
 }

@@ -12,4 +12,8 @@
 		./xdg.nix
 		./git.nix
   ];
+
+  home.username = "samuel";
+  home.homeDirectory = "/home/samuel";
+  home.stateVersion = "26.05";
 }
