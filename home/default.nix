@@ -1,19 +1,20 @@
-{ ... }:
-
-{
+{ ... }: {
   imports = [
-      ./neovim
-      ./hyprland
-      ./yazi
-      ./zsh.nix
-      ./noctalia.nix
-      ./packages.nix
-      ./kitty.nix
-		./xdg.nix
-		./git.nix
+    ./neovim
+    ./hyprland
+    ./yazi
+    ./zsh.nix
+    ./noctalia.nix
+    ./packages.nix
+    ./kitty.nix
+    ./xdg.nix
+    ./git.nix
   ];
+  home = {
+    username = "samuel";
+    homeDirectory = "/home/samuel";
+    backupFileExtension = "bak";
 
-  home.username = "samuel";
-  home.homeDirectory = "/home/samuel";
-  home.stateVersion = "26.05";
+    stateVersion = "26.05";
+  };
 }
