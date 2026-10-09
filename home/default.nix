@@ -10,5 +10,6 @@
       ./packages.nix
       ./kitty.nix
 		./xdg.nix
+		./git.nix
   ];
 }

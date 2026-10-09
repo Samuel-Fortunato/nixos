@@ -80,6 +80,8 @@
     };
     pathsToLink = [ "/share/zsh" ];
     systemPackages = with pkgs; [
+		neovim
+		git
       wl-clipboard
       glib
     ];
