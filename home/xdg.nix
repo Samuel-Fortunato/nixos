@@ -10,18 +10,12 @@
       templates = null;
       videos = null;
     };
-    portal = {
-      enable = true;
-      extraPortals = [ pkgs.xdg-desktop-portal-termfilechooser ];
-      config = {
-        hyprland = {
-          default = [
-            "hyprland"
-            "gtk"
-          ];
-          "org.freedesktop.impl.portal.FileChooser" = [ "termfilechooser" ];
-        };
-      };
-    };
+
+    configFile."xdg-desktop-portal-termfilechooser/config".text = ''
+      [filechooser]
+      default_dir=$HOME
+      open_mode=default
+      save_mode=last
+    '';
   };
 }

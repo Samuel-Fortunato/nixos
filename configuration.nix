@@ -119,5 +119,21 @@
   };
   security.polkit.enable = true;
 
+
+
+    xdg.portal = {
+      enable = true;
+      extraPortals = [ pkgs.xdg-desktop-portal-termfilechooser ];
+      config = {
+        hyprland = {
+          default = [
+            "hyprland"
+            "gtk"
+          ];
+          "org.freedesktop.impl.portal.FileChooser" = [ "termfilechooser" ];
+        };
+      };
+    };
+
   system.stateVersion = "26.05"; # Did you read the comment?
 }
