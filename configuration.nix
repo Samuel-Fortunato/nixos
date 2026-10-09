@@ -6,19 +6,6 @@
 }:
 
 {
-  imports = [
-    # Include the results of the hardware scan.
-    ./hardware-configuration.nix
-  ];
-
-  hardware.graphics.enable = true;
-  services.xserver.videoDrivers = [ "nvidia" ];
-  hardware.nvidia = {
-    modesetting.enable = true;
-    open = true;
-    powerManagement.enable = false;
-  };
-
   hardware.bluetooth = {
     enable = true;
     powerOnBoot = true;
@@ -29,34 +16,9 @@
     alsa.enable = true;
   };
 
-  boot = {
-    loader = {
-      timeout = 0;
-      grub = {
-        enable = true;
-        device = "nodev";
-        efiSupport = true;
-        useOSProber = true;
-
-        default = "0";
-        timeoutStyle = "hidden";
-
-        theme = null;
-        splashImage = null;
-        backgroundColor = "#000000";
-      };
-      efi = {
-        canTouchEfiVariables = true;
-        efiSysMountPoint = "/boot";
-      };
-    };
-    kernelPackages = pkgs.linuxPackages_latest;
-  };
-
   virtualisation.libvirtd.enable = true;
   programs.virt-manager.enable = true;
 
-  networking.hostName = "nixos"; # Define your hostname.
   networking.networkmanager.enable = true;
   time.timeZone = "Europe/Lisbon";
 
@@ -87,11 +49,6 @@
 
   # List packages installed in system profile. You can use https://search.nixos.org/ to find more packages (and options).
   environment = {
-    # variables = {
-    #   SUDO_EDITOR = "nvim";
-    #   EDITOR = "nvim";
-    #   VISUAL = "nvim";
-    # };
     pathsToLink = [ "/share/zsh" ];
     systemPackages = with pkgs; [
       wl-clipboard
