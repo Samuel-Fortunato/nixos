@@ -89,7 +89,7 @@ widget_order = [ "desktop-widget-0000000000000001", "desktop-widget-000000000000
     box_width = 1560.0
     cx = 820.0
     cy = 968.0
-    output = "eDP-1"
+	 output = "@MONITOR@"
     placement_height = 1000.0
     placement_width = 1600.0
     rotation = 0.0
@@ -109,7 +109,7 @@ widget_order = [ "desktop-widget-0000000000000001", "desktop-widget-000000000000
     box_width = 256.0
     cx = 1440.0
     cy = 212.0
-    output = "eDP-1"
+	 output = "@MONITOR@"
     placement_height = 1000.0
     placement_width = 1600.0
     rotation = 0.0
@@ -164,25 +164,25 @@ transition_duration = 1500
 [lockscreen_widgets]
 enabled = true
 schema_version = 2
-widget_order = [ "lockscreen-login-box@eDP-1", "lockscreen-widget-0000000000000001", "lockscreen-widget-0000000000000002" ]
+widget_order = [ "lockscreen-login-box@@MONITOR@", "lockscreen-widget-0000000000000001", "lockscreen-widget-0000000000000002" ]
 
     [lockscreen_widgets.grid]
     cell_size = 64
     major_interval = 4
     visible = true
 
-    [lockscreen_widgets.widget."lockscreen-login-box@eDP-1"]
+    [lockscreen_widgets.widget."lockscreen-login-box@@MONITOR@"]
     box_height = 196.0
     box_width = 810.0
     cx = 800.0
     cy = 786.0
-    output = "eDP-1"
+	 output = "@MONITOR@"
     placement_height = 1000.0
     placement_width = 1600.0
     rotation = 0.0
     type = "login_box"
 
-        [lockscreen_widgets.widget."lockscreen-login-box@eDP-1".settings]
+        [lockscreen_widgets.widget."lockscreen-login-box@@MONITOR@".settings]
         background_color = "surface_variant"
         background_opacity = 0.88
         background_radius = 12.0
@@ -203,7 +203,7 @@ widget_order = [ "lockscreen-login-box@eDP-1", "lockscreen-widget-00000000000000
     box_width = 512.0
     cx = 693.0
     cy = 372.0
-    output = "eDP-1"
+	 output = "@MONITOR@"
     placement_height = 1000.0
     placement_width = 1600.0
     rotation = 0.0
@@ -218,7 +218,7 @@ widget_order = [ "lockscreen-login-box@eDP-1", "lockscreen-widget-00000000000000
     box_width = 256.0
     cx = 1077.0
     cy = 372.0
-    output = "eDP-1"
+	 output = "@MONITOR@"
     placement_height = 1000.0
     placement_width = 1600.0
     rotation = 0.0
@@ -352,7 +352,7 @@ transition_duration = 1500
     [wallpaper.last]
     path = "/home/samuel/Pictures/Wallpapers/xp.jpg"
 
-    [wallpaper.monitors.eDP-1]
+    [wallpaper.monitors.@MONITOR@]
     path = "/home/samuel/Pictures/Wallpapers/xp.jpg"
 
 [widget.clock]

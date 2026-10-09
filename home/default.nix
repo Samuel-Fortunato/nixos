@@ -3,8 +3,8 @@
     ./neovim
     ./hyprland
     ./yazi
+	 ./noctalia
     ./zsh.nix
-    ./noctalia.nix
     ./packages.nix
     ./kitty.nix
     ./xdg.nix

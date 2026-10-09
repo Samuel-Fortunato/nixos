@@ -18,14 +18,19 @@
         nixos-laptop = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
-				./hosts/laptop
+            ./hosts/laptop
             ./configuration.nix
 
             home-manager.nixosModules.default
             {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.samuel = import ./home;
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                users.samuel = import ./home;
+                extraSpecialArgs = {
+                  monitorName = "eDP-1";
+                };
+              };
             }
           ];
         };
@@ -33,14 +38,19 @@
         nixos-vm = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
-				./hosts/vm
+            ./hosts/vm
             ./configuration.nix
 
             home-manager.nixosModules.default
             {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.samuel = import ./home;
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                users.samuel = import ./home;
+                extraSpecialArgs = {
+                  monitorName = "Virtual-1";
+                };
+              };
             }
           ];
         };
