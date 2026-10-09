@@ -29,22 +29,32 @@
     alsa.enable = true;
   };
 
-  boot.loader.grub = {
-    enable = true;
-    device = "nodev";
-    efiSupport = true;
-    useOSProber = true;
-  };
+  boot = {
+    loader = {
+		timeout = 0;
+      grub = {
+        enable = true;
+        device = "nodev";
+        efiSupport = true;
+        useOSProber = true;
 
-  boot.loader.efi = {
-    canTouchEfiVariables = true;
-    efiSysMountPoint = "/boot";
+		  default = "0";
+		  timeoutStyle = "hidden";
+
+		  theme = null;
+		  splashImage = null;
+		  backgroundColor = "#000000";
+      };
+      efi = {
+        canTouchEfiVariables = true;
+        efiSysMountPoint = "/boot";
+      };
+    };
+    kernelPackages = pkgs.linuxPackages_latest;
   };
 
   virtualisation.libvirtd.enable = true;
   programs.virt-manager.enable = true;
-
-  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   networking.hostName = "nixos"; # Define your hostname.
   networking.networkmanager.enable = true;
@@ -119,21 +129,19 @@
   };
   security.polkit.enable = true;
 
-
-
-    xdg.portal = {
-      enable = true;
-      extraPortals = [ pkgs.xdg-desktop-portal-termfilechooser ];
-      config = {
-        hyprland = {
-          default = [
-            "hyprland"
-            "gtk"
-          ];
-          "org.freedesktop.impl.portal.FileChooser" = [ "termfilechooser" ];
-        };
+  xdg.portal = {
+    enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-termfilechooser ];
+    config = {
+      hyprland = {
+        default = [
+          "hyprland"
+          "gtk"
+        ];
+        "org.freedesktop.impl.portal.FileChooser" = [ "termfilechooser" ];
       };
     };
+  };
 
   system.stateVersion = "26.05"; # Did you read the comment?
 }
