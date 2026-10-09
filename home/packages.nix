@@ -3,7 +3,7 @@
 	 thunar
     gh
     yazi
-    vim
+    # vim
     google-chrome
     fzf
     tree

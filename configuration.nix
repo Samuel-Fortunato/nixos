@@ -31,19 +31,19 @@
 
   boot = {
     loader = {
-		timeout = 0;
+      timeout = 0;
       grub = {
         enable = true;
         device = "nodev";
         efiSupport = true;
         useOSProber = true;
 
-		  default = "0";
-		  timeoutStyle = "hidden";
+        default = "0";
+        timeoutStyle = "hidden";
 
-		  theme = null;
-		  splashImage = null;
-		  backgroundColor = "#000000";
+        theme = null;
+        splashImage = null;
+        backgroundColor = "#000000";
       };
       efi = {
         canTouchEfiVariables = true;
@@ -87,27 +87,23 @@
 
   # List packages installed in system profile. You can use https://search.nixos.org/ to find more packages (and options).
   environment = {
-    variables = {
-      SUDO_EDITOR = "nvim";
-      EDITOR = "nvim";
-      VISUAL = "nvim";
-    };
+    # variables = {
+    #   SUDO_EDITOR = "nvim";
+    #   EDITOR = "nvim";
+    #   VISUAL = "nvim";
+    # };
     pathsToLink = [ "/share/zsh" ];
     systemPackages = with pkgs; [
-      neovim
-      git
       wl-clipboard
       glib
     ];
   };
 
-  programs.git = {
+  programs.neovim = {
     enable = true;
-
-    config = {
-      user.name = "Samuel-Fortunato";
-      user.email = "samff2006@gmail.com";
-    };
+    defaultEditor = true;
+    viAlias = true;
+    vimAlias = true;
   };
 
   services.displayManager.ly = {
