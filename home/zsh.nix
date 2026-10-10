@@ -17,6 +17,7 @@
     shellAliases = {
       ncf = "nvim ~/.config/nvim/";
 		cd = "z";
+		rebuild = "sudo nixos-rebuild switch && hyprctl reload && noctalia msg config-reload && noctalia msg notification-show 'NixOS rebuilt \!' 'Hyprland & Noctalia reloaded'";
     };
 
     initContent = ''
