@@ -34,16 +34,19 @@
   };
 
   virtualisation.libvirtd.enable = true;
-  programs.virt-manager.enable = true;
 
   networking.networkmanager.enable = true;
   time.timeZone = "Europe/Lisbon";
 
-  programs.hyprland = {
-    enable = true;
-    withUWSM = true;
+  programs = {
+    virt-manager.enable = true;
+    hyprland = {
+      enable = true;
+      withUWSM = true;
+    };
+    zsh.enable = true;
+	 steam.enable = true;
   };
-  programs.zsh.enable = true;
 
   nixpkgs.config.allowUnfree = true;
   nix.settings.experimental-features = [
