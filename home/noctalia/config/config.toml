@@ -1,6 +1,3 @@
-[audio]
-enable_screenshot_sounds = false
-
 [bar.default]
 center = [ "clock" ]
 contact_shadow = true
@@ -53,7 +50,7 @@ refresh_minutes = 5
     type = "google"
 
 [control_center]
-hidden_tabs = [ "media", "audio", "system", "power", "notifications" ]
+hidden_tabs = [ "media", "calendar", "audio", "system", "power", "notifications" ]
 show_session_button = true
 sidebar = "full"
 
