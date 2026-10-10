@@ -11,6 +11,12 @@
       videos = null;
     };
 
+    mimeApps = {
+      enable = true;
+      defaultApplications = {
+        "application/pdf" = "org.pwmt.zathura.desktop";
+      };
+    };
     configFile."xdg-desktop-portal-termfilechooser/config".text = ''
       [filechooser]
       default_dir=$HOME

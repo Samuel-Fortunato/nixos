@@ -10,6 +10,7 @@
     ./kitty.nix
     ./xdg.nix
     ./git.nix
+	 ./zathura.nix
   ];
   home = {
     username = "samuel";
