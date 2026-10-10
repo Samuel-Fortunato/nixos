@@ -11,5 +11,6 @@
     fastfetch
     nerd-fonts.jetbrains-mono
     spotify
+	 rclone
   ];
 }

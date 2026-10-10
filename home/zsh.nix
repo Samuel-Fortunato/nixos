@@ -16,8 +16,21 @@
 
     shellAliases = {
       ncf = "nvim ~/.config/nvim/";
-		cd = "z";
-		rebuild = "sudo nixos-rebuild switch && hyprctl reload && noctalia msg config-reload && noctalia msg notification-show 'NixOS rebuilt \!' 'Hyprland & Noctalia reloaded'";
+      cd = "z";
+      rebuild = "sudo nixos-rebuild switch && hyprctl reload && noctalia msg config-reload && noctalia msg notification-show 'NixOS rebuilt \!' 'Hyprland & Noctalia reloaded'";
+      sync-desktop = ''
+        if systemctl --user start proton-drive-bisync.service; then
+          if [ "$(systemctl --user show proton-drive-bisync.service -p Result --value)" = "success" ]; then
+            echo "Desktop synced successfully. Safe to shut down."
+          else
+            echo "Desktop sync failed. Do not switch PCs yet."
+            return 1
+          fi
+        else
+          echo "Desktop sync failed. Do not switch PCs yet."
+          return 1
+        fi
+      '';
     };
 
     initContent = ''

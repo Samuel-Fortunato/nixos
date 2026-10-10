@@ -4,6 +4,7 @@
     ./hyprland
     ./yazi
 	 ./noctalia
+	 ./proton-drive.nix
     ./zsh.nix
     ./packages.nix
     ./kitty.nix
