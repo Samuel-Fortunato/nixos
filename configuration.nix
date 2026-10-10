@@ -16,6 +16,10 @@
     alsa.enable = true;
   };
 
+  boot.loader.grub = {
+    configurationLimit = 5;
+  };
+
   virtualisation.libvirtd.enable = true;
   programs.virt-manager.enable = true;
 
