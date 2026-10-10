@@ -27,6 +27,12 @@
     };
   };
 
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 14d";
+  };
+
   virtualisation.libvirtd.enable = true;
   programs.virt-manager.enable = true;
 
