@@ -76,9 +76,9 @@
     allowRiskyCriticalPowerAction = true;
     criticalPowerAction = "Suspend";
   };
-  services.logind = {
-    powerKey = "suspend";
-    lidSwitch = "ignore";
+  services.logind.settings.Login = {
+    HandlePowerKey = "suspend";
+    HandleLidSwitch = "ignore";
   };
   security.polkit.enable = true;
 
