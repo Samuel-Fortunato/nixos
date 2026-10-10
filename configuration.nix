@@ -16,8 +16,15 @@
     alsa.enable = true;
   };
 
-  boot.loader.grub = {
-    configurationLimit = 5;
+  boot.loader = {
+    timeout = 0;
+    grub = {
+      configurationLimit = 5;
+      timeoutStyle = "hidden";
+      theme = null;
+      splashImage = null;
+      backgroundColor = "#000000";
+    };
   };
 
   virtualisation.libvirtd.enable = true;

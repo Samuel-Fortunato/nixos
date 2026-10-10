@@ -20,10 +20,6 @@
         efiSupport = true;
         useOSProber = true;
         default = "0";
-        timeoutStyle = "hidden";
-        theme = null;
-        splashImage = null;
-        backgroundColor = "#000000";
       };
       efi = {
         canTouchEfiVariables = true;
