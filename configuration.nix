@@ -10,6 +10,7 @@
 
   virtualisation.libvirtd.enable = true;
   security.polkit.enable = true;
+  documentation.man.cache.enable = true;
 
   nixpkgs.config.allowUnfree = true;
   nix.settings.experimental-features = [
