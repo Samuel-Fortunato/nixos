@@ -87,6 +87,7 @@
     enable = true;
     settings = {
       bigclock = true;
+		session_log = null;
     };
   };
   services.power-profiles-daemon.enable = true;
