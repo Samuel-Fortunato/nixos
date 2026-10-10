@@ -284,14 +284,14 @@ setup_wizard_enabled = false
         enabled = true
         glyph = "moon"
         label = "Suspend"
-        shortcut = "3"
+        shortcut = "2"
         variant = "default"
 
         [[shell.session.actions]]
         action = "logout"
         countdown_seconds = 0.0
         enabled = true
-        shortcut = "2"
+        shortcut = "3"
         variant = "default"
 
         [[shell.session.actions]]
