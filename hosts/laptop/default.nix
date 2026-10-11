@@ -11,6 +11,22 @@
     powerManagement.enable = false;
   };
 
+  virtualisation.libvirtd = {
+    enable = true;
+    qemu = {
+      swtpm.enable = true;
+      vhostUserPackages = [ pkgs.virtiofsd ];
+    };
+  };
+  programs.virt-manager.enable = true;
+  environment.systemPackages = [
+    pkgs.swtpm
+  ];
+
+  users.users.samuel.extraGroups = [
+    "libvirtd"
+  ];
+
   boot = {
     loader = {
       timeout = 0;

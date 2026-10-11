@@ -8,7 +8,6 @@
   networking.networkmanager.enable = true;
   time.timeZone = "Europe/Lisbon";
 
-  virtualisation.libvirtd.enable = true;
   security.polkit.enable = true;
   documentation.man.cache.enable = true;
 
@@ -42,7 +41,6 @@
       extraGroups = [
         "wheel"
         "networkmanager"
-        "libvirtd"
       ];
     };
   };
@@ -82,7 +80,6 @@
   };
 
   programs = {
-    virt-manager.enable = true;
     zsh.enable = true;
     steam.enable = true;
     hyprland = {
