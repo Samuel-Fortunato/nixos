@@ -11,6 +11,7 @@
     ./xdg.nix
     ./git.nix
 	 ./zathura.nix
+	 ./gtk.nix
   ];
   home = {
     username = "samuel";
