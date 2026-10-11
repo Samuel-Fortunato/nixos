@@ -7,6 +7,6 @@ return {
 	opts = { },
 	config = function (_,_)
 		require("catppuccin")
-		vim.cmd.colorscheme "catppuccin-nvim"
+		-- vim.cmd.colorscheme "catppuccin-nvim"
 	end
 }
