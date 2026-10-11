@@ -124,9 +124,12 @@ hl.bind(mainMod .. " + SHIFT + E", hl.dsp.exec_cmd(prog.guiFileManager))
 hl.bind(mainMod .. "+P", hl.dsp.exec_cmd(ipc .. "panel-toggle session"))
 hl.bind(mainMod .. "+V", hl.dsp.exec_cmd(ipc .. "panel-toggle clipboard"))
 hl.bind(mainMod .. "+T", hl.dsp.exec_cmd(ipc .. "panel-toggle wallpaper"))
-hl.bind("CTRL + SUPER_l", hl.dsp.exec_cmd("noctalia msg panel-toggle control-center"), {
-	description = "Toggle Noctalia Control Center"
-})
+
+hl.bind(mainMod .. "+SUPER_l", hl.dsp.submap("double-click"))
+hl.bind(mainMod .. "+SUPER_l", hl.dsp.exec_cmd("sleep 0.4 && hyprctl dispatch 'hl.dsp.submap(\"reset\")'"))
+hl.define_submap("double-click", function()
+	hl.bind(mainMod .. "+SUPER_l", hl.dsp.exec_cmd(ipc .. "panel-toggle control-center"))
+end)
 
 hl.bind(mainMod .. "+PERIOD", hl.dsp.exec_cmd(ipc .. "notification-clear-active"))
 hl.bind(mainMod .. "+SHIFT+PERIOD", hl.dsp.exec_cmd(ipc .. "notification-invoke-latest"))
