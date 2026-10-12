@@ -13,5 +13,8 @@
     spotify
 	 rclone
 	 # bibata-cursors
+	 tmux
+	 distrobox
+	 trash-cli
   ];
 }

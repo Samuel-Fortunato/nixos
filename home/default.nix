@@ -12,6 +12,7 @@
     ./git.nix
 	 ./zathura.nix
 	 ./gtk.nix
+	 ./matlab.nix
   ];
   home = {
     username = "samuel";

@@ -52,6 +52,13 @@ hl.window_rule({
     size = { 1080, 920 },
 })
 
+hl.window_rule({
+	match = { class = "^MATLAB R2026b$", title = "Figures" },
+	float = true,
+	center = true,
+	size = { 1000, 800 },
+})
+
 hl.layer_rule({
   name = "noctalia",
   match = {
