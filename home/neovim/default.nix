@@ -15,6 +15,7 @@
       texlab
       nixfmt
       ripgrep
+		astyle
     ];
   };
 
