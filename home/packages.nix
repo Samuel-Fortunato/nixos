@@ -12,5 +12,6 @@
     nerd-fonts.jetbrains-mono
     spotify
 	 rclone
+	 # bibata-cursors
   ];
 }
