@@ -286,7 +286,7 @@ setup_wizard_enabled = false
 
         [[shell.session.actions]]
         action = "logout"
-        countdown_seconds = 0.0
+        countdown_seconds = 5.0
         enabled = true
         shortcut = "3"
         variant = "default"
