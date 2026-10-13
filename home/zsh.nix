@@ -14,6 +14,8 @@
       saveNoDups = true;
     };
 
+    # zprof.enable = true;
+
     shellAliases = {
       ncf = "nvim ~/.config/nvim/";
       cd = "z";
