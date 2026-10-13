@@ -3,6 +3,7 @@
 
   networking.hostName = "nixos-laptop";
 
+  # GPU acceleration
   hardware.graphics.enable = true;
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware.nvidia = {
@@ -15,8 +16,9 @@
 	 ui.enable = true;
   };
 
+  # Virtualization (distrobox and qemu)
   virtualisation = {
-	 podman.enable = true;
+    podman.enable = true;
     libvirtd = {
       enable = true;
       qemu = {
@@ -29,11 +31,26 @@
   environment.systemPackages = [
     pkgs.swtpm
   ];
-
   users.users.samuel.extraGroups = [
     "libvirtd"
   ];
 
+  # Windows dual boot mounting
+  fileSystems."/mnt/windows" = {
+    device = "/dev/disk/by-label/Windows-SSD";
+    fsType = "ntfs3";
+
+    options = [
+      "rw"
+      "uid=1000"
+      "gid=100"
+      "umask=022"
+      "nofail"
+      "x-systemd.automount"
+    ];
+  };
+
+  # GRUB bootloader
   boot = {
     loader = {
       timeout = 0;
