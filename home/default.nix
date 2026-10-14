@@ -13,6 +13,7 @@
 	 ./zathura.nix
 	 ./gtk.nix
 	 ./matlab.nix
+	 ./onlyoffice.nix
   ];
   home = {
     username = "samuel";
