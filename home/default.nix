@@ -4,6 +4,7 @@
     ./hyprland
     ./yazi
 	 ./noctalia
+	 ./music-wallpaper
 	 ./proton-drive.nix
     ./zsh.nix
     ./packages.nix

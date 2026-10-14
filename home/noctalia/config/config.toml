@@ -87,6 +87,7 @@ widget_order = [ "desktop-widget-0000000000000001", "desktop-widget-000000000000
     cx = 820.0
     cy = 968.0
 	 output = "@MONITOR@"
+	 enabled = true
     placement_height = 1000.0
     placement_width = 1600.0
     rotation = 0.0
@@ -107,6 +108,7 @@ widget_order = [ "desktop-widget-0000000000000001", "desktop-widget-000000000000
     cx = 1440.0
     cy = 212.0
 	 output = "@MONITOR@"
+	 enabled = false
     placement_height = 1000.0
     placement_width = 1600.0
     rotation = 0.0
@@ -118,7 +120,7 @@ widget_order = [ "desktop-widget-0000000000000001", "desktop-widget-000000000000
         layout = "vertical"
 
 [hot_corners]
-enabled = true
+enabled = false
 
 [idle]
 behavior_order = [ "screen-off", "lock", "lock-and-suspend" ]
@@ -339,7 +341,7 @@ transition = [ "fade", "wipe", "disc", "stripes", "zoom", "honeycomb" ]
 transition_duration = 1500
 
     [wallpaper.automation]
-    enabled = true
+    enabled = false
     interval_seconds = 600
     order = "random"
 
