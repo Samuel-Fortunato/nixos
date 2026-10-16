@@ -15,6 +15,7 @@
 	 ./gtk.nix
 	 ./matlab.nix
 	 ./onlyoffice.nix
+	 ./latex.nix
   ];
   home = {
     username = "samuel";
