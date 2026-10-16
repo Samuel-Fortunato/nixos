@@ -11,7 +11,10 @@
       gcc
       tree-sitter
       clang-tools
-      pyright
+
+      basedpyright
+		ruff
+
       texlab
       nixfmt
       ripgrep
