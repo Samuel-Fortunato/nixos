@@ -16,5 +16,6 @@
 	 tmux
 	 distrobox
 	 trash-cli
+	 loupe
   ];
 }
