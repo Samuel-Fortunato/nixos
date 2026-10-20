@@ -16,7 +16,9 @@
 	 ./matlab.nix
 	 ./onlyoffice.nix
 	 ./latex.nix
+	 ./starship.nix
   ];
+
   home = {
     username = "samuel";
     homeDirectory = "/home/samuel";
