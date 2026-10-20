@@ -53,7 +53,7 @@ hl.window_rule({
 })
 
 hl.window_rule({
-	match = { class = "^MATLAB R2026b$", title = "Figures" },
+	match = { class = "MATLAB.*", title = "Figures" },
 	float = true,
 	center = true,
 	size = { 1000, 800 },
