@@ -4,6 +4,7 @@
 Invoked by Noctalia hooks and two user systemd services. All mode changes are
 triggered by selecting selector images in Noctalia's own wallpaper picker.
 """
+
 from __future__ import annotations
 
 import base64
@@ -13,7 +14,6 @@ import io
 import json
 import os
 import random
-import shutil
 import subprocess
 import sys
 import time
@@ -126,13 +126,21 @@ def is_internal_music_render(path: str | Path) -> bool:
 
 
 def is_mode_wallpaper(path: str | Path) -> bool:
-    return (is_music_selector(path) or same_path(path, MUSIC_CANONICAL)
-            or is_carousel_selector(path) or is_internal_music_render(path))
+    return (
+        is_music_selector(path)
+        or same_path(path, MUSIC_CANONICAL)
+        or is_carousel_selector(path)
+        or is_internal_music_render(path)
+    )
 
 
-def run_command(args: list[str], *, timeout: float = 12.0) -> subprocess.CompletedProcess[str]:
+def run_command(
+    args: list[str], *, timeout: float = 12.0
+) -> subprocess.CompletedProcess[str]:
     try:
-        return subprocess.run(args, text=True, capture_output=True, timeout=timeout, check=False)
+        return subprocess.run(
+            args, text=True, capture_output=True, timeout=timeout, check=False
+        )
     except (OSError, subprocess.TimeoutExpired) as error:
         return subprocess.CompletedProcess(args, 1, "", str(error))
 
@@ -178,8 +186,11 @@ def mark_expected(path: str | Path) -> None:
         previous = json.loads(EXPECTED_FILE.read_text(encoding="utf-8"))
         raw = previous.get("paths", {}) if isinstance(previous, dict) else {}
         if isinstance(raw, dict):
-            entries = {str(key): float(value) for key, value in raw.items()
-                       if time.time() - float(value) <= EXPECTED_TTL}
+            entries = {
+                str(key): float(value)
+                for key, value in raw.items()
+                if time.time() - float(value) <= EXPECTED_TTL
+            }
     except (OSError, ValueError, TypeError, json.JSONDecodeError):
         entries = {}
     entries[str(resolved(path))] = time.time()
@@ -238,7 +249,9 @@ def set_wallpaper(path: str | Path) -> bool:
 def service(action: str, unit: str) -> None:
     result = run_command(["systemctl", "--user", action, unit], timeout=15.0)
     if result.returncode != 0 and (result.stderr or result.stdout):
-        log(f"systemctl --user {action} {unit}: {(result.stderr or result.stdout).strip()}")
+        log(
+            f"systemctl --user {action} {unit}: {(result.stderr or result.stdout).strip()}"
+        )
 
 
 def remember_selector_event(path: str | Path) -> bool:
@@ -247,7 +260,10 @@ def remember_selector_event(path: str | Path) -> bool:
     now = time.time()
     try:
         old = json.loads(LAST_SELECTOR_FILE.read_text(encoding="utf-8"))
-        if old.get("path") == key and now - float(old.get("time", 0)) < SELECTOR_DEBOUNCE:
+        if (
+            old.get("path") == key
+            and now - float(old.get("time", 0)) < SELECTOR_DEBOUNCE
+        ):
             return True
     except (OSError, ValueError, TypeError, json.JSONDecodeError):
         pass
@@ -259,25 +275,31 @@ def remember_selector_event(path: str | Path) -> bool:
 
 
 def ensure_fallback_image() -> None:
-    """Create a safe first-run wallpaper until a player provides artwork."""
-    if MUSIC_CANONICAL.is_file():
-        return
-    WALLPAPER_DIR.mkdir(parents=True, exist_ok=True)
-    width, height = screen_size()
-    base = Image.new("RGB", (width, height), (9, 10, 22)).convert("RGBA")
-    glow = Image.new("RGBA", (width, height), (0, 0, 0, 0))
-    glow_draw = ImageDraw.Draw(glow)
-    glow_draw.ellipse((width * .15, -height * .45, width * .9, height * .8), fill=(56, 29, 105, 150))
-    glow_draw.ellipse((width * .4, height * .35, width * 1.1, height * 1.2), fill=(14, 82, 110, 100))
-    glow = glow.filter(ImageFilter.GaussianBlur(max(24, min(width, height) // 5)))
-    base = Image.alpha_composite(base, glow).convert("RGB")
-    draw = ImageDraw.Draw(base)
-    font = load_font(max(20, min(width, height) // 35))
-    small = load_font(max(13, min(width, height) // 75))
-    draw.text((width // 2, height // 2 - 24), "MUSIC WALLPAPER", anchor="mm", font=font, fill=(227, 226, 245))
-    draw.text((width // 2, height // 2 + 30), "Play something to bring the album art to life", anchor="mm", font=small, fill=(163, 163, 188))
-    save_image_atomic(base, MUSIC_CANONICAL)
-    log(f"Created initial fallback image at {MUSIC_CANONICAL}")
+    """Keep the Home Manager-managed selector untouched."""
+    if not MUSIC_SELECTOR.is_file():
+        log(f"Music selector image is missing: {MUSIC_SELECTOR}")
+
+
+# def ensure_fallback_image() -> None:
+#     """Create a safe first-run wallpaper until a player provides artwork."""
+#     if MUSIC_CANONICAL.is_file():
+#         return
+#     WALLPAPER_DIR.mkdir(parents=True, exist_ok=True)
+#     width, height = screen_size()
+#     base = Image.new("RGB", (width, height), (9, 10, 22)).convert("RGBA")
+#     glow = Image.new("RGBA", (width, height), (0, 0, 0, 0))
+#     glow_draw = ImageDraw.Draw(glow)
+#     glow_draw.ellipse((width * .15, -height * .45, width * .9, height * .8), fill=(56, 29, 105, 150))
+#     glow_draw.ellipse((width * .4, height * .35, width * 1.1, height * 1.2), fill=(14, 82, 110, 100))
+#     glow = glow.filter(ImageFilter.GaussianBlur(max(24, min(width, height) // 5)))
+#     base = Image.alpha_composite(base, glow).convert("RGB")
+#     draw = ImageDraw.Draw(base)
+#     font = load_font(max(20, min(width, height) // 35))
+#     small = load_font(max(13, min(width, height) // 75))
+#     draw.text((width // 2, height // 2 - 24), "MUSIC WALLPAPER", anchor="mm", font=font, fill=(227, 226, 245))
+#     draw.text((width // 2, height // 2 + 30), "Play something to bring the album art to life", anchor="mm", font=small, fill=(163, 163, 188))
+#     save_image_atomic(base, MUSIC_CANONICAL)
+#     log(f"Created initial fallback image at {MUSIC_CANONICAL}")
 
 
 def enter_music_mode() -> None:
@@ -297,7 +319,9 @@ def enter_carousel_mode() -> None:
         previous = last_normal()
         if previous:
             set_wallpaper(previous)
-        log("Carousel mode could not start because no ordinary wallpaper images were found")
+        log(
+            "Carousel mode could not start because no ordinary wallpaper images were found"
+        )
         return
     service("start", CAROUSEL_SERVICE)
 
@@ -315,7 +339,11 @@ def startup() -> None:
             except OSError:
                 pass
         prior = wallpaper_get()
-        if prior and not is_mode_wallpaper(prior) and Path(prior).expanduser().is_file():
+        if (
+            prior
+            and not is_mode_wallpaper(prior)
+            and Path(prior).expanduser().is_file()
+        ):
             remember_normal(prior)
         set_mode("normal")
         service("stop", MUSIC_SERVICE)
@@ -377,16 +405,25 @@ def screen_size() -> tuple[int, int]:
     if result.returncode == 0:
         try:
             monitors = json.loads(result.stdout)
-            usable = [item for item in monitors if int(item.get("width", 0)) > 0 and int(item.get("height", 0)) > 0]
+            usable = [
+                item
+                for item in monitors
+                if int(item.get("width", 0)) > 0 and int(item.get("height", 0)) > 0
+            ]
             if usable:
-                monitor = max(usable, key=lambda item: int(item["width"]) * int(item["height"]))
+                monitor = max(
+                    usable, key=lambda item: int(item["width"]) * int(item["height"])
+                )
                 width, height = int(monitor["width"]), int(monitor["height"])
                 # Keep memory usage bounded on unusually high-resolution outputs.
                 scale = min(1.0, 5120 / max(width, height))
                 size = (max(640, int(width * scale)), max(360, int(height * scale)))
                 try:
                     STATE_DIR.mkdir(parents=True, exist_ok=True)
-                    SCREEN_SIZE_FILE.write_text(json.dumps({"width": size[0], "height": size[1]}), encoding="utf-8")
+                    SCREEN_SIZE_FILE.write_text(
+                        json.dumps({"width": size[0], "height": size[1]}),
+                        encoding="utf-8",
+                    )
                 except OSError:
                     pass
                 return size
@@ -442,13 +479,26 @@ def download_artwork(url: str, signature: str) -> Image.Image | None:
         try:
             if url.startswith("data:"):
                 header, encoded = url.split(",", 1)
-                data = base64.b64decode(encoded) if ";base64" in header else urllib.parse.unquote_to_bytes(encoded)
+                data = (
+                    base64.b64decode(encoded)
+                    if ";base64" in header
+                    else urllib.parse.unquote_to_bytes(encoded)
+                )
             else:
                 parsed = urllib.parse.urlparse(url)
                 if not parsed.scheme and Path(url).is_file():
                     data = Path(url).read_bytes()
                 else:
-                    request: Any = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0 noctalia-music-wallpaper/1.0"}) if parsed.scheme in {"http", "https"} else url
+                    request: Any = (
+                        urllib.request.Request(
+                            url,
+                            headers={
+                                "User-Agent": "Mozilla/5.0 noctalia-music-wallpaper/1.0"
+                            },
+                        )
+                        if parsed.scheme in {"http", "https"}
+                        else url
+                    )
                     with urllib.request.urlopen(request, timeout=12) as response:
                         data = response.read(25 * 1024 * 1024 + 1)
             if not data or len(data) > 25 * 1024 * 1024:
@@ -472,7 +522,9 @@ def download_artwork(url: str, signature: str) -> Image.Image | None:
 def compose_wallpaper(artwork: Image.Image) -> Image.Image:
     width, height = screen_size()
     background = ImageOps.fit(artwork, (width, height), method=Image.Resampling.LANCZOS)
-    background = background.filter(ImageFilter.GaussianBlur(radius=max(18, int(min(width, height) * 0.035))))
+    background = background.filter(
+        ImageFilter.GaussianBlur(radius=max(18, int(min(width, height) * 0.035)))
+    )
     # Dark overlay preserves desktop-widget and bar readability.
     overlay = Image.new("RGBA", (width, height), (5, 7, 15, 132))
     background = Image.alpha_composite(background.convert("RGBA"), overlay)
@@ -480,10 +532,14 @@ def compose_wallpaper(artwork: Image.Image) -> Image.Image:
     cover_size = min(int(width * 0.36), int(height * 0.58))
     cover_size = max(260, cover_size)
     cover_size = min(cover_size, width - 100, height - 100)
-    cover = ImageOps.fit(artwork, (cover_size, cover_size), method=Image.Resampling.LANCZOS).convert("RGBA")
+    cover = ImageOps.fit(
+        artwork, (cover_size, cover_size), method=Image.Resampling.LANCZOS
+    ).convert("RGBA")
     radius = max(14, cover_size // 35)
     mask = Image.new("L", cover.size, 0)
-    ImageDraw.Draw(mask).rounded_rectangle((0, 0, cover_size - 1, cover_size - 1), radius=radius, fill=255)
+    ImageDraw.Draw(mask).rounded_rectangle(
+        (0, 0, cover_size - 1, cover_size - 1), radius=radius, fill=255
+    )
     cover.putalpha(mask)
 
     x = (width - cover_size) // 2
@@ -493,21 +549,31 @@ def compose_wallpaper(artwork: Image.Image) -> Image.Image:
     ImageDraw.Draw(shadow_mask).rounded_rectangle(
         (24, 24, cover_size + 31, cover_size + 31), radius=radius + 4, fill=175
     )
-    shadow_mask = shadow_mask.filter(ImageFilter.GaussianBlur(max(12, cover_size // 20)))
+    shadow_mask = shadow_mask.filter(
+        ImageFilter.GaussianBlur(max(12, cover_size // 20))
+    )
     shadow_layer.paste((0, 0, 0, 235), (x - 28, y - 28), shadow_mask)
     background = Image.alpha_composite(background, shadow_layer)
 
     border = Image.new("RGBA", (cover_size + 10, cover_size + 10), (0, 0, 0, 0))
     border_mask = Image.new("L", border.size, 0)
-    ImageDraw.Draw(border_mask).rounded_rectangle((0, 0, border.width - 1, border.height - 1), radius=radius + 2, fill=255)
-    ImageDraw.Draw(border).rounded_rectangle((0, 0, border.width - 1, border.height - 1), radius=radius + 2, fill=(255, 255, 255, 225))
+    ImageDraw.Draw(border_mask).rounded_rectangle(
+        (0, 0, border.width - 1, border.height - 1), radius=radius + 2, fill=255
+    )
+    ImageDraw.Draw(border).rounded_rectangle(
+        (0, 0, border.width - 1, border.height - 1),
+        radius=radius + 2,
+        fill=(255, 255, 255, 225),
+    )
     background.alpha_composite(border, (x - 5, y - 5))
     background.alpha_composite(cover, (x, y))
     return background.convert("RGB")
 
 
 def metadata(player: str, key: str) -> str:
-    result = run_command(["playerctl", "--player", player, "metadata", key], timeout=3.0)
+    result = run_command(
+        ["playerctl", "--player", player, "metadata", key], timeout=3.0
+    )
     return result.stdout.strip() if result.returncode == 0 else ""
 
 
@@ -535,7 +601,9 @@ def active_playing_player() -> tuple[str, dict[str, str]] | None:
             "title": metadata(player, "xesam:title") or metadata(player, "title"),
         }
         if not data["art"]:
-            log(f"Player {player} is playing but did not publish mpris:artUrl; keeping current wallpaper")
+            log(
+                f"Player {player} is playing but did not publish mpris:artUrl; keeping current wallpaper"
+            )
             continue
         data["player"] = player
         return player, data
@@ -544,7 +612,11 @@ def active_playing_player() -> tuple[str, dict[str, str]] | None:
 
 def clean_render_cache(keep: int = 30) -> None:
     try:
-        renders = sorted(RENDERS_DIR.glob("track-*.png"), key=lambda path: path.stat().st_mtime, reverse=True)
+        renders = sorted(
+            RENDERS_DIR.glob("track-*.png"),
+            key=lambda path: path.stat().st_mtime,
+            reverse=True,
+        )
         protected = last_music_render()
         removed = 0
         for path in renders:
@@ -561,7 +633,11 @@ def clean_render_cache(keep: int = 30) -> None:
 
 def clean_art_cache(keep: int = 50) -> None:
     try:
-        files = sorted(ART_CACHE_DIR.glob("*.img"), key=lambda path: path.stat().st_mtime, reverse=True)
+        files = sorted(
+            ART_CACHE_DIR.glob("*.img"),
+            key=lambda path: path.stat().st_mtime,
+            reverse=True,
+        )
         for path in files[keep:]:
             try:
                 path.unlink()
@@ -572,7 +648,10 @@ def clean_art_cache(keep: int = 50) -> None:
 
 
 def update_music_wallpaper(data: dict[str, str]) -> bool:
-    identity = "\0".join(data.get(key, "") for key in ("player", "trackid", "url", "artist", "title", "art"))
+    identity = "\0".join(
+        data.get(key, "")
+        for key in ("player", "trackid", "url", "artist", "title", "art")
+    )
     signature = hashlib.sha256(identity.encode("utf-8", "replace")).hexdigest()
     target = RENDERS_DIR / f"track-{signature[:24]}.png"
     RENDERS_DIR.mkdir(parents=True, exist_ok=True)
@@ -595,18 +674,12 @@ def update_music_wallpaper(data: dict[str, str]) -> bool:
         rendered = compose_wallpaper(art)
         save_image_atomic(rendered, target)
 
-    # Keep the requested, human-readable canonical output in the wallpaper folder.
-    try:
-        temporary = MUSIC_CANONICAL.with_name(".00-music-theme.tmp.png")
-        shutil.copyfile(target, temporary)
-        temporary.replace(MUSIC_CANONICAL)
-    except OSError as error:
-        log(f"Could not update {MUSIC_CANONICAL}: {error}")
-
     write_text_atomic(LAST_RENDER_FILE, str(target))
     if not set_wallpaper(target):
         return False
-    log(f"Music wallpaper updated for {data.get('artist', 'Unknown artist')} — {data.get('title', 'Unknown track')} ({data.get('player', 'player')})")
+    log(
+        f"Music wallpaper updated for {data.get('artist', 'Unknown artist')} — {data.get('title', 'Unknown track')} ({data.get('player', 'player')})"
+    )
     clean_render_cache()
     clean_art_cache()
     return True
@@ -619,7 +692,10 @@ def music_monitor() -> None:
         selected = active_playing_player()
         if selected:
             player, data = selected
-            identity = "\0".join(data.get(key, "") for key in ("player", "trackid", "url", "artist", "title", "art"))
+            identity = "\0".join(
+                data.get(key, "")
+                for key in ("player", "trackid", "url", "artist", "title", "art")
+            )
             signature = hashlib.sha256(identity.encode("utf-8", "replace")).hexdigest()
             if signature != last_attempted:
                 last_attempted = signature
@@ -639,11 +715,19 @@ def ordinary_wallpapers() -> list[Path]:
     excluded_names = {MUSIC_SELECTOR.name, CAROUSEL_SELECTOR.name, MUSIC_CANONICAL.name}
     try:
         for path in WALLPAPER_DIR.rglob("*"):
-            if not path.is_file() or path.name in excluded_names or path.name.startswith(".00-music-theme"):
+            if (
+                not path.is_file()
+                or path.name in excluded_names
+                or path.name.startswith(".00-music-theme")
+            ):
                 continue
             if path.suffix.lower() not in IMAGE_EXTENSIONS:
                 continue
-            if path.resolve(strict=False) in {MUSIC_SELECTOR.resolve(strict=False), CAROUSEL_SELECTOR.resolve(strict=False), MUSIC_CANONICAL.resolve(strict=False)}:
+            if path.resolve(strict=False) in {
+                MUSIC_SELECTOR.resolve(strict=False),
+                CAROUSEL_SELECTOR.resolve(strict=False),
+                MUSIC_CANONICAL.resolve(strict=False),
+            }:
                 continue
             candidates.append(path)
     except OSError as error:
@@ -656,7 +740,9 @@ def apply_random_wallpaper() -> bool:
     if not candidates:
         return False
     current = wallpaper_get()
-    alternatives = [path for path in candidates if not current or not same_path(path, current)]
+    alternatives = [
+        path for path in candidates if not current or not same_path(path, current)
+    ]
     pool = alternatives or candidates
     target = random.choice(pool)
     remember_normal(target)
@@ -688,7 +774,10 @@ def manual_status() -> None:
 
 def main() -> int:
     if len(sys.argv) != 2:
-        print("Usage: noctalia-music-wallpaper {startup|wallpaper-hook|music-monitor|carousel-monitor|status}", file=sys.stderr)
+        print(
+            "Usage: noctalia-music-wallpaper {startup|wallpaper-hook|music-monitor|carousel-monitor|status}",
+            file=sys.stderr,
+        )
         return 2
     command = sys.argv[1]
     if command == "startup":
