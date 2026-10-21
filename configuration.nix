@@ -7,6 +7,12 @@
 {
   networking.networkmanager.enable = true;
   time.timeZone = "Europe/Lisbon";
+  i18n = {
+    defaultLocale = "en_US.UTF-8";
+    extraLocaleSettings = {
+      LC_TIME = "en_GB.UTF-8";
+    };
+  };
 
   security.polkit.enable = true;
   documentation.man.cache.enable = true;
@@ -28,6 +34,7 @@
     };
   };
 
+  # Garbage collection
   nix.gc = {
     automatic = true;
     dates = "weekly";
@@ -41,11 +48,11 @@
       extraGroups = [
         "wheel"
         "networkmanager"
-		  "dialout"
+        "dialout"
       ];
     };
   };
-  
+
   services = {
     displayManager.ly = {
       enable = true;
