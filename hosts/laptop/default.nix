@@ -11,10 +11,6 @@
     open = true;
     powerManagement.enable = false;
   };
-  programs.gpu-screen-recorder = {
-    enable = true;
-	 ui.enable = true;
-  };
 
   # Virtualization (distrobox and qemu)
   virtualisation = {
