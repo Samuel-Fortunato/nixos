@@ -17,6 +17,7 @@
 	 ./onlyoffice.nix
 	 ./latex.nix
 	 ./starship.nix
+	 ./uuctl.nix
   ];
 
   home = {
