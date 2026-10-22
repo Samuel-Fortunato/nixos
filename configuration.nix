@@ -63,6 +63,7 @@
     };
     power-profiles-daemon.enable = true;
     accounts-daemon.enable = true;
+	 udisks2.enable = true;
     upower = {
       enable = true;
       allowRiskyCriticalPowerAction = true;

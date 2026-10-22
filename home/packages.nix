@@ -1,21 +1,25 @@
 { pkgs, ... }: {
   home.packages = with pkgs; [
-	 thunar
+    thunar
     gh
     yazi
-	 btop
+    btop
     google-chrome
     fzf
     tree
     lazygit
     fastfetch
     nerd-fonts.jetbrains-mono
+    noto-fonts
     spotify
-	 rclone
-	 # bibata-cursors
-	 tmux
-	 distrobox
-	 trash-cli
-	 loupe
+    rclone
+    # bibata-cursors
+    tmux
+    distrobox
+    trash-cli
+    loupe
+    socat
+	 udiskie
+	 imagemagick
   ];
 }
