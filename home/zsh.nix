@@ -5,7 +5,15 @@
     autocd = true;
     cdpath = [ "." ];
     defaultKeymap = "viins";
-    syntaxHighlighting.enable = true;
+
+	 syntaxHighlighting.enable = true;
+    autosuggestion = {
+      enable = true;
+      strategy = [
+        "completion"
+        "history"
+      ];
+    };
     history = {
       append = true;
       expireDuplicatesFirst = true;
@@ -15,6 +23,13 @@
     };
 
     # zprof.enable = true;
+    initContent = ''
+            if [[ -o interactive ]] && command -v fastfetch >/dev/null 2>&1; then
+              fastfetch
+            fi
+
+      		bindkey -M viins 'jk' vi-cmd-mode
+            	'';
 
     shellAliases = {
       ncf = "nvim ~/.config/nvim/";
