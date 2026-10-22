@@ -145,16 +145,13 @@ width = 700
     type = "caffeine"
 
     [[control_center.shortcuts]]
-    type = "nightlight"
-
-    [[control_center.shortcuts]]
     type = "bluetooth"
 
     [[control_center.shortcuts]]
-    type = "power_profile"
+    type = "mic_mute"
 
     [[control_center.shortcuts]]
-    type = "mic_mute"
+    type = "noctalia/wallhaven:shortcut"
 
 [desktop_widgets]
 enabled = true
@@ -476,11 +473,25 @@ scale = 1.0
     volume_output = true
     wifi = true
 
-[plugin_settings]
+[plugin_settings."ashur-d/wallpaper-widget"]
+close_on_apply = true
+hub_layer = "overlay"
+notify_on_change = false
+
+[plugin_settings."mindnbytes/nix-status"]
+flake_dir = "/etc/nixos/home"
+nixos_configuration = "nixos-laptop"
+
+[plugin_settings."piero-93/battery-power-management"]
+show_profile = false
+
+[plugin_settings."profidev/hypr-screen-mirror"]
+panel_open_near_click = true
+panel_placement = "attached"
 
 [plugins]
 auto_update = "all"
-enabled = []
+enabled = [ "profidev/hypr-screen-mirror", "dunarand/tmux-provider", "aristides/udiskie", "ashur-d/wallpaper-widget" ]
 
     [[plugins.source]]
     enabled = true
