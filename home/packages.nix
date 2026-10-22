@@ -8,7 +8,6 @@
     fzf
     tree
     lazygit
-    fastfetch
     nerd-fonts.jetbrains-mono
     noto-fonts
     spotify

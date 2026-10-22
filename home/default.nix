@@ -5,6 +5,7 @@
     ./yazi
 	 ./noctalia
 	 ./music-wallpaper
+	 ./fastfetch
 	 ./proton-drive.nix
     ./zsh.nix
     ./packages.nix
