@@ -4,21 +4,21 @@
     defaultEditor = true;
     viAlias = true;
     vimAlias = true;
-	 # sideloadInitLua = true;
+    # sideloadInitLua = true;
 
     extraPackages = with pkgs; [
-		lua-language-server
+      lua-language-server
       gcc
       tree-sitter
       clang-tools
 
       basedpyright
-		ruff
+      ruff
 
       texlab
       nixfmt
       ripgrep
-		astyle
+      astyle
     ];
   };
 
