@@ -75,6 +75,8 @@ for _, letter in ipairs({ "W", "S", "A" }) do
 	hl.bind(mainMod .. " + " .. letter, hl.dsp.workspace.toggle_special(letter))
 	hl.bind(mainMod .. " + SHIFT + " .. letter, hl.dsp.window.move({ workspace = "special:" .. letter }))
 end
+hl.bind(mainMod.."+UP", hl.dsp.window.move({workspace = "special:A"}))
+hl.bind(mainMod.."+DOWN", hl.dsp.window.move({workspace = "+0"}))
 
 -- Scroll through existing workspaces with mainMod + scroll
 hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
