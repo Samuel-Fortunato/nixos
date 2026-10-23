@@ -14,7 +14,6 @@
     mimeApps = {
       enable = true;
       defaultApplications = {
-        "inode/directory" = "yazi.desktop";
         "inode/mount-point" = "yazi.desktop";
 
         "application/pdf" = "org.pwmt.zathura.desktop";
