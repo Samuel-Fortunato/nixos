@@ -20,5 +20,6 @@
     udiskie
     imagemagick
     gnome-calculator
+    showtime
   ];
 }
