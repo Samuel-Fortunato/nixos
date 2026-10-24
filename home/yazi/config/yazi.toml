@@ -3,3 +3,9 @@ prepend_rules = [
 	# Folder
 	{ url = "*/", use = [ "open", "reveal", "edit" ] },
 ]
+
+[opener]
+edit = [
+  { run = 'nvim %s', block = true, desc = "Open", for = "unix" },
+  { run = 'kitty --directory "$PWD" nvim %s', orphan = true, desc = "Open in New Window", for = "unix" },
+]
