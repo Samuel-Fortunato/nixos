@@ -773,7 +773,7 @@ sync_color_scheme = true
 wallpaper_scheme = "m3-tonal-spot"
 
     [theme.templates]
-    builtin_ids = [ "btop", "hyprland", "kitty" ]
+    builtin_ids = [ "btop", "gtk3", "gtk4", "hyprland", "kitty" ]
     community_ids = [ "neovim", "zathura", "fzf" ]
     enable_builtin_templates = true
     enable_community_templates = true
