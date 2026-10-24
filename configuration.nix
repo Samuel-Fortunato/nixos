@@ -91,6 +91,7 @@
   programs = {
     zsh.enable = true;
     steam.enable = true;
+	 gpu-screen-recorder.enable = true;
     hyprland = {
       enable = true;
       withUWSM = true;

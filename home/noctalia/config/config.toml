@@ -59,7 +59,7 @@ order = [ "default" ]
     show_on_workspace_switch = true
     show_tooltip = true
     smart_auto_hide = false
-    start = [ "control-center", "spacer", "workspaces" ]
+    start = [ "control-center", "recorder", "spacer", "workspaces" ]
     thickness = 40
     widget_spacing = 10
 
@@ -145,13 +145,16 @@ width = 700
     type = "caffeine"
 
     [[control_center.shortcuts]]
-    type = "bluetooth"
-
-    [[control_center.shortcuts]]
     type = "mic_mute"
 
     [[control_center.shortcuts]]
-    type = "noctalia/wallhaven:shortcut"
+    type = "bluetooth"
+
+    [[control_center.shortcuts]]
+    type = "nightlight"
+
+    [[control_center.shortcuts]]
+    type = "noctalia/screen_recorder:toggle"
 
 [desktop_widgets]
 enabled = true
@@ -482,6 +485,12 @@ notify_on_change = false
 flake_dir = "/etc/nixos/home"
 nixos_configuration = "nixos-laptop"
 
+[plugin_settings."noctalia/screen_recorder"]
+glyph_pending = "player-pause-filled"
+glyph_recording = "player-record-filled"
+hide_inactive = true
+video_source = "focused"
+
 [plugin_settings."piero-93/battery-power-management"]
 show_profile = false
 
@@ -491,7 +500,13 @@ panel_placement = "attached"
 
 [plugins]
 auto_update = "all"
-enabled = [ "profidev/hypr-screen-mirror", "dunarand/tmux-provider", "aristides/udiskie", "ashur-d/wallpaper-widget" ]
+enabled = [
+    "profidev/hypr-screen-mirror",
+    "dunarand/tmux-provider",
+    "aristides/udiskie",
+    "ashur-d/wallpaper-widget",
+    "noctalia/screen_recorder"
+]
 
     [[plugins.source]]
     enabled = true
@@ -875,6 +890,9 @@ type = "volume"
 [widget.ram]
 stat = "ram_used"
 type = "sysmon"
+
+[widget.recorder]
+type = "noctalia/screen_recorder:recorder"
 
 [widget.spacer]
 interactive = false
