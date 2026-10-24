@@ -12,13 +12,12 @@
     noto-fonts
     spotify
     rclone
-    # bibata-cursors
     tmux
     distrobox
     trash-cli
     loupe
     socat
-	 udiskie
-	 imagemagick
+    udiskie
+    imagemagick
   ];
 }
