@@ -7,6 +7,11 @@
       package = pkgs.adw-gtk3;
     };
 
+    iconTheme = {
+      name = "Adwaita";
+      package = pkgs.adwaita-icon-theme;
+    };
+
     gtk3.extraConfig.gtk-application-prefer-dark-theme = true;
   };
 
