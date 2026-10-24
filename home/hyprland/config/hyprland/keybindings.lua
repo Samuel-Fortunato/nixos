@@ -55,7 +55,6 @@ hl.bind(mainMod .. " + SHIFT + k", move_window("up", 0, -30), { repeating = true
 hl.bind(mainMod .. " + SHIFT + j", move_window("down", 0, 30), { repeating = true })
 
 
-
 -- Resize windows
 hl.bind(mainMod .. " + CTRL + h", hl.dsp.window.resize({ x = -30, y = 0, relative = true }), { repeating = true })
 hl.bind(mainMod .. " + CTRL + l", hl.dsp.window.resize({ x = 30, y = 0, relative = true }), { repeating = true })
@@ -69,6 +68,10 @@ for i = 1, 10 do
 	hl.bind(mainMod .. " + " .. key, hl.dsp.focus({ workspace = i }))
 	hl.bind(mainMod .. " + SHIFT + " .. key, hl.dsp.window.move({ workspace = i }))
 end
+-- Move to next empty workspace
+-- Move window to next empty workspace
+hl.bind(mainMod .. " + apostrophe", hl.dsp.focus({ workspace = "empty" }))
+hl.bind(mainMod .. " + SHIFT + apostrophe", hl.dsp.window.move({ workspace = "empty" }))
 
 -- Example special workspace (scratchpad)
 for _, letter in ipairs({ "W", "S", "A" }) do
