@@ -4,7 +4,7 @@ local prog = require("hyprland.programs")
 ---------------------
 
 local mainMod = "SUPER" -- Sets "Windows" key as main modifier
-local ipc = "noctalia msg "
+local noctalia = "noctalia msg "
 
 -- Example binds, see https://wiki.hypr.land/Configuring/Basics/Binds/ for more
 hl.bind(mainMod .. " + Q", hl.dsp.window.close())
@@ -90,17 +90,17 @@ hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })
 hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
 -- Laptop multimedia keys for volume and LCD brightness
-hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd(ipc .. "volume-up 2"), { locked = true, repeating = true })
-hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd(ipc .. "volume-down 2"), { locked = true, repeating = true })
-hl.bind("XF86AudioMute", hl.dsp.exec_cmd(ipc .. "volume-mute"), { locked = true })
-hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd(ipc .. "brightness-up"), { locked = true, repeating = true })
-hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd(ipc .. "brightness-down"), { locked = true, repeating = true })
+hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd(noctalia .. "volume-up 2"), { locked = true, repeating = true })
+hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd(noctalia .. "volume-down 2"), { locked = true, repeating = true })
+hl.bind("XF86AudioMute", hl.dsp.exec_cmd(noctalia .. "volume-mute"), { locked = true })
+hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd(noctalia .. "brightness-up"), { locked = true, repeating = true })
+hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd(noctalia .. "brightness-down"), { locked = true, repeating = true })
 
 -- Requires playerctl
-hl.bind("XF86AudioNext", hl.dsp.exec_cmd(ipc .. "media next"), { locked = true })
-hl.bind("XF86AudioPlay", hl.dsp.exec_cmd(ipc .. "media toggle"), { locked = true })
-hl.bind("XF86AudioStop", hl.dsp.exec_cmd(ipc .. "media next-player"), { locked = true })
-hl.bind("XF86AudioPrev", hl.dsp.exec_cmd(ipc .. "media previous"), { locked = true })
+hl.bind("XF86AudioNext", hl.dsp.exec_cmd(noctalia .. "media next"), { locked = true })
+hl.bind("XF86AudioPlay", hl.dsp.exec_cmd(noctalia .. "media toggle"), { locked = true })
+hl.bind("XF86AudioStop", hl.dsp.exec_cmd(noctalia .. "media next-player"), { locked = true })
+hl.bind("XF86AudioPrev", hl.dsp.exec_cmd(noctalia .. "media previous"), { locked = true })
 
 -- Rotate monitor
 hl.bind(mainMod .. " + SHIFT + Down", hl.dsp.exec_cmd(
@@ -120,31 +120,31 @@ hl.bind(mainMod .. " + SHIFT + Left", hl.dsp.exec_cmd(
 hl.bind(mainMod .. " + ccedilla", hl.dsp.exec_cmd(prog.browser))
 hl.bind(mainMod .. " + RETURN", hl.dsp.exec_cmd(prog.terminal))
 hl.bind("XF86Calculator", hl.dsp.exec_cmd(prog.calculator))
-hl.bind("PRINT", hl.dsp.exec_cmd(ipc .. "screenshot-region"))
-hl.bind("CTRL + PRINT", hl.dsp.exec_cmd(ipc .. "screenshot-fullscreen pick"))
-hl.bind("SHIFT + PRINT", hl.dsp.exec_cmd(ipc .. "screenshot-annotate"))
+hl.bind("PRINT", hl.dsp.exec_cmd(noctalia .. "screenshot-region"))
+hl.bind("CTRL + PRINT", hl.dsp.exec_cmd(noctalia .. "screenshot-fullscreen pick"))
+hl.bind("SHIFT + PRINT", hl.dsp.exec_cmd(noctalia .. "screenshot-annotate"))
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(prog.fileManager))
 hl.bind(mainMod .. " + SHIFT + E", hl.dsp.exec_cmd(prog.guiFileManager))
 
-hl.bind(mainMod .. "+DELETE", hl.dsp.exec_cmd(ipc .. "panel-toggle session"))
-hl.bind(mainMod .. "+V", hl.dsp.exec_cmd(ipc .. "panel-toggle clipboard"))
-hl.bind(mainMod .. "+T", hl.dsp.exec_cmd(ipc .. "panel-toggle ashur-d/wallpaper-widget:hub"))
-hl.bind(mainMod .. "+P", hl.dsp.exec_cmd(ipc .. "panel-toggle profidev/hypr-screen-mirror:panel"))
+hl.bind(mainMod .. "+DELETE", hl.dsp.exec_cmd(noctalia .. "panel-toggle session"))
+hl.bind(mainMod .. "+V", hl.dsp.exec_cmd(noctalia .. "panel-toggle clipboard"))
+hl.bind(mainMod .. "+T", hl.dsp.exec_cmd(noctalia .. "panel-toggle ashur-d/wallpaper-widget:hub"))
+hl.bind(mainMod .. "+P", hl.dsp.exec_cmd(noctalia .. "panel-toggle profidev/hypr-screen-mirror:panel"))
 
 hl.bind(mainMod .. "+SUPER_l", hl.dsp.submap("double-click"))
 hl.bind(mainMod .. "+SUPER_l", hl.dsp.exec_cmd("sleep 0.4 && hyprctl dispatch 'hl.dsp.submap(\"reset\")'"))
 hl.define_submap("double-click", function()
-	hl.bind(mainMod .. "+SUPER_l", hl.dsp.exec_cmd(ipc .. "panel-toggle control-center"))
+	hl.bind(mainMod .. "+SUPER_l", hl.dsp.exec_cmd(noctalia .. "panel-toggle control-center"))
 end)
 
-hl.bind(mainMod .. "+PERIOD", hl.dsp.exec_cmd(ipc .. "notification-clear-active"))
-hl.bind(mainMod .. "+SHIFT+PERIOD", hl.dsp.exec_cmd(ipc .. "notification-invoke-latest"))
-hl.bind(mainMod .. "+CTRL+PERIOD", hl.dsp.exec_cmd(ipc .. "notification-dnd-toggle"))
-hl.bind(mainMod .. "+N", hl.dsp.exec_cmd(ipc .. "panel-toggle control-center notifications"))
+hl.bind(mainMod .. "+PERIOD", hl.dsp.exec_cmd(noctalia .. "notification-clear-active"))
+hl.bind(mainMod .. "+SHIFT+PERIOD", hl.dsp.exec_cmd(noctalia .. "notification-invoke-latest"))
+hl.bind(mainMod .. "+CTRL+PERIOD", hl.dsp.exec_cmd(noctalia .. "notification-dnd-toggle"))
+hl.bind(mainMod .. "+N", hl.dsp.exec_cmd(noctalia .. "panel-toggle control-center notifications"))
 
-hl.bind(mainMod .. "+Space", hl.dsp.exec_cmd(ipc .. "panel-toggle launcher"))
-hl.bind(mainMod .. "+comma", hl.dsp.exec_cmd(ipc .. "settings-toggle"))
+hl.bind(mainMod .. "+Space", hl.dsp.exec_cmd(noctalia .. "panel-toggle launcher"))
+hl.bind(mainMod .. "+comma", hl.dsp.exec_cmd(noctalia .. "settings-toggle"))
 
-hl.bind("ALT + Tab", hl.dsp.exec_cmd(ipc .. "window-switcher hold"))
-hl.bind("CTRL + ESCAPE", hl.dsp.exec_cmd(ipc .. "panel-toggle control-center system"))
-hl.bind(mainMod .. " + BACKSLASH", hl.dsp.exec_cmd(ipc .. "bar-toggle"))
+hl.bind("ALT + Tab", hl.dsp.exec_cmd(noctalia .. "window-switcher hold"))
+hl.bind("CTRL + ESCAPE", hl.dsp.exec_cmd(noctalia .. "panel-toggle control-center system"))
+hl.bind(mainMod .. " + BACKSLASH", hl.dsp.exec_cmd(noctalia .. "bar-toggle"))

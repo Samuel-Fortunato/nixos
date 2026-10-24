@@ -34,7 +34,7 @@ hl.window_rule({
 hl.window_rule({
 	name = "calculator",
 
-	match = { class = "^(org.kde.kcalc)$" },
+	match = { class = "^(org.gnome.Calculator)$" },
 	float = true,
 	-- size = { 300, 400 },
 })

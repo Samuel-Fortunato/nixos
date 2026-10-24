@@ -19,5 +19,6 @@
     socat
     udiskie
     imagemagick
+    gnome-calculator
   ];
 }
