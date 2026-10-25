@@ -32,7 +32,7 @@ order = [ "default" ]
     capsule_opacity = 1.0
     capsule_padding = 6.0
     capsule_thickness = 0.75999999046325684
-    center = [ "clock" ]
+    center = [ "clock", "toggle" ]
     compositor_blur = true
     concave_edge_corners = true
     contact_shadow = true
@@ -505,7 +505,8 @@ enabled = [
     "dunarand/tmux-provider",
     "aristides/udiskie",
     "ashur-d/wallpaper-widget",
-    "noctalia/screen_recorder"
+    "noctalia/screen_recorder",
+    "umedbazarov/crashes"
 ]
 
     [[plugins.source]]
@@ -901,6 +902,9 @@ type = "spacer"
 [widget.temp]
 stat = "cpu_temp"
 type = "sysmon"
+
+[widget.toggle]
+type = "maddingo/hypr-layout-switcher:toggle"
 
 [widget.workspaces]
 active_pill_size = 2.0
