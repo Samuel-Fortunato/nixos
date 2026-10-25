@@ -16,6 +16,12 @@ hl.bind(mainMod .. " + D", hl.dsp.window.float())
 hl.bind(mainMod .. " + SHIFT + D", hl.dsp.window.pin())
 hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen({ mode = "maximized" }))
 hl.bind(mainMod .. " + SHIFT + F", hl.dsp.window.fullscreen({ mode = "fullscreen" }))
+hl.bind(mainMod .. " + CTRL + F",
+	hl.dsp.window.fullscreen_state({
+		internal = 0,
+		client = 2,
+		action = "toggle",
+	}))
 
 -- Move focus with mainMod + arrow keys
 hl.bind(mainMod .. " + h", hl.dsp.focus({ direction = "left" }))
@@ -78,8 +84,8 @@ for _, letter in ipairs({ "W", "S", "A" }) do
 	hl.bind(mainMod .. " + " .. letter, hl.dsp.workspace.toggle_special(letter))
 	hl.bind(mainMod .. " + SHIFT + " .. letter, hl.dsp.window.move({ workspace = "special:" .. letter }))
 end
-hl.bind(mainMod.."+UP", hl.dsp.window.move({workspace = "special:A"}))
-hl.bind(mainMod.."+DOWN", hl.dsp.window.move({workspace = "+0"}))
+hl.bind(mainMod .. "+UP", hl.dsp.window.move({ workspace = "special:A" }))
+hl.bind(mainMod .. "+DOWN", hl.dsp.window.move({ workspace = "+0" }))
 
 -- Scroll through existing workspaces with mainMod + scroll
 hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
