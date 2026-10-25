@@ -21,5 +21,8 @@
     imagemagick
     gnome-calculator
     showtime
+    jq
+    libnotify
+	 codex
   ];
 }
