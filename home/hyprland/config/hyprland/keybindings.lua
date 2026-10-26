@@ -138,10 +138,13 @@ hl.bind(mainMod .. "+V", hl.dsp.exec_cmd(noctalia .. "panel-toggle clipboard"))
 hl.bind(mainMod .. "+T", hl.dsp.exec_cmd(noctalia .. "panel-toggle ashur-d/wallpaper-widget:hub"))
 hl.bind(mainMod .. "+P", hl.dsp.exec_cmd(noctalia .. "panel-toggle profidev/hypr-screen-mirror:panel"))
 
+-- Control center
+-- Double click to open, single click to close
 hl.bind(mainMod .. "+SUPER_l", hl.dsp.submap("double-click"))
+hl.bind(mainMod .. "+SUPER_l", hl.dsp.exec_cmd(noctalia .. "panel-close control-center"))
 hl.bind(mainMod .. "+SUPER_l", hl.dsp.exec_cmd("sleep 0.4 && hyprctl dispatch 'hl.dsp.submap(\"reset\")'"))
 hl.define_submap("double-click", function()
-	hl.bind(mainMod .. "+SUPER_l", hl.dsp.exec_cmd(noctalia .. "panel-toggle control-center"))
+	hl.bind(mainMod .. "+SUPER_l", hl.dsp.exec_cmd(noctalia .. "panel-open control-center"))
 end)
 
 hl.bind(mainMod .. "+PERIOD", hl.dsp.exec_cmd(noctalia .. "notification-clear-active"))
