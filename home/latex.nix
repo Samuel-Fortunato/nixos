@@ -6,9 +6,12 @@ let
       latexmk
       latexindent
 		xetex
+		dvisvgm
 
       beamer
       beamertheme-metropolis
+		standalone
+
       booktabs
       mdwtools
       fontspec

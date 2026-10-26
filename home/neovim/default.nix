@@ -11,14 +11,14 @@
       gcc
       tree-sitter
       clang-tools
-
       basedpyright
       ruff
-
       texlab
       nixfmt
+		astyle
+
       ripgrep
-      astyle
+		ghostscript
     ];
   };
 
