@@ -59,7 +59,7 @@ order = [ "default" ]
     show_on_workspace_switch = true
     show_tooltip = true
     smart_auto_hide = false
-    start = [ "control-center", "recorder", "spacer", "workspaces" ]
+    start = [ "cat", "control-center", "recorder", "spacer", "workspaces" ]
     thickness = 40
     widget_spacing = 10
 
@@ -349,12 +349,46 @@ wallpaper = ""
 [lockscreen_widgets]
 enabled = true
 schema_version = 2
-widget_order = [ "lockscreen-login-box@eDP-1", "lockscreen-widget-0000000000000001", "lockscreen-widget-0000000000000002" ]
+widget_order = [
+    "lockscreen-login-box@HDMI-A-2",
+    "lockscreen-login-box@eDP-1",
+    "lockscreen-widget-0000000000000001",
+    "lockscreen-widget-0000000000000002"
+]
 
     [lockscreen_widgets.grid]
     cell_size = 64
     major_interval = 4
     visible = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@HDMI-A-2"]
+    box_height = 196.0
+    box_width = 720.0
+    cx = 320.0
+    cy = 319.11111450195312
+    enabled = true
+    output = "HDMI-A-2"
+    placement_height = 400.0
+    placement_width = 640.0
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@HDMI-A-2".settings]
+        background_color = "surface_variant"
+        background_opacity = 0.88
+        background_radius = 12.0
+        center_password_text = false
+        input_opacity = 1.0
+        input_radius = 6.0
+        layout = "regular"
+        show_caps_lock = true
+        show_keyboard_layout = true
+        show_login_button = true
+        show_media = true
+        show_password_reveal = true
+        show_session_buttons = true
+        show_unlock_hint = true
+        show_weather = true
 
     [lockscreen_widgets.widget."lockscreen-login-box@eDP-1"]
     box_height = 196.0
@@ -380,6 +414,7 @@ widget_order = [ "lockscreen-login-box@eDP-1", "lockscreen-widget-00000000000000
         show_keyboard_layout = true
         show_login_button = true
         show_media = true
+        show_password_reveal = true
         show_session_buttons = true
         show_unlock_hint = false
         show_weather = true
@@ -506,7 +541,8 @@ enabled = [
     "aristides/udiskie",
     "ashur-d/wallpaper-widget",
     "noctalia/screen_recorder",
-    "umedbazarov/crashes"
+    "umedbazarov/crashes",
+    "noctalia/bongocat"
 ]
 
     [[plugins.source]]
@@ -823,12 +859,20 @@ min_length = 80.0
 title_scroll = "none"
 type = "active_window"
 
+[widget.cat]
+input_devices = [ "/dev/input/by-id/usb-ITE_Tech._Inc._ITE_Device_8258_-event-kbd" ]
+type = "noctalia/bongocat:cat"
+
 [widget.clock]
 capsule = false
 capsule_border = "outline"
 capsule_radius = 10
 scale = 1.5
 type = "clock"
+
+[widget.control-center]
+enabled = false
+type = "control-center"
 
 [widget.cpu]
 stat = "cpu_usage"
@@ -896,6 +940,7 @@ type = "sysmon"
 type = "noctalia/screen_recorder:recorder"
 
 [widget.spacer]
+enabled = false
 interactive = false
 type = "spacer"
 
