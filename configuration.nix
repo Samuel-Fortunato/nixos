@@ -49,6 +49,7 @@
         "wheel"
         "networkmanager"
         "dialout"
+		  "input"
       ];
     };
   };

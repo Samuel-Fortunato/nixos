@@ -23,6 +23,7 @@
     showtime
     jq
     libnotify
-	 codex
+    codex
+    evtest
   ];
 }
