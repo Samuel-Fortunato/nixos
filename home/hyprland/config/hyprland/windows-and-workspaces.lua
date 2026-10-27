@@ -40,19 +40,6 @@ hl.window_rule({
 })
 
 hl.window_rule({
-	name = "bitwarden",
-
-	match = { class = "chrome-nngceckbapebfimnlniiiahkandclblb-Default" },
-	float = true,
-})
-
-hl.window_rule({
-    match = { class = "dev.noctalia.Noctalia" },
-    float = true,
-    size = { 1080, 920 },
-})
-
-hl.window_rule({
 	match = { class = "MATLAB.*", title = "Figures" },
 	float = true,
 	center = true,
@@ -70,6 +57,18 @@ hl.layer_rule({
   blur_popups = true,
 })
 
-hl.workspace_rule({ workspace = "W", persistent = true, default_name = "whatsapp" })
-hl.workspace_rule({ workspace = "S", persistent = true, default_name = "spotify" })
-hl.workspace_rule({ workspace = "A", persistent = true, default_name = "scratchpad" })
+-- WhatsApp (Chrome window)
+hl.window_rule({
+    name = "whatsapp-workspace",
+    match = {
+        class = "^chrome-hnpfjngllnobngcgfapefoaidbinmjnm-Default$",
+    },
+    workspace = "special:W",
+})
+
+-- Spotify
+hl.window_rule({
+    name = "spotify-workspace",
+    match = { class = "^Spotify$" },
+    workspace = "special:S",
+})
