@@ -5,7 +5,7 @@
     autocd = true;
     defaultKeymap = "viins";
 
-	 syntaxHighlighting.enable = true;
+    syntaxHighlighting.enable = true;
     autosuggestion = {
       enable = true;
       strategy = [
@@ -23,12 +23,14 @@
 
     # zprof.enable = true;
     initContent = ''
-            if [[ -o interactive ]] && command -v fastfetch >/dev/null 2>&1; then
-              fastfetch
-            fi
+      	 setopt interactivecomments
 
-      		bindkey -M viins 'jk' vi-cmd-mode
-            	'';
+                  if [[ -o interactive ]] && command -v fastfetch >/dev/null 2>&1; then
+                    fastfetch
+                  fi
+
+            		bindkey -M viins 'jk' vi-cmd-mode
+                  	'';
 
     shellAliases = {
       ncf = "nvim ~/.config/nvim/";
