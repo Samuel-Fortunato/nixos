@@ -10,7 +10,6 @@ hl.monitor({
 	mode     = "highres",
 	-- position = "auto",
 	scale    = monitorScaleFactor,
-	mirror = "HDMI-A-1"
 	-- disabled = true,
 })
 
