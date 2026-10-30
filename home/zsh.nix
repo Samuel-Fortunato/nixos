@@ -1,77 +1,76 @@
-{ pkgs, ... }: {
-  programs.zsh = {
-    enable = true;
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+{
+  options.my.modules.zsh.enable = lib.mkEnableOption "Zsh configuration";
 
-    autocd = true;
-    defaultKeymap = "viins";
-
-    syntaxHighlighting.enable = true;
-    autosuggestion = {
+  config = lib.mkIf config.my.modules.zsh.enable {
+    programs.zsh = {
       enable = true;
-      strategy = [
-        "completion"
-        "history"
-      ];
-    };
-    history = {
-      append = true;
-      expireDuplicatesFirst = true;
-      extended = true;
-      findNoDups = true;
-      saveNoDups = true;
-    };
 
-    # zprof.enable = true;
-    initContent = ''
-      	 setopt interactivecomments
+      autocd = true;
+      defaultKeymap = "viins";
 
-                  if [[ -o interactive ]] && command -v fastfetch >/dev/null 2>&1; then
-                    fastfetch
-                  fi
+      syntaxHighlighting.enable = true;
+      autosuggestion = {
+        enable = true;
+        strategy = [
+          "completion"
+          "history"
+        ];
+      };
+      history = {
+        append = true;
+        expireDuplicatesFirst = true;
+        extended = true;
+        findNoDups = true;
+        saveNoDups = true;
+      };
 
-            		bindkey -M viins 'jk' vi-cmd-mode
-                  	'';
+      # zprof.enable = true;
+      initContent = ''
+        	 setopt interactivecomments
 
-    shellAliases = {
-      ncf = "nvim ~/.config/nvim/";
-      cd = "z";
-    };
+                    if [[ -o interactive ]] && command -v fastfetch >/dev/null 2>&1; then
+                      fastfetch
+                    fi
 
-    siteFunctions = {
-      y = ''
-        		  local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
-                yazi "$@" --cwd-file="$tmp"
-                if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
-                  builtin cd -- "$cwd"
-                fi
-                rm -f -- "$tmp"
-        		'';
-      rebuild = ''
-        		sudo nixos-rebuild switch && hyprctl reload && noctalia msg config-reload && noctalia msg notification-show "NixOS rebuilt \!" "Hyprland & Noctalia reloaded"
-        		'';
-      sync-desktop = ''
-        if systemctl --user start proton-drive-bisync.service; then
-          if [ "$(systemctl --user show proton-drive-bisync.service -p Result --value)" = "success" ]; then
-            echo "Desktop synced successfully. Safe to shut down."
-          else
-            echo "Desktop sync failed. Do not switch PCs yet."
-            return 1
+              		bindkey -M viins 'jk' vi-cmd-mode
+                    	'';
+
+      shellAliases = {
+        ncf = "nvim ~/.config/nvim/";
+        cd = "z";
+      };
+
+      siteFunctions = {
+        homMan = ''
+          home-manager switch "$@" || return
+
+          # Reload Hyprland if running
+          if [[ -n "$HYPRLAND_INSTANCE_SIGNATURE" ]] && command -v hyprctl >/dev/null 2>&1; then
+            hyprctl reload
           fi
-        else
-          echo "Desktop sync failed. Do not switch PCs yet."
-          return 1
-        fi
-      '';
+
+          # Reload Noctalia if available
+          if command -v noctalia >/dev/null 2>&1; then
+            noctalia msg config-reload >/dev/null 2>&1 || true
+          fi
+        '';
+      };
     };
-  };
 
-  programs.zoxide = {
-    enable = true;
-    enableZshIntegration = true;
-  };
+    programs.zoxide = {
+      enable = true;
+      enableZshIntegration = true;
+    };
 
-  programs.fzf = {
-    enable = true;
-    enableZshIntegration = true;
+    programs.fzf = {
+      enable = true;
+      enableZshIntegration = true;
+    };
   };
 }

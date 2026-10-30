@@ -1,25 +1,29 @@
-{ pkgs, ... }:
-
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
   tex = pkgs.texliveBasic.withPackages (
     ps: with ps; [
       latexmk
       latexindent
-		xetex
-		dvisvgm
+      xetex
+      dvisvgm
 
       beamer
       beamertheme-metropolis
-		standalone
+      standalone
 
       booktabs
       mdwtools
       fontspec
-		multirow
-		makecell
-		ragged2e
-		enumitem
-		microtype
+      multirow
+      makecell
+      ragged2e
+      enumitem
+      microtype
 
       pgf
       pgfopts
@@ -27,7 +31,9 @@ let
   );
 in
 {
-  home.packages = [
-    tex
-  ];
+  options.my.modules.latex.enable = lib.mkEnableOption "LaTeX environment";
+
+  config = lib.mkIf config.my.modules.latex.enable {
+    home.packages = [ tex ];
+  };
 }

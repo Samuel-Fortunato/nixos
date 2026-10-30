@@ -1,7 +1,10 @@
 { pkgs, ... }: {
-  imports = [ ./hardware-configuration.nix ];
+  imports = [
+    ./hardware-configuration.nix
+  ];
 
   networking.hostName = "nixos-laptop";
+  programs.hyprland.enable = true;
 
   # GPU acceleration
   hardware.graphics = {
