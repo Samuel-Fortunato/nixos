@@ -25,6 +25,8 @@
       musicWallpaper.enable = true;
     };
 
+	 cursor.enable = true;
+
     # Applications
     thunar.enable = true;
     gh.enable = true;
