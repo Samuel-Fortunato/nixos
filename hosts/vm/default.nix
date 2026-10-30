@@ -1,7 +1,10 @@
 { pkgs, ... }: {
-  imports = [ ./hardware-configuration.nix ];
+  imports = [
+    ./hardware-configuration.nix
+  ];
 
   networking.hostName = "nixos-vm";
+  programs.hyprland.enable = true;
 
   boot = {
     loader = {

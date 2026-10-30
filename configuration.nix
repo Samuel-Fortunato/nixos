@@ -5,6 +5,10 @@
   ...
 }:
 {
+  imports = [
+    ./modules/nixos/hyprland.nix
+  ];
+
   networking.networkmanager.enable = true;
   time.timeZone = "Europe/Lisbon";
   i18n = {
@@ -49,7 +53,7 @@
         "wheel"
         "networkmanager"
         "dialout"
-		  "input"
+        "input"
       ];
     };
   };
@@ -64,7 +68,7 @@
     };
     power-profiles-daemon.enable = true;
     accounts-daemon.enable = true;
-	 udisks2.enable = true;
+    udisks2.enable = true;
     upower = {
       enable = true;
       allowRiskyCriticalPowerAction = true;
@@ -92,11 +96,7 @@
   programs = {
     zsh.enable = true;
     steam.enable = true;
-	 gpu-screen-recorder.enable = true;
-    hyprland = {
-      enable = true;
-      withUWSM = true;
-    };
+    gpu-screen-recorder.enable = true;
     neovim = {
       enable = true;
       defaultEditor = true;
@@ -108,20 +108,6 @@
   hardware.bluetooth = {
     enable = true;
     powerOnBoot = true;
-  };
-
-  xdg.portal = {
-    enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-termfilechooser ];
-    config = {
-      hyprland = {
-        default = [
-          "hyprland"
-          "gtk"
-        ];
-        "org.freedesktop.impl.portal.FileChooser" = [ "termfilechooser" ];
-      };
-    };
   };
 
   system.stateVersion = "26.05";

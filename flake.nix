@@ -20,18 +20,6 @@
           modules = [
             ./hosts/laptop
             ./configuration.nix
-
-            home-manager.nixosModules.default
-            {
-              home-manager = {
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                users.samuel = import ./home;
-                extraSpecialArgs = {
-                  monitorName = "eDP-1";
-                };
-              };
-            }
           ];
         };
 
@@ -40,19 +28,42 @@
           modules = [
             ./hosts/vm
             ./configuration.nix
-
-            home-manager.nixosModules.default
-            {
-              home-manager = {
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                users.samuel = import ./home;
-                extraSpecialArgs = {
-                  monitorName = "Virtual-1";
-                };
-              };
-            }
           ];
+        };
+      };
+      homeConfigurations = {
+        "samuel@nixos-laptop" = home-manager.lib.homeManagerConfiguration {
+          pkgs = import nixpkgs {
+            system = "x86_64-linux";
+            config.allowUnfree = true;
+          };
+
+          modules = [
+            ./home
+            ./hosts/laptop/home.nix
+            { programs.home-manager.enable = true; }
+          ];
+
+          extraSpecialArgs = {
+            monitorName = "eDP-1";
+          };
+        };
+
+        "samuel@nixos-vm" = home-manager.lib.homeManagerConfiguration {
+          pkgs = import nixpkgs {
+            system = "x86_64-linux";
+            config.allowUnfree = true;
+          };
+
+          modules = [
+            ./home
+            ./hosts/vm/home.nix
+            { programs.home-manager.enable = true; }
+          ];
+
+          extraSpecialArgs = {
+            monitorName = "Virtual-1";
+          };
         };
       };
     };

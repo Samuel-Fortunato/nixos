@@ -1,29 +1,33 @@
-{ pkgs, ... }: {
-  programs.neovim = {
-    enable = true;
-    defaultEditor = true;
-    viAlias = true;
-    vimAlias = true;
-    # sideloadInitLua = true;
+{ config, lib, pkgs, ... }:
+{
+  options.my.modules.neovim.enable =
+    lib.mkEnableOption "Neovim editor";
 
-    extraPackages = with pkgs; [
-      lua-language-server
-      gcc
-      tree-sitter
-      clang-tools
-      basedpyright
-      ruff
-      texlab
-      nixfmt
-		astyle
+  config = lib.mkIf config.my.modules.neovim.enable {
+    programs.neovim = {
+      enable = true;
+      defaultEditor = true;
+      viAlias = true;
+      vimAlias = true;
 
-      ripgrep
-		ghostscript
-    ];
-  };
+      extraPackages = with pkgs; [
+        lua-language-server
+        gcc
+        tree-sitter
+        clang-tools
+        basedpyright
+        ruff
+        texlab
+        nixfmt
+        astyle
+        ripgrep
+        ghostscript
+      ];
+    };
 
-  xdg.configFile."nvim" = {
-    source = ./config;
-    recursive = true;
+    xdg.configFile."nvim" = {
+      source = ./config;
+      recursive = true;
+    };
   };
 }
