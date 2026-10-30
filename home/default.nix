@@ -19,6 +19,7 @@
     ./latex.nix
     ./starship.nix
     ./uuctl.nix
+	 ./apps.nix
   ];
 
   home = {
