@@ -20,7 +20,10 @@
     matlab.enable = false;
 
     hyprland.enable = true;
-    noctalia.enable = true;
+    noctalia = {
+      enable = true;
+      musicWallpaper.enable = true;
+    };
 
     # Applications
     thunar.enable = true;
