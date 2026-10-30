@@ -19,24 +19,13 @@
     ./latex.nix
     ./starship.nix
 	 ./apps.nix
+	 ./cursor.nix
   ];
 
   home = {
     username = "samuel";
     homeDirectory = "/home/samuel";
     backupFileExtension = "bak";
-
-    pointerCursor = {
-      enable = true;
-
-      name = "Bibata-Modern-Ice";
-      package = pkgs.bibata-cursors;
-      size = 20;
-
-      gtk.enable = true;
-      x11.enable = true;
-      hyprcursor.enable = true;
-    };
 
     stateVersion = "26.05";
   };
