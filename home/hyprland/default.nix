@@ -15,8 +15,12 @@
         source = ./config;
         recursive = true;
       };
-      "xdg-desktop-portal-termfilechooser/config".text =
-        "[filechooser] default_dir=$HOME open_mode=default save_mode=last ";
+      "xdg-desktop-portal-termfilechooser/config".text = ''
+                [filechooser]
+        		  default_dir=$HOME
+        		  open_mode=default
+        		  save_mode=last
+        		  '';
     };
   };
 }
