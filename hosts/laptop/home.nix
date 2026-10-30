@@ -8,5 +8,9 @@
 	 gtk.enable = true;
 	 onlyoffice.enable = true;
 	 zathura.enable = true;
+
+	 yazi.enable = true;
+	 latex.enable = true;
+	 xdg.enable = true;
   };
 }
