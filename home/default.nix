@@ -3,23 +3,29 @@
     ./neovim
     ./hyprland
     ./yazi
-	 ./noctalia
-	 ./music-wallpaper
-	 ./fastfetch
-	 ./proton-drive.nix
+    ./noctalia
+    ./music-wallpaper
+    ./fastfetch
+    ./proton-drive.nix
     ./zsh.nix
     ./packages.nix
     ./kitty.nix
     ./xdg.nix
     ./git.nix
-	 ./zathura.nix
-	 ./gtk.nix
-	 ./matlab.nix
-	 ./onlyoffice.nix
-	 ./latex.nix
-	 ./starship.nix
-	 ./uuctl.nix
+    ./zathura.nix
+    ./gtk.nix
+    ./matlab.nix
+    ./onlyoffice.nix
+    ./latex.nix
+    ./starship.nix
+    ./uuctl.nix
   ];
+
+  my.modules = {
+    kitty.enable = true;
+    starship.enable = true;
+    fastfetch.enable = true;
+  };
 
   home = {
     username = "samuel";
@@ -27,16 +33,16 @@
     backupFileExtension = "bak";
 
     pointerCursor = {
-		enable = true;
+      enable = true;
 
       name = "Bibata-Modern-Ice";
-		package = pkgs.bibata-cursors;
-		size = 20;
+      package = pkgs.bibata-cursors;
+      size = 20;
 
-		gtk.enable = true;
-		x11.enable = true;
-		hyprcursor.enable = true;
-	 };
+      gtk.enable = true;
+      x11.enable = true;
+      hyprcursor.enable = true;
+    };
 
     stateVersion = "26.05";
   };
