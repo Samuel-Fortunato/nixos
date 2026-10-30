@@ -13,6 +13,9 @@
 	 latex.enable = false;
 	 xdg.enable = true;
 
+    zsh.enable = true;
+    proton-drive.enable = false;
+
     # Applications
     thunar.enable = true;
     gh.enable = true;
