@@ -19,6 +19,9 @@
     neovim.enable = true;
     matlab.enable = false;
 
+    hyprland.enable = true;
+    noctalia.enable = true;
+
     # Applications
     thunar.enable = true;
     gh.enable = true;
