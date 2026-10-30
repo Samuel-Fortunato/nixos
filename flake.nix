@@ -65,5 +65,38 @@
           ];
         };
       };
+      homeConfigurations = {
+        "samuel@nixos-laptop" = home-manager.lib.homeManagerConfiguration {
+          pkgs = import nixpkgs {
+            system = "x86_64-linux";
+            config.allowUnfree = true;
+          };
+
+          modules = [
+            ./home
+            ./hosts/laptop/home.nix
+          ];
+
+          extraSpecialArgs = {
+            monitorName = "eDP-1";
+          };
+        };
+
+        "samuel@nixos-vm" = home-manager.lib.homeManagerConfiguration {
+          pkgs = import nixpkgs {
+            system = "x86_64-linux";
+            config.allowUnfree = true;
+          };
+
+          modules = [
+            ./home
+            ./hosts/vm/home.nix
+          ];
+
+          extraSpecialArgs = {
+            monitorName = "Virtual-1";
+          };
+        };
+      };
     };
 }
