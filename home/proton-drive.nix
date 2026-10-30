@@ -7,6 +7,8 @@
 {
   options.my.modules.proton-drive.enable = lib.mkEnableOption "Proton Drive synchronization";
   config = lib.mkIf config.my.modules.proton-drive.enable {
+    home.packages = [ pkgs.rclone ];
+
     systemd.user.services.proton-drive-bisync = {
       Unit.Description = "Synchronize Desktop with Proton Drive";
       Service = {
