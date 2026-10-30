@@ -3,7 +3,7 @@
   config = lib.mkIf config.my.modules.yazi.enable {
     programs.yazi = {
       enable = true;
-      enableZshIntegration = false;
+      enableZshIntegration = config.my.modules.zsh.enable;
     };
     xdg.configFile."yazi" = {
       source = ./config;
