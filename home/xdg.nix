@@ -34,8 +34,6 @@
           "image/bmp" = "org.gnome.Loupe.desktop";
         };
       };
-      configFile."xdg-desktop-portal-termfilechooser/config".text =
-        "[filechooser] default_dir=$HOME open_mode=default save_mode=last ";
     };
   };
 }
