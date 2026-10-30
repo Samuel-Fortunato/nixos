@@ -26,7 +26,12 @@
               home-manager = {
                 useGlobalPkgs = true;
                 useUserPackages = true;
-                users.samuel = import ./home;
+                users.samuel = {
+                  imports = [
+                    ./home
+                    ./hosts/laptop/home.nix
+                  ];
+                };
                 extraSpecialArgs = {
                   monitorName = "eDP-1";
                 };
@@ -46,7 +51,12 @@
               home-manager = {
                 useGlobalPkgs = true;
                 useUserPackages = true;
-                users.samuel = import ./home;
+                users.samuel = {
+                  imports = [
+                    ./home
+                    ./hosts/vm/home.nix
+                  ];
+                };
                 extraSpecialArgs = {
                   monitorName = "Virtual-1";
                 };
