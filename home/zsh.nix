@@ -47,9 +47,19 @@
       };
 
       siteFunctions = {
-        rebuild = ''
-          		sudo nixos-rebuild switch && hyprctl reload && noctalia msg config-reload && noctalia msg notification-show "NixOS rebuilt \!" "Hyprland & Noctalia reloaded"
-          		'';
+        homMan = ''
+          home-manager switch "$@" || return
+
+          # Reload Hyprland if running
+          if [[ -n "$HYPRLAND_INSTANCE_SIGNATURE" ]] && command -v hyprctl >/dev/null 2>&1; then
+            hyprctl reload
+          fi
+
+          # Reload Noctalia if available
+          if command -v noctalia >/dev/null 2>&1; then
+            noctalia msg config-reload >/dev/null 2>&1 || true
+          fi
+        '';
       };
     };
 
