@@ -20,23 +20,6 @@
           modules = [
             ./hosts/laptop
             ./configuration.nix
-
-            home-manager.nixosModules.default
-            {
-              home-manager = {
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                users.samuel = {
-                  imports = [
-                    ./home
-                    ./hosts/laptop/home.nix
-                  ];
-                };
-                extraSpecialArgs = {
-                  monitorName = "eDP-1";
-                };
-              };
-            }
           ];
         };
 
@@ -45,23 +28,6 @@
           modules = [
             ./hosts/vm
             ./configuration.nix
-
-            home-manager.nixosModules.default
-            {
-              home-manager = {
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                users.samuel = {
-                  imports = [
-                    ./home
-                    ./hosts/vm/home.nix
-                  ];
-                };
-                extraSpecialArgs = {
-                  monitorName = "Virtual-1";
-                };
-              };
-            }
           ];
         };
       };
@@ -75,6 +41,7 @@
           modules = [
             ./home
             ./hosts/laptop/home.nix
+            { programs.home-manager.enable = true; }
           ];
 
           extraSpecialArgs = {
@@ -91,6 +58,7 @@
           modules = [
             ./home
             ./hosts/vm/home.nix
+            { programs.home-manager.enable = true; }
           ];
 
           extraSpecialArgs = {
