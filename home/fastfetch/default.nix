@@ -1,4 +1,9 @@
-{ pkgs, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
 let
   # ───────── things you'll tweak ─────────
   logoChoice = "image"; # "nixos_small" | "none" | "image"
@@ -119,15 +124,18 @@ let
   };
 in
 {
-  programs.fastfetch = {
-    enable = true;
-    settings = boxed;
-  };
+  options.my.modules.fastfetch.enable = lib.mkEnableOption "Fastfetch system information";
 
-  # Instant switching, no rebuild: flags override the config's logo
-  home.shellAliases = {
-    ffs = "fastfetch --logo-type builtin -l nixos_small --logo-padding-top 1 --logo-padding-right 3";
-    ffn = "fastfetch -l none";
-    ffi = "fastfetch --logo-type kitty-direct -l ${imagePath} --logo-width 20 --logo-height 10 --logo-padding-top 1 --logo-padding-right 3";
+  config = lib.mkIf config.my.modules.fastfetch.enable {
+    programs.fastfetch = {
+      enable = true;
+      settings = boxed;
+    };
+
+    home.shellAliases = {
+      ffs = "fastfetch --logo-type builtin -l nixos_small --logo-padding-top 1 --logo-padding-right 3";
+      ffn = "fastfetch -l none";
+      ffi = "fastfetch --logo-type kitty-direct -l ${imagePath} --logo-width 20 --logo-height 10 --logo-padding-top 1 --logo-padding-right 3";
+    };
   };
 }
