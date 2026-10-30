@@ -12,7 +12,6 @@ let
     chrome = pkgs.google-chrome;
     lazygit = pkgs.lazygit;
     spotify = pkgs.spotify;
-    rclone = pkgs.rclone;
     tmux = pkgs.tmux;
     distrobox = pkgs.distrobox;
     trash = pkgs.trash-cli;

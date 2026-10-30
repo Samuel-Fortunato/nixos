@@ -23,7 +23,6 @@
     chrome.enable = true;
     lazygit.enable = true;
     spotify.enable = true;
-    rclone.enable = false;
     tmux.enable = true;
     distrobox.enable = false;
     trash.enable = true;
