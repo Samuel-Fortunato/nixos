@@ -13,7 +13,6 @@ let
     lazygit = pkgs.lazygit;
     spotify = pkgs.spotify;
     tmux = pkgs.tmux;
-    distrobox = pkgs.distrobox;
     trash = pkgs.trash-cli;
     loupe = pkgs.loupe;
     udiskie = pkgs.udiskie;

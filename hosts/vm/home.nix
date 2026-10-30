@@ -16,6 +16,9 @@
     zsh.enable = true;
     proton-drive.enable = false;
 
+    neovim.enable = true;
+    matlab.enable = false;
+
     # Applications
     thunar.enable = true;
     gh.enable = true;
@@ -24,7 +27,6 @@
     lazygit.enable = true;
     spotify.enable = true;
     tmux.enable = true;
-    distrobox.enable = false;
     trash.enable = true;
     loupe.enable = true;
     udiskie.enable = true;
