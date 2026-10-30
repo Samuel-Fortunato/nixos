@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ config, pkgs, ... }: {
   imports = [
     ./neovim
     ./hyprland
@@ -18,9 +18,11 @@
     ./onlyoffice.nix
     ./latex.nix
     ./starship.nix
-	 ./apps.nix
-	 ./cursor.nix
+    ./apps.nix
+    ./cursor.nix
   ];
+
+  xdg.configFile."home-manager".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos";
 
   home = {
     username = "samuel";
