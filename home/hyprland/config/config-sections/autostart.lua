@@ -1,4 +1,4 @@
-local prog = require("hyprland.programs")
+local prog = require("config-sections.programs")
 -------------------
 ---- AUTOSTART ----
 -------------------

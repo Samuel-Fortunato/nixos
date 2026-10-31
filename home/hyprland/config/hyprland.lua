@@ -1,13 +1,13 @@
-require("hyprland.monitors")
-require("hyprland.autostart")
-require("hyprland.environment")
-require("hyprland.permissions")
-require("hyprland.look-and-feel")
-require("hyprland.animations")
-require("hyprland.misc")
-require("hyprland.input")
-require("hyprland.keybindings")
-require("hyprland.windows-and-workspaces")
+require("config-sections.monitors")
+require("config-sections.autostart")
+require("config-sections.environment")
+require("config-sections.permissions")
+require("config-sections.look-and-feel")
+require("config-sections.animations")
+require("config-sections.misc")
+require("config-sections.input")
+require("config-sections.keybindings")
+require("config-sections.windows-and-workspaces")
 
 
 -- For Noctalia color templates
