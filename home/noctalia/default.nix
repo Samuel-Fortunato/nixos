@@ -23,6 +23,18 @@ in
       );
     };
 
-    home.packages = [ uuctl-noctalia ];
+    home.packages = with pkgs; [
+      uuctl-noctalia
+
+		# Hypr Screen Mirror
+      socat
+
+		# Crashes
+		jq
+		libnotify
+
+		# Wallpaper Widget
+		imagemagick
+    ];
   };
 }
