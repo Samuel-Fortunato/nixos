@@ -9,6 +9,8 @@
       shellWrapperName = "lazygit";
 
       settings = {
+        gui.nerdFontsVersion = "3";
+
         git.diffRenderers = [
           {
             command = ''
