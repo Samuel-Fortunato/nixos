@@ -20,6 +20,7 @@
     ./starship.nix
     ./apps.nix
     ./cursor.nix
+	 ./lazygit.nix
   ];
 
   xdg.configFile."home-manager".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos";

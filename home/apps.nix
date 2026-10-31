@@ -10,7 +10,6 @@ let
     gh = pkgs.gh;
     btop = pkgs.btop;
     chrome = pkgs.google-chrome;
-    lazygit = pkgs.lazygit;
     spotify = pkgs.spotify;
     tmux = pkgs.tmux;
     trash = pkgs.trash-cli;
