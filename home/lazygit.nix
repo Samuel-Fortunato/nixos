@@ -5,8 +5,18 @@
     programs.lazygit = {
       enable = true;
 
-		enableZshIntegration = true;
-		shellWrapperName = "lazygit";
+      enableZshIntegration = true;
+      shellWrapperName = "lazygit";
+
+      settings = {
+        git.diffRenderers = [
+          {
+            command = ''
+              delta --{{colorScheme}} --paging=never --line-numbers --hyperlinks --hyperlinks-file-link-format="lazygit-edit://{path}:{line}"
+            '';
+          }
+        ];
+      };
     };
   };
 }
