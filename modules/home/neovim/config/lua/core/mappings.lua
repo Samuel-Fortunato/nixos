@@ -1,32 +1,69 @@
+-- Leader keys
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
-local keymap = vim.keymap.set
-
--- other keymaps
-keymap("i", "jk", "<Esc>", { desc = "Exit insert mode" })
-keymap("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move line down" })
-keymap("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move line up" })
-
--- keymap("n", "<A-j>", "gj", { desc = "Move down (wrapped lines)" })
--- keymap("n", "<A-k>", "gk", { desc = "Move up (wrapped lines)" })
-
-keymap('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true, desc = "Move up (wrapped lines)" })
-keymap('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true, desc = "Move down (wrapped lines)" })
-
-keymap("i", "<A-h>", "<Left>", { desc = "Move left (insert mode)" })
-keymap("i", "<A-j>", "<Down>", { desc = "Move down (insert mode)" })
-keymap("i", "<A-k>", "<Up>", { desc = "Move up (insert mode)" })
-keymap("i", "<A-l>", "<Right>", { desc = "Move right (insert mode)" })
-
-keymap("n", "'", "`")
+local map = vim.keymap.set
 
 
--- window navigation commands
-keymap("n", "<c-h>", "<c-w><c-h>", { desc = "Move to window in the left" })
-keymap("n", "<c-j>", "<c-w><c-j>", { desc = "Move to window below" })
-keymap("n", "<c-k>", "<c-w><c-k>", { desc = "Move to window above" })
-keymap("n", "<c-l>", "<c-w><c-l>", { desc = "Move to window in the right" })
+-- ── Insert mode ────────────────────────────────────────────
 
--- Remove highlight
-keymap("n", "<Esc>", vim.cmd.nohlsearch, { desc = "Clear search highlights" })
+-- Exit insert mode
+map("i", "jk", "<Esc>", { desc = "Exit insert mode" })
+
+-- Move cursor without leaving insert mode
+map("i", "<A-h>", "<Left>",  { desc = "Move left" })
+map("i", "<A-j>", "<Down>",  { desc = "Move down" })
+map("i", "<A-k>", "<Up>",    { desc = "Move up" })
+map("i", "<A-l>", "<Right>", { desc = "Move right" })
+
+
+-- ── Navigation ─────────────────────────────────────────────
+
+-- Navigate visual lines when no count is given;
+-- otherwise, navigate actual buffer lines.
+map("n", "j", "v:count == 0 ? 'gj' : 'j'", {
+    expr = true,
+    silent = true,
+    desc = "Move down (wrapped lines)",
+})
+
+map("n", "k", "v:count == 0 ? 'gk' : 'k'", {
+    expr = true,
+    silent = true,
+    desc = "Move up (wrapped lines)",
+})
+
+-- Jump to exact mark position instead of beginning of line
+map("n", "'", "`", { desc = "Jump to exact mark position" })
+
+
+-- ── Window navigation ──────────────────────────────────────
+
+map("n", "<C-h>", "<C-w>h", { desc = "Move to left window" })
+map("n", "<C-j>", "<C-w>j", { desc = "Move to lower window" })
+map("n", "<C-k>", "<C-w>k", { desc = "Move to upper window" })
+map("n", "<C-l>", "<C-w>l", { desc = "Move to right window" })
+
+
+-- ── Visual mode ────────────────────────────────────────────
+
+-- Move selected lines while keeping the selection
+map("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move selection down" })
+map("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move selection up" })
+
+
+-- ── Search ─────────────────────────────────────────────────
+
+-- Clear search highlights without disabling hlsearch
+map("n", "<Esc>", vim.cmd.nohlsearch, {
+    desc = "Clear search highlights",
+})
+
+
+-- ── Snippets ───────────────────────────────────────────────
+
+-- Remove Neovim's built-in snippet navigation mappings.
+-- Blink handles Tab/Shift-Tab using LuaSnip instead.
+for _, key in ipairs({ "<Tab>", "<S-Tab>" }) do
+    vim.keymap.del({ "i", "s" }, key)
+end

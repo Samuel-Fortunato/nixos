@@ -1,7 +1,12 @@
-{ config, lib, pkgs, ... }:
 {
-  options.my.modules.neovim.enable =
-    lib.mkEnableOption "Neovim editor";
+  config,
+  lib,
+  pkgs,
+  inputs,
+  ...
+}:
+{
+  options.my.modules.neovim.enable = lib.mkEnableOption "Neovim editor";
 
   config = lib.mkIf config.my.modules.neovim.enable {
     programs.neovim = {
@@ -11,15 +16,25 @@
       vimAlias = true;
 
       extraPackages = with pkgs; [
+        # Language servers
         lua-language-server
-        gcc
-        tree-sitter
         clang-tools
         basedpyright
-        ruff
         texlab
+
+        # Formatters and linters
+        ruff
         nixfmt
         astyle
+
+        # Development and build tools
+        gcc
+        cargo
+        rustc
+        tree-sitter
+        pkg-config
+
+        # Utilities
         ripgrep
         ghostscript
       ];
