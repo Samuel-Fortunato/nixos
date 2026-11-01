@@ -39,7 +39,7 @@
           };
 
           modules = [
-            ./home
+            ./modules/home
             ./hosts/laptop/home.nix
             { programs.home-manager.enable = true; }
           ];
@@ -56,7 +56,7 @@
           };
 
           modules = [
-            ./home
+            ./modules/home
             ./hosts/vm/home.nix
             { programs.home-manager.enable = true; }
           ];

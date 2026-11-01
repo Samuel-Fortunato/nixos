@@ -5,10 +5,10 @@
   ...
 }:
 let
-  cfg = config.my.modules.fontconfig;
+  cfg = config.my.modules.fonts;
 in
 {
-  options.my.modules.fontconfig.enable = lib.mkEnableOption "System-wide fonts and Fontconfig";
+  options.my.modules.fonts.enable = lib.mkEnableOption "System-wide fonts and Fontconfig";
 
   config = lib.mkIf cfg.enable {
     fonts = {
