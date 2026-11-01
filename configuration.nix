@@ -1,57 +1,43 @@
+{ pkgs, lib, ... }:
 {
-  config,
-  lib,
-  pkgs,
-  ...
-}:
-{
-  imports = [
-    ./modules/nixos/hyprland.nix
-    ./modules/nixos/fonts.nix
-    ./modules/nixos/ly.nix
-    ./modules/nixos/pipewire.nix
-	 ./modules/nixos/grub.nix
-	 ./modules/nixos/networkmanager.nix
-  ];
+  imports = lib.filesystem.listFilesRecursive ./modules/nixos;
 
-  time.timeZone = "Europe/Lisbon";
-  i18n = {
-    defaultLocale = "en_US.UTF-8";
-    extraLocaleSettings = {
-      LC_TIME = "en_GB.UTF-8";
-    };
-  };
-
-
+  # Nix configuration
   nixpkgs.config.allowUnfree = true;
+
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"
   ];
 
-  # Garbage collection
   nix.gc = {
     automatic = true;
     dates = "weekly";
     options = "--delete-older-than 14d";
   };
 
+  # Localization
+  time.timeZone = "Europe/Lisbon";
+
+  i18n = {
+    defaultLocale = "en_US.UTF-8";
+    extraLocaleSettings.LC_TIME = "en_GB.UTF-8";
+  };
+
+  # Users
   users = {
     defaultUserShell = pkgs.zsh;
+
     users.samuel = {
       isNormalUser = true;
-      extraGroups = [
-        "wheel"
-      ];
+      extraGroups = [ "wheel" ];
     };
   };
 
-  environment = {
-    pathsToLink = [ "/share/zsh" ];
-  };
-
+  # Console applications
   programs = {
     zsh.enable = true;
+
     neovim = {
       enable = true;
       defaultEditor = true;
@@ -60,4 +46,5 @@
     };
   };
 
+  environment.pathsToLink = [ "/share/zsh" ];
 }

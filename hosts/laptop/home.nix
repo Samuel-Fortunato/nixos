@@ -26,6 +26,7 @@
     };
 
 	 cursor.enable = true;
+	 fonts.enable = true;
 
     # Applications
     thunar.enable = true;

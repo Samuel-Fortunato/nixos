@@ -1,12 +1,15 @@
 {
   description = "Samuel's NixOS configuration";
+
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
+
   outputs =
     {
       nixpkgs,
@@ -14,6 +17,7 @@
       ...
     }:
     {
+      # NixOS system configurations
       nixosConfigurations = {
         nixos-laptop = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
@@ -31,6 +35,8 @@
           ];
         };
       };
+
+      # Standalone Home Manager configurations
       homeConfigurations = {
         "samuel@nixos-laptop" = home-manager.lib.homeManagerConfiguration {
           pkgs = import nixpkgs {

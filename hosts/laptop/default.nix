@@ -1,26 +1,68 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   imports = [
     ./hardware-configuration.nix
   ];
 
-  my.modules.fonts.enable = true;
-  documentation.man.cache.enable = true;
-
-  # Graphical environment
-  services.displayManager.ly.enable = true;
-  services.pipewire.enable = true;
-
-  security.polkit.enable = true;
-  services.accounts-daemon.enable = true;
-  services.udisks2.enable = true;
-
-  # Laptop-specific hardware and power management
-  hardware.bluetooth = {
-    enable = true;
-    powerOnBoot = true;
+  # Host identity and networking
+  networking = {
+    hostName = "nixos-laptop";
+    networkmanager.enable = true;
   };
 
+  # Bootloader and kernel
+  boot = {
+    kernelPackages = pkgs.linuxPackages_latest;
+
+    loader = {
+      grub = {
+        enable = true;
+        device = "nodev";
+        efiSupport = true;
+        useOSProber = true;
+        default = "0";
+      };
+
+      efi = {
+        canTouchEfiVariables = true;
+        efiSysMountPoint = "/boot";
+      };
+    };
+  };
+
+  # Hardware
+  hardware = {
+    graphics = {
+      enable = true;
+      extraPackages = with pkgs; [
+        intel-media-driver
+      ];
+    };
+
+    nvidia = {
+      modesetting.enable = true;
+      open = true;
+      powerManagement.enable = false;
+    };
+
+    bluetooth = {
+      enable = true;
+      powerOnBoot = true;
+    };
+  };
+
+  # System services
   services = {
+    # Graphical environment
+    displayManager.ly.enable = true;
+    xserver.videoDrivers = [ "nvidia" ];
+
+    # Audio and desktop integration
+    pipewire.enable = true;
+    accounts-daemon.enable = true;
+    udisks2.enable = true;
+
+    # Power management
     power-profiles-daemon.enable = true;
 
     upower = {
@@ -35,54 +77,45 @@
     };
   };
 
-  # Laptop-specific applications
-  programs.steam.enable = true;
-  programs.gpu-screen-recorder.enable = true;
-
-  networking = {
-    networkmanager.enable = true;
-    hostName = "nixos-laptop";
-  };
-  programs.hyprland.enable = true;
-
-  # GPU acceleration
-  hardware.graphics = {
-    enable = true;
-    extraPackages = with pkgs; [
-      intel-media-driver
-    ];
-  };
-  services.xserver.videoDrivers = [ "nvidia" ];
-  hardware.nvidia = {
-    modesetting.enable = true;
-    open = true;
-    powerManagement.enable = false;
+  # Programs
+  programs = {
+    hyprland.enable = true;
+    steam.enable = true;
+    gpu-screen-recorder.enable = true;
+    virt-manager.enable = true;
   };
 
-  # Virtualization (distrobox and qemu)
+  # Security and permissions
+  security.polkit.enable = true;
+
+  users.users.samuel.extraGroups = [
+    "libvirtd"
+    "dialout"
+    "input" # Noctalia Bongo Cat
+  ];
+
+  # Virtualization
   virtualisation = {
     podman.enable = true;
+
     libvirtd = {
       enable = true;
+
       qemu = {
         swtpm.enable = true;
         vhostUserPackages = [ pkgs.virtiofsd ];
       };
     };
   };
-  programs.virt-manager.enable = true;
+
+  # System packages
   environment.systemPackages = with pkgs; [
     swtpm
     wl-clipboard
     glib
   ];
-  users.users.samuel.extraGroups = [
-    "libvirtd"
-    "dialout"
-    "input"
-  ];
 
-  # Windows dual boot mounting
+  # Windows dual-boot partition
   fileSystems."/mnt/windows" = {
     device = "/dev/disk/by-label/Windows-SSD";
     fsType = "ntfs3";
@@ -97,23 +130,9 @@
     ];
   };
 
-  # GRUB bootloader
-  boot = {
-    loader = {
-      grub = {
-        enable = true;
-        device = "nodev";
-        efiSupport = true;
-        useOSProber = true;
-        default = "0";
-      };
-      efi = {
-        canTouchEfiVariables = true;
-        efiSysMountPoint = "/boot";
-      };
-    };
-    kernelPackages = pkgs.linuxPackages_latest;
-  };
+  # Documentation
+  documentation.man.cache.enable = true;
 
+  # System compatibility
   system.stateVersion = "26.05";
 }

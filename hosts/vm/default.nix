@@ -1,40 +1,55 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   imports = [
     ./hardware-configuration.nix
   ];
 
+  # Host identity and networking
   networking = {
-    networkmanager.enable = true;
     hostName = "nixos-vm";
+    networkmanager.enable = true;
   };
+
+  # Bootloader
+  boot.loader = {
+    grub = {
+      enable = true;
+      device = "nodev";
+      efiSupport = true;
+    };
+
+    efi.canTouchEfiVariables = true;
+  };
+
+  # Hardware
+  hardware.graphics.enable = true;
+
+  # System services
+  services = {
+    # Virtual machine integration
+    qemuGuest.enable = true;
+
+    # Graphical environment
+    displayManager.ly.enable = true;
+
+    # Audio and desktop integration
+    pipewire.enable = true;
+    accounts-daemon.enable = true;
+    udisks2.enable = true;
+  };
+
+  # Programs
   programs.hyprland.enable = true;
 
-  # Graphical environment
-  services.displayManager.ly.enable = true;
-  services.pipewire.enable = true;
-
+  # Security
   security.polkit.enable = true;
-  services.accounts-daemon.enable = true;
-  services.udisks2.enable = true;
 
+  # System packages
   environment.systemPackages = with pkgs; [
     wl-clipboard
     glib
   ];
 
-  boot = {
-    loader = {
-      grub = {
-        enable = true;
-        device = "nodev";
-        efiSupport = true;
-      };
-      efi.canTouchEfiVariables = true;
-    };
-  };
-
-  hardware.graphics.enable = true;
-  services.qemuGuest.enable = true;
-
+  # System compatibility
   system.stateVersion = "26.05";
 }
