@@ -1,7 +1,7 @@
 { ... }:
 {
   imports = [
-    ../common/home.nix
+    ../../profiles/home/daily-desktop.nix
   ];
 
   # No VM-specific modules enabled.
