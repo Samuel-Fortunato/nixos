@@ -17,6 +17,6 @@
     codex.enable = true;
 
     # Cloud synchronization
-    proton-drive.enable = true;
+    proton-drive.enable = false;
   };
 }
