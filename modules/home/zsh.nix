@@ -57,7 +57,7 @@
 
           # Reload Noctalia if available
           if command -v noctalia >/dev/null 2>&1; then
-            noctalia msg config-reload >/dev/null 2>&1 || true
+            noctalia msg config-reload
           fi
         '';
       };
