@@ -35,15 +35,10 @@ return {
 		input = { enabled = true },
 		picker = {
 			enabled = true,
-			formatters = {
-				file = {
-					git_status_hl = false,
-				},
-			},
 			sources = {
 				explorer = {
 					auto_close = true,
-					layout = { preset = "default", preview = true }
+					layout = { preset = "vertical", preview = true }
 				}
 			}
 		},
