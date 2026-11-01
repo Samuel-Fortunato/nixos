@@ -7,6 +7,7 @@
 {
   imports = [
     ./modules/nixos/hyprland.nix
+    ./modules/nixos/fonts.nix
   ];
 
   networking.networkmanager.enable = true;

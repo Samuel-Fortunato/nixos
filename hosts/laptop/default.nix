@@ -3,6 +3,8 @@
     ./hardware-configuration.nix
   ];
 
+  my.modules.fontconfig.enable = true;
+
   networking.hostName = "nixos-laptop";
   programs.hyprland.enable = true;
 
