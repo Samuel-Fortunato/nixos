@@ -4,8 +4,45 @@
   ];
 
   my.modules.fonts.enable = true;
+  documentation.man.cache.enable = true;
 
-  networking.hostName = "nixos-laptop";
+  # Graphical environment
+  services.displayManager.ly.enable = true;
+  services.pipewire.enable = true;
+
+  security.polkit.enable = true;
+  services.accounts-daemon.enable = true;
+  services.udisks2.enable = true;
+
+  # Laptop-specific hardware and power management
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+  };
+
+  services = {
+    power-profiles-daemon.enable = true;
+
+    upower = {
+      enable = true;
+      allowRiskyCriticalPowerAction = true;
+      criticalPowerAction = "Suspend";
+    };
+
+    logind.settings.Login = {
+      HandlePowerKey = "suspend";
+      HandleLidSwitch = "ignore";
+    };
+  };
+
+  # Laptop-specific applications
+  programs.steam.enable = true;
+  programs.gpu-screen-recorder.enable = true;
+
+  networking = {
+    networkmanager.enable = true;
+    hostName = "nixos-laptop";
+  };
   programs.hyprland.enable = true;
 
   # GPU acceleration
@@ -34,11 +71,15 @@
     };
   };
   programs.virt-manager.enable = true;
-  environment.systemPackages = [
-    pkgs.swtpm
+  environment.systemPackages = with pkgs; [
+    swtpm
+    wl-clipboard
+    glib
   ];
   users.users.samuel.extraGroups = [
     "libvirtd"
+    "dialout"
+    "input"
   ];
 
   # Windows dual boot mounting
@@ -59,7 +100,6 @@
   # GRUB bootloader
   boot = {
     loader = {
-      timeout = 0;
       grub = {
         enable = true;
         device = "nodev";
@@ -74,4 +114,6 @@
     };
     kernelPackages = pkgs.linuxPackages_latest;
   };
+
+  system.stateVersion = "26.05";
 }
