@@ -40,6 +40,9 @@
     showtime.enable = true;
     calculator.enable = true;
 
+    # Password manager
+    proton-pass.enable = true;
+
     # Utilities
     btop.enable = true;
     tmux.enable = true;
