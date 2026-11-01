@@ -44,6 +44,7 @@
       shellAliases = {
         ncf = "nvim ~/.config/nvim/";
         cd = "z";
+        cat = "bat";
       };
 
       siteFunctions = {
@@ -72,5 +73,7 @@
       enable = true;
       enableZshIntegration = true;
     };
+
+    programs.bat.enable = true;
   };
 }
