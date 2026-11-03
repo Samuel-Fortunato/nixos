@@ -9,6 +9,9 @@
     hostName = "nixos-laptop";
     networkmanager.enable = true;
   };
+  
+  # Optional custom NixOS modules
+  my.modules.razer.enable = true;
 
   # Bootloader and kernel
   boot = {

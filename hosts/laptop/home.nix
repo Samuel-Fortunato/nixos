@@ -19,5 +19,8 @@
     # Cloud synchronization
     proton-drive.enable = false;
     mega-sync.enable = true;
+
+	 # Razer mouse controller (polychromatic)
+	 razer.enable = true;
   };
 }
