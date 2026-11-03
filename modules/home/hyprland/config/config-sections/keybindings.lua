@@ -140,18 +140,29 @@ hl.bind(mainMod .. "+P", hl.dsp.exec_cmd(noctalia .. "panel-toggle profidev/hypr
 
 -- Control center
 -- Double click to open, single click to close
-hl.bind(mainMod .. "+SUPER_l", hl.dsp.submap("double-click"))
-hl.bind(mainMod .. "+SUPER_l", hl.dsp.exec_cmd(noctalia .. "panel-close control-center"))
-hl.bind(mainMod .. "+SUPER_l", hl.dsp.exec_cmd("sleep 0.4 && hyprctl dispatch 'hl.dsp.submap(\"reset\")'"))
+
+hl.bind(mainMod .. "+SUPER_l", hl.dsp.submap("double-click"), { release = true })
+hl.bind(mainMod .. "+SUPER_l", hl.dsp.exec_cmd(noctalia .. "panel-close control-center"), { release = true })
+hl.bind(mainMod .. "+SUPER_l", hl.dsp.exec_cmd("sleep 0.4 && hyprctl dispatch 'hl.dsp.submap(\"reset\")'"), { release = true })
+
 hl.define_submap("double-click", function()
-	hl.bind(mainMod .. "+SUPER_l", hl.dsp.exec_cmd(noctalia .. "panel-open control-center"))
+    hl.bind(mainMod .. "+SUPER_l", hl.dsp.exec_cmd(noctalia .. "panel-open control-center"), { release = true })
 end)
 
+-- hl.bind(mainMod .. "+SUPER_l", hl.dsp.submap("double-click"))
+-- hl.bind(mainMod .. "+SUPER_l", hl.dsp.exec_cmd(noctalia .. "panel-close control-center"))
+-- hl.bind(mainMod .. "+SUPER_l", hl.dsp.exec_cmd("sleep 0.4 && hyprctl dispatch 'hl.dsp.submap(\"reset\")'"))
+-- hl.define_submap("double-click", function()
+-- 	hl.bind(mainMod .. "+SUPER_l", hl.dsp.exec_cmd(noctalia .. "panel-open control-center"))
+-- end)
+
+-- Notifications
 hl.bind(mainMod .. "+PERIOD", hl.dsp.exec_cmd(noctalia .. "notification-clear-active"))
 hl.bind(mainMod .. "+SHIFT+PERIOD", hl.dsp.exec_cmd(noctalia .. "notification-invoke-latest"))
 hl.bind(mainMod .. "+CTRL+PERIOD", hl.dsp.exec_cmd(noctalia .. "notification-dnd-toggle"))
 hl.bind(mainMod .. "+N", hl.dsp.exec_cmd(noctalia .. "panel-toggle control-center notifications"))
 
+-- Noctalia
 hl.bind(mainMod .. "+Space", hl.dsp.exec_cmd(noctalia .. "panel-toggle launcher"))
 hl.bind(mainMod .. "+comma", hl.dsp.exec_cmd(noctalia .. "settings-toggle"))
 
