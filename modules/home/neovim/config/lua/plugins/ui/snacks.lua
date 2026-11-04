@@ -18,10 +18,12 @@ return {
 		{ "<leader>fh", function() Snacks.picker.help() end,            desc = "Help Pages" },
 		{ "<leader>:",  function() Snacks.picker.command_history() end, desc = "Command History" },
 
-		{ "<C-\\>",     mode = { "n", "t" },                            function() Snacks.terminal() end,  desc = "Terminal" },
+		{ "<C-\\>",     mode = { "n", "t" },                            function() Snacks.terminal.focus() end,  desc = "Terminal" },
 
 		{ "<leader>T",  function() Snacks.picker.colorschemes() end,    desc = "Select Theme" },
 		{ "<leader>z",  function() Snacks.zen() end,                    desc = "Toggle Zen Mode" },
+
+		{ "<leader>bc", function() Snacks.bufdelete.delete() end,       desc = "Close Buffer" },
 	},
 	opts = {
 		bigfile = { enabled = true },
@@ -52,7 +54,10 @@ return {
 				height = 0.8
 			},
 		},
-		statuscolumn = { enabled = true },
+		statuscolumn = {
+			enabled = true,
+			folds = { open = true },
+		},
 		words = { enabled = true },
 	}
 }
