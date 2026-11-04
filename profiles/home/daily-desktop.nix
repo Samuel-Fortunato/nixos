@@ -1,5 +1,4 @@
-{ ... }:
-{
+{...}: {
   my.modules = {
     # Shell and terminal
     zsh.enable = true;
@@ -20,6 +19,9 @@
       enable = true;
       musicWallpaper.enable = true;
     };
+
+    # keyring
+    seahorse.enable = true;
 
     # Appearance and desktop integration
     gtk.enable = true;

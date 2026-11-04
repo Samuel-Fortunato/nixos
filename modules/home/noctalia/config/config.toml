@@ -115,7 +115,7 @@ event_date_format = "%A %e %B"
 event_time_format = "%H:%M"
 refresh_minutes = 5
 
-    [calendar.account.personal_google]
+    [calendar.account.samff2006]
     calendars = []
     client_cert_file = ""
     client_key_file = ""
@@ -133,7 +133,7 @@ refresh_minutes = 5
     all_day_digest_time = "09:00"
     default_lead_minutes = 10
     enabled = true
-    use_event_reminders = true
+    use_event_reminders = false
 
 [control_center]
 circular_avatar = true
@@ -146,8 +146,8 @@ sidebar_section = "compact"
 width = 700
 
     [control_center.calendar]
-    hide_past_events = false
-    past_events_threshold_minutes = 30
+    hide_past_events = true
+    past_events_threshold_minutes = 0
     show_events_card = true
     show_week_numbers = false
 

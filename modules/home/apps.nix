@@ -19,6 +19,7 @@ let
     showtime = pkgs.showtime;
     codex = pkgs.codex;
     evtest = pkgs.evtest;
+	 seahorse = pkgs.seahorse;
   };
 in
 {

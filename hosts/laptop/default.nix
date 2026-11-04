@@ -65,6 +65,9 @@
     accounts-daemon.enable = true;
     udisks2.enable = true;
 
+	 # keyring
+	 gnome.gnome-keyring.enable = true;
+
     # Power management
     power-profiles-daemon.enable = true;
 
