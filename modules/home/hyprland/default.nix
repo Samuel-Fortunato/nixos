@@ -1,8 +1,12 @@
-{ config, lib, ... }:
+{ config, pkgs, lib, ... }:
 {
   options.my.modules.hyprland.enable = lib.mkEnableOption "Hyprland user configuration";
 
   config = lib.mkIf config.my.modules.hyprland.enable {
+    home.packages = [
+      pkgs.hyprshutdown
+    ];
+
     wayland.windowManager.hyprland = {
       enable = true;
       package = null;
