@@ -72,3 +72,9 @@ hl.window_rule({
     match = { class = "^Spotify$" },
     workspace = "special:S",
 })
+
+hl.workspace_rule({
+    workspace = "s[true]",
+    gaps_in = 10,
+    gaps_out = 40,
+})
