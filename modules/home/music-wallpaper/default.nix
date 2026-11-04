@@ -2,21 +2,22 @@
   config,
   lib,
   pkgs,
+  monitorName,
   ...
-}:
-let
-  pythonWithPillow = pkgs.python3.withPackages (pythonPackages: [ pythonPackages.pillow ]);
+}: let
+  pythonWithPillow = pkgs.python3.withPackages (pythonPackages: [pythonPackages.pillow]);
 
   musicWallpaper = pkgs.writeShellApplication {
     name = "noctalia-music-wallpaper";
-    runtimeInputs = [
-      pythonWithPillow
-      pkgs.playerctl
-      pkgs.hyprland
-      pkgs.systemd
-      pkgs.dejavu_fonts
-    ]
-    ++ lib.optional (config.programs.noctalia.package != null) config.programs.noctalia.package;
+    runtimeInputs =
+      [
+        pythonWithPillow
+        pkgs.playerctl
+        pkgs.hyprland
+        pkgs.systemd
+        pkgs.dejavu_fonts
+      ]
+      ++ lib.optional (config.programs.noctalia.package != null) config.programs.noctalia.package;
     text = ''
       export NOCTALIA_FONT_FILE="${pkgs.dejavu_fonts}/share/fonts/truetype/DejaVuSans.ttf"
       exec python3 ${./music_wallpaper.py} "$@"
@@ -25,15 +26,14 @@ let
 
   selectorArt =
     pkgs.runCommand "noctalia-wallpaper-mode-selectors"
-      {
-        nativeBuildInputs = [ pythonWithPillow ];
-      }
-      ''
-        mkdir -p "$out"
-        NOCTALIA_FONT_FILE="${pkgs.dejavu_fonts}/share/fonts/truetype/DejaVuSans.ttf" python3 ${./selector_art.py} "$out"
-      '';
-in
-{
+    {
+      nativeBuildInputs = [pythonWithPillow];
+    }
+    ''
+      mkdir -p "$out"
+      NOCTALIA_FONT_FILE="${pkgs.dejavu_fonts}/share/fonts/truetype/DejaVuSans.ttf" python3 ${./selector_art.py} "$out"
+    '';
+in {
   options.my.modules.noctalia.musicWallpaper.enable =
     lib.mkEnableOption "Noctalia music wallpaper integration";
 
@@ -57,16 +57,18 @@ in
 
     # Noctalia loads extra TOML files from ~/.config/noctalia as a config stack.
     # This hook file is kept separate from the user's existing config.toml.
-    xdg.configFile."noctalia/zz-music-wallpaper.toml".text = ''
-      [hooks]
-      started = "${musicWallpaper}/bin/noctalia-music-wallpaper startup"
-      wallpaper_changed = "${musicWallpaper}/bin/noctalia-music-wallpaper wallpaper-hook"
-    '';
+    xdg.configFile = lib.optionalAttrs (monitorName != "eDP-1") {
+      "noctalia/zz-music-wallpaper.toml".text = ''
+        [hooks]
+        started = "${musicWallpaper}/bin/noctalia-music-wallpaper startup"
+        wallpaper_changed = "${musicWallpaper}/bin/noctalia-music-wallpaper wallpaper-hook"
+      '';
+    };
 
     systemd.user.services.noctalia-music-wallpaper = {
       Unit = {
         Description = "Update Noctalia wallpaper from the currently playing MPRIS track";
-        PartOf = [ "graphical-session.target" ];
+        PartOf = ["graphical-session.target"];
       };
       Service = {
         Type = "simple";
@@ -79,14 +81,14 @@ in
     systemd.user.services.noctalia-wallpaper-carousel = {
       Unit = {
         Description = "Rotate ordinary wallpapers while Noctalia carousel mode is selected";
-        PartOf = [ "graphical-session.target" ];
+        PartOf = ["graphical-session.target"];
       };
       Service = {
         Type = "simple";
         ExecStart = "${musicWallpaper}/bin/noctalia-music-wallpaper carousel-monitor";
         Restart = "on-failure";
         RestartSec = "3s";
-        Environment = [ "NOCTALIA_WALLPAPER_INTERVAL=600" ];
+        Environment = ["NOCTALIA_WALLPAPER_INTERVAL=600"];
       };
     };
   };
