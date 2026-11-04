@@ -271,11 +271,11 @@ logging_out = []
 power_profile_changed = []
 rebooting = []
 session_locked = []
-session_unlocked = []
+session_unlocked = [ "~/.local/bin/noctalia-caffeine-lock restore" ]
 shutting_down = []
-started = [ "/nix/store/vrnc89s5w63y0aas0lmqq2f24yhx0zaq-noctalia-music-wallpaper/bin/noctalia-music-wallpaper startup" ]
+started = [ "/nix/store/pbm11ryypsadggl1g1papsjnir1ljv21-noctalia-music-wallpaper/bin/noctalia-music-wallpaper startup" ]
 theme_mode_changed = []
-wallpaper_changed = [ "/nix/store/vrnc89s5w63y0aas0lmqq2f24yhx0zaq-noctalia-music-wallpaper/bin/noctalia-music-wallpaper wallpaper-hook" ]
+wallpaper_changed = [ "/nix/store/pbm11ryypsadggl1g1papsjnir1ljv21-noctalia-music-wallpaper/bin/noctalia-music-wallpaper wallpaper-hook" ]
 wifi_disabled = []
 wifi_enabled = []
 
@@ -325,7 +325,7 @@ pre_action_fade_seconds = 0.0
     enabled = true
     locked_timeout = 100.0
     resume_command = ""
-    timeout = 250.0
+    timeout = 100.0
 
 [keybinds]
 cancel = [ "Escape" ]
@@ -380,12 +380,12 @@ widget_order = [
     [lockscreen_widgets.widget."lockscreen-login-box@HDMI-A-2"]
     box_height = 196.0
     box_width = 720.0
-    cx = 320.0
-    cy = 319.11111450195312
+    cx = 800.0
+    cy = 718.0
     enabled = true
     output = "HDMI-A-2"
-    placement_height = 400.0
-    placement_width = 640.0
+    placement_height = 900.0
+    placement_width = 1600.0
     rotation = 0.0
     type = "login_box"
 
@@ -732,19 +732,30 @@ umbriel_overview_type_to_launch_enabled = false
         variant = "default"
 
         [[shell.session.actions]]
-        action = "lock_and_suspend"
-        command = ""
+        action = "command"
+        command = "~/.local/bin/noctalia-caffeine-lock lock"
         countdown_seconds = 0.0
         enabled = true
-        glyph = "moon"
-        label = "Suspend"
+        glyph = "caffeine-off"
+        label = "Caffeine Lock"
         lockscreen_shortcut = ""
         shortcut = "2"
         variant = "default"
 
         [[shell.session.actions]]
-        action = "logout"
+        action = "lock_and_suspend"
         command = ""
+        countdown_seconds = 0.0
+        enabled = false
+        glyph = "moon"
+        label = "Suspend"
+        lockscreen_shortcut = ""
+        shortcut = "3"
+        variant = "default"
+
+        [[shell.session.actions]]
+        action = "logout"
+        command = "hyprctl dispatch \"hl.dsp.exec_cmd('hyprshutdown')\""
         countdown_seconds = 5.0
         enabled = true
         glyph = ""
@@ -755,7 +766,7 @@ umbriel_overview_type_to_launch_enabled = false
 
         [[shell.session.actions]]
         action = "reboot"
-        command = ""
+        command = "hyprctl dispatch \"hl.dsp.exec_cmd('hyprshutdown -p \\\"systemctl reboot\\\"')\""
         countdown_seconds = 5.0
         enabled = true
         glyph = ""
@@ -766,7 +777,7 @@ umbriel_overview_type_to_launch_enabled = false
 
         [[shell.session.actions]]
         action = "shutdown"
-        command = ""
+        command = "hyprctl dispatch \"hl.dsp.exec_cmd('hyprshutdown -p \\\"systemctl poweroff\\\"')\""
         countdown_seconds = 5.0
         enabled = true
         glyph = ""
@@ -842,7 +853,7 @@ wallpaper_scheme = "faithful"
 
     [theme.templates]
     builtin_ids = [ "btop", "gtk3", "gtk4", "hyprland", "kitty" ]
-    community_ids = [ "neovim", "zathura", "fzf" ]
+    community_ids = [ "neovim", "zathura", "hyprtoolkit", "fzf" ]
     enable_builtin_templates = true
     enable_community_templates = true
 
