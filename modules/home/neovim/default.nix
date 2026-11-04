@@ -21,6 +21,7 @@
         clang-tools
         basedpyright
         texlab
+        nixd
 
         # Formatters and linters
         ruff

@@ -28,4 +28,5 @@ vim.lsp.enable({
 	"texlab",
 	"lua_ls",
 	"matlab_ls",
+	"nixd",
 })
