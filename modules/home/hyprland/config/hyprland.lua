@@ -11,5 +11,10 @@ require("config-sections.windows-and-workspaces")
 
 
 -- For Noctalia color templates
-local ok, noctalia = pcall(require, "noctalia")
-if ok then noctalia.apply_theme() end
+local ok, noctalia = pcall(function()
+  return require("noctalia")
+end)
+
+if ok then
+  noctalia.apply_theme()
+end
