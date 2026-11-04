@@ -13,7 +13,7 @@ return {
 			c = { "astyle", lsp_format = "never" },
 			cpp = { "astyle", lsp_format = "never" },
 			sh = { "shfmt" },
-			nix = { "nixfmt" },
+			nix = { "alejandra" },
 			python = { "ruff_fix", "ruff_format", "ruff_organize_imports" }
 		},
 		default_format_opts = {

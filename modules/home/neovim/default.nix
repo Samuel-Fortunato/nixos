@@ -2,10 +2,8 @@
   config,
   lib,
   pkgs,
-  inputs,
   ...
-}:
-{
+}: {
   options.my.modules.neovim.enable = lib.mkEnableOption "Neovim editor";
 
   config = lib.mkIf config.my.modules.neovim.enable {
@@ -25,7 +23,7 @@
 
         # Formatters and linters
         ruff
-        nixfmt
+        alejandra
         astyle
 
         # Development and build tools
@@ -45,5 +43,9 @@
       source = ./config;
       recursive = true;
     };
+
+    xdg.configFile."alejandra/alejandra.toml".text = ''
+      indentation = "Tabs"
+    '';
   };
 }
