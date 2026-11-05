@@ -39,11 +39,19 @@ return {
 		-- fuzzy = { implementation = "rust", },
 
 		sources = {
-			default = { "lsp", "snippets", "path", "buffer", },
+			default = { "lsp", "path", "snippets", "buffer" },
 
 			-- VimTeX exposes an omnifunc for TeX completion.
 			per_filetype = { tex = { inherit_defaults = true, "omni" }, },
-			providers = { snippets = { min_keyword_length = 2, opts = { show_autosnippets = false, }, }, buffer = { min_keyword_length = 5, }, },
+			providers = {
+				snippets = {
+					min_keyword_length = 2,
+					opts = { show_autosnippets = false, },
+				},
+				buffer = {
+					min_keyword_length = 3,
+				},
+			},
 		},
 
 		completion = {
@@ -54,7 +62,7 @@ return {
 
 			list = {
 				selection = {
-					preselect = true, auto_insert = false,
+					preselect = true, auto_insert = true,
 				},
 			},
 
