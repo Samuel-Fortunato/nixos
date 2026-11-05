@@ -5,6 +5,7 @@
     kitty.enable = true;
     starship.enable = true;
     fastfetch.enable = true;
+    ripgrep.enable = true;
 
     # Development tools
     git.enable = true;
