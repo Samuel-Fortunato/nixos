@@ -15,6 +15,7 @@ shutdownHyprlandBind:set_enabled(false)
 hl.bind(mainMod .. " + D", hl.dsp.window.float())
 hl.bind(mainMod .. " + SHIFT + D", hl.dsp.window.pin())
 hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen({ mode = "maximized" }))
+hl.bind(mainMod .. " + X", hl.dsp.layout("togglesplit"));
 hl.bind(mainMod .. " + SHIFT + F", hl.dsp.window.fullscreen({ mode = "fullscreen" }))
 hl.bind(mainMod .. " + CTRL + F",
 	hl.dsp.window.fullscreen_state({
