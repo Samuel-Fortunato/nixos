@@ -2,7 +2,6 @@
   config,
   lib,
   pkgs,
-  monitorName,
   ...
 }: let
   pythonWithPillow = pkgs.python3.withPackages (pythonPackages: [pythonPackages.pillow]);
@@ -54,16 +53,6 @@ in {
     # These are selectable entries in Noctalia's existing wallpaper directory.
     home.file."Pictures/Wallpapers/00-music-theme.png".source = "${selectorArt}/00-music-theme.png";
     home.file."Pictures/Wallpapers/01-carroussel.png".source = "${selectorArt}/01-carroussel.png";
-
-    # Noctalia loads extra TOML files from ~/.config/noctalia as a config stack.
-    # This hook file is kept separate from the user's existing config.toml.
-    xdg.configFile = lib.optionalAttrs (monitorName != "eDP-1") {
-      "noctalia/zz-music-wallpaper.toml".text = ''
-        [hooks]
-        started = "${musicWallpaper}/bin/noctalia-music-wallpaper startup"
-        wallpaper_changed = "${musicWallpaper}/bin/noctalia-music-wallpaper wallpaper-hook"
-      '';
-    };
 
     systemd.user.services.noctalia-music-wallpaper = {
       Unit = {

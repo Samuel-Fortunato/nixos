@@ -9,7 +9,23 @@
     exec ${pkgs.uwsm}/bin/uuctl "$@" noctalia dmenu -p
   '';
 
-  noctaliaSettings = (import ./config.nix {inherit pkgs;}).settings;
+  # Change both monitor-name values and attribute keys (e.g. widget IDs).
+  remapMonitor = value:
+    if builtins.isAttrs value then
+      lib.mapAttrs' (
+        name: child:
+          lib.nameValuePair
+            (builtins.replaceStrings ["@MONITOR@"] [monitorName] name)
+            (remapMonitor child)
+      ) value
+    else if builtins.isList value then
+      builtins.map remapMonitor value
+    else if builtins.isString value then
+      builtins.replaceStrings ["@MONITOR@"] [monitorName] value
+    else
+      value;
+
+  noctaliaSettings = remapMonitor (import ./config.nix {inherit pkgs;}).settings;
 
   noctaliaSeed =
     (pkgs.formats.toml {}).generate
@@ -21,17 +37,10 @@ imports = [./watcher.nix];
   options.my.modules.noctalia.enable = lib.mkEnableOption "Noctalia desktop shell";
 
   config = lib.mkIf config.my.modules.noctalia.enable {
-    programs.noctalia =
-      {
-        enable = true;
-        systemd.enable = true;
-      }
-      // lib.optionalAttrs (monitorName != "eDP-1") {
-        # Keep the previous configuration for the VM temporarily.
-        settings = builtins.replaceStrings ["@MONITOR@"] [monitorName] (
-          builtins.readFile ./config/config.toml
-        );
-      };
+    programs.noctalia = {
+      enable = true;
+      systemd.enable = true;
+    };
 
     home.packages = with pkgs; [
       uuctl-noctalia
@@ -47,7 +56,7 @@ imports = [./watcher.nix];
       imagemagick
     ];
 
-    home.activation = lib.optionalAttrs (monitorName == "eDP-1") {
+    home.activation = {
       noctaliaSettingsSeed = lib.hm.dag.entryAfter ["writeBoundary"] ''
         stateDir="''${NOCTALIA_STATE_HOME:-''${XDG_STATE_HOME:-$HOME/.local/state}}/noctalia"
         settingsFile="$stateDir/settings.toml"

@@ -14,7 +14,8 @@ let
     text = ''
       exec python3 ${./export-settings.py} \
         "$HOME/.local/state/noctalia/settings.toml" \
-        /etc/nixos/modules/home/noctalia/config.nix
+        /etc/nixos/modules/home/noctalia/config.nix \
+        ${lib.escapeShellArg monitorName}
     '';
   };
 in
