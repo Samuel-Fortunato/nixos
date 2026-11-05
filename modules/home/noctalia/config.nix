@@ -346,37 +346,6 @@ let
       };
     };
     "idle" = {
-      "behavior" = {
-        "lock" = {
-          "action" = "lock";
-          "command" = "";
-          "enabled" = true;
-          "locked_timeout" = 0.0;
-          "resume_command" = "";
-          "timeout" = 400.0;
-        };
-        "lock-and-suspend" = {
-          "action" = "lock_and_suspend";
-          "command" = "";
-          "enabled" = true;
-          "locked_timeout" = 0.0;
-          "resume_command" = "";
-          "timeout" = 600.0;
-        };
-        "screen-off" = {
-          "action" = "screen_off";
-          "command" = "";
-          "enabled" = true;
-          "locked_timeout" = 100.0;
-          "resume_command" = "";
-          "timeout" = 100.0;
-        };
-      };
-      "behavior_order" = [
-        "screen-off"
-        "lock"
-        "lock-and-suspend"
-      ];
       "pre_action_fade_seconds" = 0.0;
     };
     "keybinds" = {
