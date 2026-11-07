@@ -3,6 +3,5 @@ return {
 	lazy = false,
 	dependencies = {
 		"folke/snacks.nvim",
-		"folke/which-key.nvim",
 	}
 }
