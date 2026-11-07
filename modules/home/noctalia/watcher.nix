@@ -8,9 +8,14 @@
 let
   enabled = config.my.modules.noctalia.enable && monitorName == "eDP-1";
 
+  noctaliaPackage =
+    if config.programs.noctalia.package != null
+    then config.programs.noctalia.package
+    else pkgs.noctalia;
+
   exporter = pkgs.writeShellApplication {
     name = "noctalia-settings-export";
-    runtimeInputs = [ pkgs.python3 pkgs.nix ];
+    runtimeInputs = [ pkgs.python3 pkgs.nix noctaliaPackage ];
     text = ''
       exec python3 ${./export-settings.py} \
         "$HOME/.local/state/noctalia/settings.toml" \
