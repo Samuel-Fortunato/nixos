@@ -4,7 +4,7 @@ return {
 	dependencies = { 'nvim-tree/nvim-web-devicons' },
 	opts = {
 		sections = {
-			lualine_x = { "overseer", "filetype" }
+			lualine_x = { "filetype" }
 		}
 	}
 }
