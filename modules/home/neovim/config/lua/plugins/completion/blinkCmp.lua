@@ -4,7 +4,7 @@ return {
 		"saghen/blink.lib",
 		"L3MON4D3/LuaSnip",
 	},
-	event = "InsertEnter",
+	event = { "InsertEnter", "CmdlineEnter" },
 
 	-- v2's supported Rust fuzzy matcher build method.
 	build = function()
