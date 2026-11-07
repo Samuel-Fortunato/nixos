@@ -10,11 +10,11 @@ local map = vim.keymap.set
 -- Exit insert mode
 map("i", "jk", "<Esc>", { desc = "Exit insert mode" })
 
--- Move cursor without leaving insert mode
-map("i", "<A-h>", "<Left>",  { desc = "Move left" })
-map("i", "<A-j>", "<Down>",  { desc = "Move down" })
-map("i", "<A-k>", "<Up>",    { desc = "Move up" })
-map("i", "<A-l>", "<Right>", { desc = "Move right" })
+-- -- Move cursor without leaving insert mode
+-- map("i", "<A-h>", "<Left>",  { desc = "Move left" })
+-- map("i", "<A-j>", "<Down>",  { desc = "Move down" })
+-- map("i", "<A-k>", "<Up>",    { desc = "Move up" })
+-- map("i", "<A-l>", "<Right>", { desc = "Move right" })
 
 
 -- ── Navigation ─────────────────────────────────────────────
@@ -47,9 +47,9 @@ map("n", "<C-l>", "<C-w>l", { desc = "Move to right window" })
 
 -- ── Visual mode ────────────────────────────────────────────
 
--- Move selected lines while keeping the selection
-map("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move selection down" })
-map("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move selection up" })
+-- -- Move selected lines while keeping the selection
+-- map("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move selection down" })
+-- map("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move selection up" })
 
 
 -- ── Search ─────────────────────────────────────────────────

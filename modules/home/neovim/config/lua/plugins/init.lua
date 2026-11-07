@@ -3,5 +3,7 @@ return {
 	{ import = "plugins.editing" },
 	{ import = "plugins.lsp" },
 	{ import = "plugins.tools" },
-	{ import = "plugins.ui" }
+	{ import = "plugins.ui" },
+	{ import = "plugins.mini" },
+	{ import = "plugins.snacks" }
 }
