@@ -25,9 +25,13 @@ vim.diagnostic.config({
 })
 
 vim.api.nvim_create_autocmd("CursorHold", {
-	callback = function()
-		vim.diagnostic.open_float(nil, { focusable = false })
-	end,
+    group = vim.api.nvim_create_augroup("DiagnosticFloat", { clear = true }),
+    callback = function()
+        vim.diagnostic.open_float({
+            focusable = false,
+            scope = "line",
+        })
+    end,
 })
 
-vim.opt.updatetime = 1000 -- 300ms delay before the float appears
+vim.opt.updatetime = 1000 -- Trigger CursorHold after ~1s of inactivity
