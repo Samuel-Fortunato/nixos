@@ -154,8 +154,6 @@ local delimiters = {
 }
 
 -- ─── Functions & decorators ───────────────────────────────────────────────────
-fmta("%\\{<>\\}", { i(1) })
-
 local functions_ = {
 	-- Common functions (auto-operator)
 	ma("sin", fmta("\\sin{<>}", { i(1) })),
