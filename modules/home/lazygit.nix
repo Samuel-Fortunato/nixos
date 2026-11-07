@@ -5,9 +5,6 @@
     programs.lazygit = {
       enable = true;
 
-      enableZshIntegration = true;
-      shellWrapperName = "lazygit";
-
       settings = {
         gui.nerdFontsVersion = "3";
 
