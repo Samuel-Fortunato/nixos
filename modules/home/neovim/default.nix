@@ -25,6 +25,7 @@
         ruff
         alejandra
         astyle
+		  shfmt
 
         # Development and build tools
         gcc
