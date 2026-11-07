@@ -6,6 +6,11 @@ return {
 	config = function()
 		local treesitter = require("nvim-treesitter")
 
+		-- Parser used by Noice and Snacks Picker
+		if #vim.api.nvim_get_runtime_file("parser/regex.*", false) == 0 then
+			treesitter.install({ "regex" })
+		end
+
 		-- Languages we know nvim-treesitter supports.
 		local available = {}
 		for _, lang in ipairs(treesitter.get_available()) do
