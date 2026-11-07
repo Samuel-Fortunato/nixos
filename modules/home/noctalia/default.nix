@@ -11,19 +11,20 @@
 
   # Change both monitor-name values and attribute keys (e.g. widget IDs).
   remapMonitor = value:
-    if builtins.isAttrs value then
+    if builtins.isAttrs value
+    then
       lib.mapAttrs' (
         name: child:
           lib.nameValuePair
-            (builtins.replaceStrings ["@MONITOR@"] [monitorName] name)
-            (remapMonitor child)
-      ) value
-    else if builtins.isList value then
-      builtins.map remapMonitor value
-    else if builtins.isString value then
-      builtins.replaceStrings ["@MONITOR@"] [monitorName] value
-    else
-      value;
+          (builtins.replaceStrings ["@MONITOR@"] [monitorName] name)
+          (remapMonitor child)
+      )
+      value
+    else if builtins.isList value
+    then builtins.map remapMonitor value
+    else if builtins.isString value
+    then builtins.replaceStrings ["@MONITOR@"] [monitorName] value
+    else value;
 
   noctaliaSettings = remapMonitor (import ./config.nix {inherit pkgs;}).settings;
 
@@ -32,7 +33,7 @@
     "noctalia-settings.toml"
     noctaliaSettings;
 in {
-imports = [./watcher.nix];
+  imports = [./watcher.nix];
 
   options.my.modules.noctalia.enable = lib.mkEnableOption "Noctalia desktop shell";
 
@@ -40,6 +41,7 @@ imports = [./watcher.nix];
     programs.noctalia = {
       enable = true;
       systemd.enable = true;
+      settings = noctaliaSettings;
     };
 
     home.packages = with pkgs; [
@@ -56,17 +58,13 @@ imports = [./watcher.nix];
       imagemagick
     ];
 
-    home.activation = {
-      noctaliaSettingsSeed = lib.hm.dag.entryAfter ["writeBoundary"] ''
-        stateDir="''${NOCTALIA_STATE_HOME:-''${XDG_STATE_HOME:-$HOME/.local/state}}/noctalia"
-        settingsFile="$stateDir/settings.toml"
+    home.activation.noctaliaSettingsRestore = lib.hm.dag.entryAfter ["linkGeneration"] ''
+      stateDir="''${NOCTALIA_STATE_HOME:-''${XDG_STATE_HOME:-$HOME/.local/state}}/noctalia"
 
-        if [ ! -e "$settingsFile" ] && [ ! -L "$settingsFile" ]; then
-          mkdir -p "$stateDir"
-          install -m 600 ${noctaliaSeed} "$settingsFile"
-          touch "$stateDir/.setup-complete"
-        fi
-      '';
-    };
+      ${pkgs.python3}/bin/python3 ${./restore-settings.py} \
+        "$stateDir/settings.toml"
+
+      touch "$stateDir/.setup-complete"
+    '';
   };
 }
