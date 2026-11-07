@@ -111,7 +111,7 @@ Trigger prefix `;` — only active **inside math mode**.
 | `hat`   | `\hat{}`         |
 | `vec`   | `\vec{}`         |
 | `dot`   | `\dot{}`         |
-| `sq`    | `\sqrt{}`        |
+| `sr`    | `\sqrt{}`        |
 | `wh`    | `\widehat{}`     |
 
 #### Blackboard Bold (auto)

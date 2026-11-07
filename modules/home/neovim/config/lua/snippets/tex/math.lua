@@ -88,7 +88,7 @@ local operators = {
 	ma("<-", t("\\leftarrow ")),
 	ma("=>", t("\\Rightarrow ")),
 	ma("<=", t("\\Leftarrow")),
-	ma("<=>", t("\\Leftrightarrow ")),
+	ma("iff", t("\\Leftrightarrow ")),
 	-- ma("!>",   t("\\mapsto ")),
 	-- ma("~>",   t("\\leadsto ")),
 	-- ma(">>",   t("\\gg ")),
@@ -150,7 +150,7 @@ local delimiters = {
 	ma("lra", fmta("\\left\\langle <> \\right\\rangle", { i(1) })),
 	ma("lrc", fmta("\\left\\lceil <> \\right\\rceil", { i(1) })),
 	ma("lrf", fmta("\\left\\lfloor <> \\right\\rfloor", { i(1) })),
-	ma("lrlr", fmta("\\left<> <> \\right<>", { i(1), i(3), i(2)})),
+	ma("lrlr", fmta("\\left<> <> \\right<>", { i(1), i(3), i(2) })),
 }
 
 -- ─── Functions & decorators ───────────────────────────────────────────────────
@@ -190,20 +190,20 @@ local functions_ = {
 	-- ma("arg", fmta("\\arg\\{<>\\}", { i(1) })),
 
 	-- Decorated letters
-	ma("bar", fmta("\\bar{<>}", { i(1) })),
+	ma("bar", fmta("\\bar{<>}", { i(1) }), { wordTrig = true }),
 	ma("hat", fmta("\\hat{<>}", { i(1) })),
 	ma("til", fmta("\\tilde{<>}", { i(1) })),
 	ma("vec", fmta("\\vec{<>}", { i(1) })),
-	ma("dot", fmta("\\dot{<>}", { i(1) })),
-	ma("ddot", fmta("\\ddot{<>}", { i(1) })),
+	ma("dot", fmta("\\dot{<>}", { i(1) }), { wordTrig = true }),
+	ma("ddot", fmta("\\ddot{<>}", { i(1) }), { wordTrig = true }),
 	ma("udr", fmta("\\underline{<>}", { i(1) })),
 	ma("ovl", fmta("\\overline{<>}", { i(1) })),
 	ma("wh", fmta("\\widehat{<>}", { i(1) })),
 	ma("wt", fmta("\\widetilde{<>}", { i(1) })),
 
 	-- Roots
-	ma("sq", fmta("\\sqrt{<>}", { i(1) })),
-	ma("sqn", fmta("\\sqrt[<>]{<>}", { i(1), i(2) })),
+	ma("sr", fmta("\\sqrt{<>}", { i(1) })),
+	ma("nr", fmta("\\sqrt[<>]{<>}", { i(1), i(2) })),
 }
 
 -- ─── Fonts ────────────────────────────────────────────────────────────────────

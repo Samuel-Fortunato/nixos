@@ -11,8 +11,10 @@ local ls = require("luasnip")
 --- Uses treesitter if available, falls back to vimtex, then a simple regex.
 function M.in_math()
 	-- 1. Try vimtex (most accurate for complex documents)
-	local ok, vimtex = pcall(function() return vim.fn["vimtex#syntax#in_mathzone"]() end)
-	if ok and vimtex == 1 then return true end
+	local ok, vimtex = pcall(function()
+		return vim.fn["vimtex#syntax#in_mathzone"]()
+	end)
+	if ok then return vimtex == 1 end
 
 	-- 2. Try treesitter math nodes
 	local ts_ok, _ = pcall(require, "nvim-treesitter")
