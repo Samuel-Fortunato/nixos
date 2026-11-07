@@ -25,7 +25,7 @@
         ruff
         alejandra
         astyle
-		  shfmt
+        shfmt
 
         # Development and build tools
         gcc
@@ -37,6 +37,7 @@
         # Utilities
         ripgrep
         ghostscript
+        fd
       ];
     };
 
