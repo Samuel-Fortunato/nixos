@@ -6,7 +6,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 	if vim.v.shell_error ~= 0 then
 		vim.api.nvim_echo({
 			{ "Failed to clone lazy.nvim:\n", "ErrorMsg" },
-			{ out, "WarningMsg" },
+			{ out,                            "WarningMsg" },
 			{ "\nPress any key to exit..." },
 		}, true, {})
 		vim.fn.getchar()
@@ -24,7 +24,12 @@ require("lazy").setup({
 	defaults = { lazy = true },
 	checker = { enabled = true },
 	install = { missing = true },
-	ui = { 
+
+	rocks = {
+		enabled = false
+	},
+
+	ui = {
 		border = "rounded",
 		title = " LAZY.NVIM - NEOVIM PLUGIN MANAGER ",
 	},
