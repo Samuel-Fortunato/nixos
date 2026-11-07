@@ -8,9 +8,6 @@ return {
 		{ "<leader>e",  function() Snacks.explorer.open() end,          desc = "Show file explorer" },
 		{ "<leader>g",  function() Snacks.lazygit() end,                desc = "LazyGit" },
 
-		{ "<leader>nn", function() Snacks.notifier.hide() end,          desc = "Dismiss All Notifications" },
-		{ "<leader>nh", function() Snacks.notifier.show_history() end,  desc = "Show notification history" },
-
 		{ "<leader>ff", function() Snacks.picker.files() end,           desc = "Find Files" },
 		{ "<leader>fg", function() Snacks.picker.grep() end,            desc = "Grep" },
 		{ "<leader>fm", function() Snacks.picker.marks() end,           desc = "Marks" },
@@ -44,16 +41,10 @@ return {
 				}
 			}
 		},
-		notifier = { enabled = true },
+		notifier = { enabled = false },
 		quickfile = { enabled = true },
 		scope = { enabled = true },
 		scroll = { enabled = true },
-		styles = {
-			notification_history = {
-				width = 0.8,
-				height = 0.8
-			},
-		},
 		statuscolumn = {
 			enabled = true,
 			folds = { open = true },
