@@ -3,37 +3,39 @@
   lib,
   pkgs,
   ...
-}:
-let
+}: let
   tex = pkgs.texliveBasic.withPackages (
-    ps: with ps; [
-      latexmk
-      latexindent
-      xetex
-      dvisvgm
+    ps:
+      with ps; [
+        latexmk
+        latexindent
+        xetex
+        dvisvgm
 
-      beamer
-      beamertheme-metropolis
-      standalone
+        beamer
+        beamertheme-metropolis
+        standalone
 
-      booktabs
-      mdwtools
-      fontspec
-      multirow
-      makecell
-      ragged2e
-      enumitem
-      microtype
+        booktabs
+        mdwtools
+        fontspec
+        multirow
+        makecell
+        ragged2e
+        enumitem
+        microtype
+        lipsum
+        cleveref
+        circuitikz
 
-      pgf
-      pgfopts
-    ]
+        pgf
+        pgfopts
+      ]
   );
-in
-{
+in {
   options.my.modules.latex.enable = lib.mkEnableOption "LaTeX environment";
 
   config = lib.mkIf config.my.modules.latex.enable {
-    home.packages = [ tex ];
+    home.packages = [tex];
   };
 }
