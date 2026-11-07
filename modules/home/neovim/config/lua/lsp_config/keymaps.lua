@@ -15,10 +15,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 		map("n", "<leader>la", vim.lsp.buf.code_action, "Code Actions")
 		map("n", "<leader>li", vim.lsp.buf.implementation, "Implementation")
-		-- map("n", "<leader>lr", ":IncRename " .. vim.fn.expand("<cword>"), "Rename")
-		vim.keymap.set("n", "<leader>lr", function()
-			return ":IncRename " .. vim.fn.expand("<cword>")
-		end, { expr = true })
+		map("n", "<leader>lr", vim.lsp.buf.rename, "Rename Symbol")
 		map("n", "<leader>lf", vim.lsp.buf.references, "References")
 		map("n", "<leader>lt", vim.lsp.buf.type_definition, "Type definitions")
 		map("n", "<leader>lx", vim.lsp.codelens.run, "Run codelens")
