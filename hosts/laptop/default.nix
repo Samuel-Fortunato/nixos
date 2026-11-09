@@ -88,6 +88,7 @@
   # Programs
   programs = {
     hyprland.enable = true;
+	 umbriel.enable = true;
     steam.enable = true;
     gpu-screen-recorder.enable = true;
     virt-manager.enable = true;

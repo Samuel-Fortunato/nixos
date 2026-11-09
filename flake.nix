@@ -8,69 +8,71 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    umbriel.url = "github:noctalia-dev/umbriel/cachix";
   };
 
-  outputs =
-    {
-      nixpkgs,
-      home-manager,
-      ...
-    }:
-    {
-      # NixOS system configurations
-      nixosConfigurations = {
-        nixos-laptop = nixpkgs.lib.nixosSystem {
+  outputs = {
+    nixpkgs,
+    home-manager,
+	 umbriel,
+    ...
+  }: {
+    # NixOS system configurations
+    nixosConfigurations = {
+      nixos-laptop = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ./hosts/laptop
+          ./configuration.nix
+			 umbriel.nixosModules.default
+        ];
+      };
+
+      nixos-vm = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ./hosts/vm
+          ./configuration.nix
+        ];
+      };
+    };
+
+    # Standalone Home Manager configurations
+    homeConfigurations = {
+      "samuel@nixos-laptop" = home-manager.lib.homeManagerConfiguration {
+        pkgs = import nixpkgs {
           system = "x86_64-linux";
-          modules = [
-            ./hosts/laptop
-            ./configuration.nix
-          ];
+          config.allowUnfree = true;
         };
 
-        nixos-vm = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          modules = [
-            ./hosts/vm
-            ./configuration.nix
-          ];
+        modules = [
+          ./modules/home
+          ./hosts/laptop/home.nix
+          {programs.home-manager.enable = true;}
+        ];
+
+        extraSpecialArgs = {
+          monitorName = "eDP-1";
         };
       };
 
-      # Standalone Home Manager configurations
-      homeConfigurations = {
-        "samuel@nixos-laptop" = home-manager.lib.homeManagerConfiguration {
-          pkgs = import nixpkgs {
-            system = "x86_64-linux";
-            config.allowUnfree = true;
-          };
-
-          modules = [
-            ./modules/home
-            ./hosts/laptop/home.nix
-            { programs.home-manager.enable = true; }
-          ];
-
-          extraSpecialArgs = {
-            monitorName = "eDP-1";
-          };
+      "samuel@nixos-vm" = home-manager.lib.homeManagerConfiguration {
+        pkgs = import nixpkgs {
+          system = "x86_64-linux";
+          config.allowUnfree = true;
         };
 
-        "samuel@nixos-vm" = home-manager.lib.homeManagerConfiguration {
-          pkgs = import nixpkgs {
-            system = "x86_64-linux";
-            config.allowUnfree = true;
-          };
+        modules = [
+          ./modules/home
+          ./hosts/vm/home.nix
+          {programs.home-manager.enable = true;}
+        ];
 
-          modules = [
-            ./modules/home
-            ./hosts/vm/home.nix
-            { programs.home-manager.enable = true; }
-          ];
-
-          extraSpecialArgs = {
-            monitorName = "Virtual-1";
-          };
+        extraSpecialArgs = {
+          monitorName = "Virtual-1";
         };
       };
     };
+  };
 }
