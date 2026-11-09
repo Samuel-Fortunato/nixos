@@ -1,5 +1,8 @@
-{ pkgs, lib, ... }:
 {
+  pkgs,
+  lib,
+  ...
+}: {
   imports = lib.filesystem.listFilesRecursive ./modules/nixos;
 
   # Nix configuration
@@ -19,6 +22,9 @@
   # Localization
   time.timeZone = "Europe/Lisbon";
 
+  # keyboard layout
+  services.xserver.xkb.layout = "pt";
+
   i18n = {
     defaultLocale = "en_US.UTF-8";
     extraLocaleSettings.LC_TIME = "en_GB.UTF-8";
@@ -30,7 +36,7 @@
 
     users.samuel = {
       isNormalUser = true;
-      extraGroups = [ "wheel" ];
+      extraGroups = ["wheel"];
     };
   };
 
@@ -46,5 +52,5 @@
     };
   };
 
-  environment.pathsToLink = [ "/share/zsh" ];
+  environment.pathsToLink = ["/share/zsh"];
 }
