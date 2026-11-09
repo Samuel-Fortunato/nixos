@@ -3,5 +3,12 @@ return {
 	lazy = false,
 	dependencies = {
 		"folke/snacks.nvim",
-	}
+	},
+	opts = {
+		idf_cmd = {
+			"idf.py",
+			"-D",
+			"_CMAKE_TOOLCHAIN_PREFIX=riscv32-esp-elf-",
+		},
+	},
 }
