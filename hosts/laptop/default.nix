@@ -58,7 +58,8 @@
   # System services
   services = {
     # Graphical environment
-    displayManager.ly.enable = true;
+    displayManager.noctalia-greeter.enable = true;
+    # displayManager.ly.enable = true;
     xserver.videoDrivers = [ "nvidia" ];
 
     # Audio and desktop integration

@@ -225,8 +225,8 @@ let
         "desktop-widget-0000000000000001" = {
           "box_height" = 48.0;
           "box_width" = 1560.0;
-          "cx" = 820.0000610351562;
-          "cy" = 968.0000610351562;
+          "cx" = 820.0001220703125;
+          "cy" = 968.0001220703125;
           "enabled" = true;
           "output" = "@MONITOR@";
           "placement_height" = 1000.0;
@@ -691,7 +691,7 @@ let
       "external_ip_enabled" = false;
       "font_family" = "sans-serif";
       "greeter_sync" = {
-        "auto_sync" = false;
+        "auto_sync" = true;
       };
       "input_borders" = true;
       "keyboard_layout" = { };
