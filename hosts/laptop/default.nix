@@ -46,6 +46,7 @@
       modesetting.enable = true;
       open = true;
       powerManagement.enable = false;
+		moduleParams.nvidia.NVreg_UseKernelSuspendNotifiers = 1;
     };
 
     bluetooth = {
