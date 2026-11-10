@@ -21,7 +21,7 @@ let
     "backdrop" = {
       "blur_intensity" = 0.5;
       "enabled" = false;
-      "tint_intensity" = 0.30000001192092896;
+      "tint_intensity" = 0.3;
     };
     "bar" = {
       "default" = {
@@ -67,7 +67,7 @@ let
         ];
         "capsule_opacity" = 1.0;
         "capsule_padding" = 6.0;
-        "capsule_thickness" = 0.7599999904632568;
+        "capsule_thickness" = 0.76;
         "center" = [
           "clock"
         ];
@@ -105,7 +105,7 @@ let
         "radius_top_left" = 0;
         "radius_top_right" = 0;
         "reserve_space" = true;
-        "scale" = 1.2000000476837158;
+        "scale" = 1.2;
         "shadow" = true;
         "show_on_workspace_switch" = true;
         "show_tooltip" = true;
@@ -134,7 +134,7 @@ let
     "brightness" = {
       "enable_ddcutil" = false;
       "ignore_mmids" = [ ];
-      "minimum_brightness" = 0.009999999776482582;
+      "minimum_brightness" = 0.01;
       "sync_all_monitors" = false;
     };
     "calendar" = {
@@ -225,8 +225,8 @@ let
         "desktop-widget-0000000000000001" = {
           "box_height" = 48.0;
           "box_width" = 1560.0;
-          "cx" = 820.0001220703125;
-          "cy" = 968.0001220703125;
+          "cx" = 820.0;
+          "cy" = 968.0;
           "enabled" = true;
           "output" = "@MONITOR@";
           "placement_height" = 1000.0;
@@ -271,15 +271,15 @@ let
       "active_opacity" = 1.0;
       "active_scale" = 1.0;
       "auto_hide" = false;
-      "background_opacity" = 0.8799999952316284;
+      "background_opacity" = 0.89;
       "border" = "outline_variant";
       "border_width" = 0.0;
       "concave_edge_corners" = true;
       "cross_axis_padding" = 8;
       "enabled" = false;
       "icon_size" = 48;
-      "inactive_opacity" = 0.8500000238418579;
-      "inactive_scale" = 0.8500000238418579;
+      "inactive_opacity" = 0.85;
+      "inactive_scale" = 0.85;
       "item_spacing" = 6;
       "launcher_custom_image" = "";
       "launcher_custom_image_colorize" = false;
@@ -287,7 +287,7 @@ let
       "launcher_position" = "none";
       "layer" = "top";
       "magnification" = true;
-      "magnification_scale" = 1.4500000476837158;
+      "magnification_scale" = 1.45;
       "main_axis_padding" = 16;
       "margin_edge" = 0;
       "margin_ends" = 0;
@@ -437,13 +437,13 @@ let
       "allow_empty_password" = false;
       "blur_intensity" = 0.5;
       "blurred_desktop" = true;
-      "edge_smoothness" = 0.30000001192092896;
+      "edge_smoothness" = 0.3;
       "enabled" = true;
       "fingerprint" = false;
       "grace_period_seconds" = 0;
       "lock_before_suspend" = true;
       "monitors" = [ ];
-      "tint_intensity" = 0.30000001192092896;
+      "tint_intensity" = 0.3;
       "transition" = [
         "fade"
         "wipe"
@@ -467,7 +467,7 @@ let
         "lockscreen-login-box@@MONITOR@" = {
           "box_height" = 196.0;
           "box_width" = 810.0;
-          "cx" = 800.0000610351562;
+          "cx" = 800.0;
           "cy" = 786.0;
           "enabled" = true;
           "output" = "@MONITOR@";
@@ -569,7 +569,7 @@ let
       "temperature_night" = 4000;
     };
     "notification" = {
-      "background_opacity" = 0.9700000286102295;
+      "background_opacity" = 0.97;
       "border" = true;
       "border_color" = "outline_variant";
       "border_width" = 1.0;
@@ -590,7 +590,7 @@ let
       "width" = 360;
     };
     "osd" = {
-      "background_opacity" = 0.9700000286102295;
+      "background_opacity" = 0.97;
       "border" = true;
       "border_color" = "outline_variant";
       "border_width" = 1.0;
@@ -793,7 +793,7 @@ let
         "pipe_to_command" = false;
         "quality" = 90;
         "region_border_width" = 2.0;
-        "region_dim_opacity" = 0.6499999761581421;
+        "region_dim_opacity" = 0.65;
         "region_modifier" = "none";
         "remember_last_region" = false;
         "save_to_file" = true;
@@ -881,7 +881,7 @@ let
       "settings_window_translucent" = true;
       "setup_wizard_enabled" = false;
       "shadow" = {
-        "alpha" = 0.550000011920929;
+        "alpha" = 0.55;
         "direction" = "down";
       };
       "shared_gl_context" = true;
@@ -999,7 +999,7 @@ let
       "directory" = "/home/samuel/Pictures/Wallpapers/";
       "directory_dark" = "";
       "directory_light" = "";
-      "edge_smoothness" = 0.30000001192092896;
+      "edge_smoothness" = 0.3;
       "enabled" = true;
       "fill_color" = "";
       "fill_mode" = "crop";
