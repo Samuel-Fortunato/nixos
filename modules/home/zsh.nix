@@ -1,10 +1,8 @@
 {
   config,
   lib,
-  pkgs,
   ...
-}:
-{
+}: {
   options.my.modules.zsh.enable = lib.mkEnableOption "Zsh configuration";
 
   config = lib.mkIf config.my.modules.zsh.enable {
@@ -32,14 +30,14 @@
 
       # zprof.enable = true;
       initContent = ''
-        	 setopt interactivecomments
+                setopt interactivecomments
 
-                    if [[ -o interactive ]] && command -v fastfetch >/dev/null 2>&1; then
-                      fastfetch
-                    fi
+                if [[ -o interactive ]] && command -v fastfetch >/dev/null 2>&1; then
+        			  fastfetch
+                fi
 
-              		bindkey -M viins 'jk' vi-cmd-mode
-                    	'';
+                bindkey -M viins 'jk' vi-cmd-mode
+      '';
 
       shellAliases = {
         ncf = "nvim ~/.config/nvim/";
@@ -48,18 +46,28 @@
       };
 
       siteFunctions = {
+        copy = ''
+          if (( $# == 0 )); then
+            print -u2 "Usage: copy <command> [args...]"
+            return 1
+          fi
+
+          { "$@"; } 2>&1 | tee >(wl-copy)
+          return ''${pipestatus[1]}
+        '';
+
         homMan = ''
           home-manager switch "$@" || return
 
-          # Reload Hyprland if running
-          if [[ -n "$HYPRLAND_INSTANCE_SIGNATURE" ]] && command -v hyprctl >/dev/null 2>&1; then
-            hyprctl reload
-          fi
+          # # Reload Hyprland if running
+          # if [[ -n "$HYPRLAND_INSTANCE_SIGNATURE" ]] && command -v hyprctl >/dev/null 2>&1; then
+          #   hyprctl reload
+          # fi
 
-          # Reload Noctalia if available
-          if command -v noctalia >/dev/null 2>&1; then
-            noctalia msg config-reload
-          fi
+          # # Reload Noctalia if available
+          # if command -v noctalia >/dev/null 2>&1; then
+          #   noctalia msg config-reload
+          # fi
         '';
       };
     };
