@@ -92,7 +92,7 @@ let
         "font_scale" = 1.0;
         "font_weight" = 500;
         "hover_highlight" = true;
-        "layer" = "top";
+        "layer" = "overlay";
         "margin_edge" = 0;
         "margin_ends" = 0;
         "margin_opposite_edge" = 0;
