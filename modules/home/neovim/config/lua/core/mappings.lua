@@ -21,16 +21,16 @@ map("i", "jk", "<Esc>", { desc = "Exit insert mode" })
 
 -- Navigate visual lines when no count is given;
 -- otherwise, navigate actual buffer lines.
-map("n", "j", "v:count == 0 ? 'gj' : 'j'", {
-    expr = true,
-    silent = true,
-    desc = "Move down (wrapped lines)",
+map({ "n", "v" }, "j", "v:count == 0 ? 'gj' : 'j'", {
+	expr = true,
+	silent = true,
+	desc = "Move down (wrapped lines)",
 })
 
-map("n", "k", "v:count == 0 ? 'gk' : 'k'", {
-    expr = true,
-    silent = true,
-    desc = "Move up (wrapped lines)",
+map({ "n", "v" }, "k", "v:count == 0 ? 'gk' : 'k'", {
+	expr = true,
+	silent = true,
+	desc = "Move up (wrapped lines)",
 })
 
 -- Jump to exact mark position instead of beginning of line
@@ -56,7 +56,7 @@ map("n", "<C-l>", "<C-w>l", { desc = "Move to right window" })
 
 -- Clear search highlights without disabling hlsearch
 map("n", "<Esc>", vim.cmd.nohlsearch, {
-    desc = "Clear search highlights",
+	desc = "Clear search highlights",
 })
 
 
@@ -65,5 +65,5 @@ map("n", "<Esc>", vim.cmd.nohlsearch, {
 -- Remove Neovim's built-in snippet navigation mappings.
 -- Blink handles Tab/Shift-Tab using LuaSnip instead.
 for _, key in ipairs({ "<Tab>", "<S-Tab>" }) do
-    vim.keymap.del({ "i", "s" }, key)
+	vim.keymap.del({ "i", "s" }, key)
 end
