@@ -116,7 +116,7 @@ def nix_value(v, depth=0, in_list=False):
     next_ind = "  " * (depth + 1)
     if isinstance(v, dict):
         if not v:
-            return "{ }"
+            return "{}"
         lines = ["{"]
         for k in sorted(v):
             lines.append(f"{next_ind}{nix_string(k)} = {nix_value(v[k], depth + 1)};")
@@ -124,7 +124,7 @@ def nix_value(v, depth=0, in_list=False):
         return "\n".join(lines)
     if isinstance(v, list):
         if not v:
-            return "[ ]"
+            return "[]"
         lines = ["["]
         lines.extend(f"{next_ind}{nix_value(item, depth + 1, True)}" for item in v)
         lines.append(ind + "]")
