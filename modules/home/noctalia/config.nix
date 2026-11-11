@@ -631,9 +631,12 @@ let
         "notify_on_change" = false;
       };
       "noctalia/screen_recorder" = {
+        "audio_codec" = "aac";
+        "frame_rate" = 30;
         "glyph_pending" = "player-pause-filled";
         "glyph_recording" = "player-record-filled";
         "hide_inactive" = true;
+        "video_qp" = 26;
         "video_source" = "focused";
       };
       "profidev/hypr-screen-mirror" = {
