@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }: {
   options.my.modules.yazi.enable = lib.mkEnableOption "Yazi file manager";
@@ -43,5 +44,9 @@
         setup = true;
       };
     };
+
+    home.packages = with pkgs; [
+      exiftool
+    ];
   };
 }
