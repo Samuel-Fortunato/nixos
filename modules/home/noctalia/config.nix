@@ -1,8 +1,7 @@
 # Noctalia's manually editable configuration, applied by Home Manager.
 # The GUI exporter writes a separate config.generated.nix for review.
 # To restore manually: $(nix-build --no-out-link ./config.nix)/bin/noctalia-restore-settings MONITOR_NAME
-{ pkgs ? import <nixpkgs> { } }:
-let
+{pkgs ? import <nixpkgs> {}}: let
   settings = {
     "accessibility" = {
       "high_contrast" = false;
@@ -133,14 +132,14 @@ let
     };
     "brightness" = {
       "enable_ddcutil" = false;
-      "ignore_mmids" = [ ];
+      "ignore_mmids" = [];
       "minimum_brightness" = 0.01;
       "sync_all_monitors" = false;
     };
     "calendar" = {
       "account" = {
         "samff2006" = {
-          "calendars" = [ ];
+          "calendars" = [];
           "client_cert_file" = "";
           "client_key_file" = "";
           "color" = "";
@@ -155,7 +154,7 @@ let
         };
       };
       "dedupe_events" = false;
-      "dedupe_ignore_patterns" = [ ];
+      "dedupe_ignore_patterns" = [];
       "enabled" = true;
       "event_date_format" = "%A %e %B";
       "event_time_format" = "%H:%M";
@@ -179,6 +178,7 @@ let
         "media"
         "calendar"
         "audio"
+        "network"
         "system"
         "power"
         "notifications"
@@ -291,7 +291,7 @@ let
       "main_axis_padding" = 16;
       "margin_edge" = 0;
       "margin_ends" = 0;
-      "pinned" = [ ];
+      "pinned" = [];
       "position" = "bottom";
       "radius" = 16;
       "radius_bottom_left" = 16;
@@ -306,30 +306,30 @@ let
       "smart_auto_hide" = false;
     };
     "hooks" = {
-      "battery_charging" = [ ];
-      "battery_discharging" = [ ];
-      "battery_percentage_changed" = [ ];
-      "battery_plugged" = [ ];
-      "bluetooth_disabled" = [ ];
-      "bluetooth_enabled" = [ ];
-      "colors_changed" = [ ];
-      "logging_out" = [ ];
-      "power_profile_changed" = [ ];
-      "rebooting" = [ ];
-      "session_locked" = [ ];
+      "battery_charging" = [];
+      "battery_discharging" = [];
+      "battery_percentage_changed" = [];
+      "battery_plugged" = [];
+      "bluetooth_disabled" = [];
+      "bluetooth_enabled" = [];
+      "colors_changed" = [];
+      "logging_out" = [];
+      "power_profile_changed" = [];
+      "rebooting" = [];
+      "session_locked" = [];
       "session_unlocked" = [
         "~/.local/bin/noctalia-caffeine-lock restore"
       ];
-      "shutting_down" = [ ];
+      "shutting_down" = [];
       "started" = [
         "$HOME/.nix-profile/bin/noctalia-music-wallpaper startup"
       ];
-      "theme_mode_changed" = [ ];
+      "theme_mode_changed" = [];
       "wallpaper_changed" = [
         "$HOME/.nix-profile/bin/noctalia-music-wallpaper wallpaper-hook"
       ];
-      "wifi_disabled" = [ ];
-      "wifi_enabled" = [ ];
+      "wifi_disabled" = [];
+      "wifi_enabled" = [];
     };
     "hot_corners" = {
       "bottom_left" = {
@@ -442,7 +442,7 @@ let
       "fingerprint" = false;
       "grace_period_seconds" = 0;
       "lock_before_suspend" = true;
-      "monitors" = [ ];
+      "monitors" = [];
       "tint_intensity" = 0.3;
       "transition" = [
         "fade"
@@ -580,7 +580,7 @@ let
       "keep_dismissed_in_history" = false;
       "layer" = "top";
       "max_visible" = 0;
-      "monitors" = [ ];
+      "monitors" = [];
       "offset_x" = 20;
       "offset_y" = 8;
       "position" = "top_right";
@@ -615,7 +615,7 @@ let
         "volume_output" = true;
         "wifi" = true;
       };
-      "monitors" = [ ];
+      "monitors" = [];
       "offset_x" = 0;
       "offset_y" = 33;
       "orientation" = "horizontal";
@@ -694,7 +694,7 @@ let
         "auto_sync" = true;
       };
       "input_borders" = true;
-      "keyboard_layout" = { };
+      "keyboard_layout" = {};
       "launch_apps_as_systemd_services" = true;
       "launch_apps_custom_command" = "";
       "launcher" = {
@@ -704,7 +704,7 @@ let
         "category_icons_only" = false;
         "compact" = false;
         "default_view" = "recent";
-        "dmenu" = { };
+        "dmenu" = {};
         "fetch_exchange_rates" = true;
         "ignore_mouse" = false;
         "layout" = "simple";
@@ -716,7 +716,7 @@ let
             "launcher"
           ];
         };
-        "pinned" = [ ];
+        "pinned" = [];
         "provider_prefix" = ".";
         "search_position" = "bottom";
         "show_app_actions" = false;
@@ -730,7 +730,7 @@ let
         "width" = 760;
       };
       "mpris" = {
-        "blacklist" = [ ];
+        "blacklist" = [];
       };
       "niri_overview_close_on_launch_enabled" = false;
       "niri_overview_type_to_launch_enabled" = false;
@@ -873,7 +873,7 @@ let
         ];
         "grid" = false;
         "grid_columns" = 3;
-        "power" = { };
+        "power" = {};
         "show_shortcuts" = true;
       };
       "settings_expand_all_groups" = false;
@@ -1126,39 +1126,40 @@ let
       };
     };
   };
-  settingsToml = (pkgs.formats.toml { }).generate "noctalia-settings.toml" settings;
+  settingsToml = (pkgs.formats.toml {}).generate "noctalia-settings.toml" settings;
 in
-(pkgs.writeShellScriptBin "noctalia-restore-settings" ''
-  set -eu
-  PATH=${pkgs.coreutils}/bin:$PATH
-  umask 077
-  if [ "$#" -ne 1 ]; then
-    echo "Usage: noctalia-restore-settings MONITOR_NAME" >&2
-    exit 2
-  fi
-  monitor="$1"
-  case "$monitor" in
-    ""|*[!A-Za-z0-9_.-]*)
-      echo "Invalid monitor name: $monitor" >&2
+  (pkgs.writeShellScriptBin "noctalia-restore-settings" ''
+    set -eu
+    PATH=${pkgs.coreutils}/bin:$PATH
+    umask 077
+    if [ "$#" -ne 1 ]; then
+      echo "Usage: noctalia-restore-settings MONITOR_NAME" >&2
       exit 2
-      ;;
-  esac
-  if [ -n "''${NOCTALIA_STATE_HOME:-}" ]; then
-    dir="$NOCTALIA_STATE_HOME/noctalia"
-  elif [ -n "''${XDG_STATE_HOME:-}" ]; then
-    dir="$XDG_STATE_HOME/noctalia"
-  else
-    dir="$HOME/.local/state/noctalia"
-  fi
-  mkdir -p "$dir"
-  if [ -e "$dir/settings.toml" ]; then
-    cp "$dir/settings.toml" "$dir/settings.toml.bak-$(date +%Y%m%d-%H%M%S)"
-  fi
-  tmp=$(mktemp "$dir/.settings.toml.XXXXXX")
-  # config.nix is host-independent; replace its monitor placeholder at restore time.
-  ${pkgs.gnused}/bin/sed "s/@MONITOR@/$monitor/g" ${settingsToml} > "$tmp"
-  chmod 600 "$tmp"
-  mv -f "$tmp" "$dir/settings.toml"
-  touch "$dir/.setup-complete"
-  echo "Noctalia settings restored. Restart Noctalia to activate plugins."
-'') // { inherit settings; }
+    fi
+    monitor="$1"
+    case "$monitor" in
+      ""|*[!A-Za-z0-9_.-]*)
+        echo "Invalid monitor name: $monitor" >&2
+        exit 2
+        ;;
+    esac
+    if [ -n "''${NOCTALIA_STATE_HOME:-}" ]; then
+      dir="$NOCTALIA_STATE_HOME/noctalia"
+    elif [ -n "''${XDG_STATE_HOME:-}" ]; then
+      dir="$XDG_STATE_HOME/noctalia"
+    else
+      dir="$HOME/.local/state/noctalia"
+    fi
+    mkdir -p "$dir"
+    if [ -e "$dir/settings.toml" ]; then
+      cp "$dir/settings.toml" "$dir/settings.toml.bak-$(date +%Y%m%d-%H%M%S)"
+    fi
+    tmp=$(mktemp "$dir/.settings.toml.XXXXXX")
+    # config.nix is host-independent; replace its monitor placeholder at restore time.
+    ${pkgs.gnused}/bin/sed "s/@MONITOR@/$monitor/g" ${settingsToml} > "$tmp"
+    chmod 600 "$tmp"
+    mv -f "$tmp" "$dir/settings.toml"
+    touch "$dir/.setup-complete"
+    echo "Noctalia settings restored. Restart Noctalia to activate plugins."
+  '')
+  // {inherit settings;}
