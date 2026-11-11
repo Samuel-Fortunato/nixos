@@ -42,6 +42,7 @@
     loupe.enable = true;
     showtime.enable = true;
     calculator.enable = true;
+    litemdview.enable = true;
 
     # Password manager
     proton-pass.enable = true;

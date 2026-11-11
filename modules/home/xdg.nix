@@ -1,10 +1,8 @@
 {
   config,
   lib,
-  pkgs,
   ...
-}:
-{
+}: {
   options.my.modules.xdg.enable = lib.mkEnableOption "XDG configuration";
   config = lib.mkIf config.my.modules.xdg.enable {
     xdg = {
