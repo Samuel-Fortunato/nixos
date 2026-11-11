@@ -5,6 +5,15 @@
   monitorName,
   ...
 }: let
+  noctaliaAccept = pkgs.writeShellApplication {
+    name = "noctalia-accept";
+    runtimeInputs = [
+      pkgs.coreutils
+      pkgs.nix
+    ];
+    text = builtins.readFile ./accept-settings.sh;
+  };
+
   uuctl-noctalia = pkgs.writeShellScriptBin "uuctl" ''
     exec ${pkgs.uwsm}/bin/uuctl "$@" noctalia dmenu -p
   '';
@@ -45,6 +54,10 @@ in {
     };
 
     home.packages = with pkgs; [
+      # apply noctalia GUI settings
+      noctaliaAccept
+
+      # uuctl via noctalia menu
       uuctl-noctalia
 
       # Hypr Screen Mirror
