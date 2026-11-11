@@ -1,7 +1,8 @@
 # Noctalia's manually editable configuration, applied by Home Manager.
 # The GUI exporter writes a separate config.generated.nix for review.
 # To restore manually: $(nix-build --no-out-link ./config.nix)/bin/noctalia-restore-settings MONITOR_NAME
-{pkgs ? import <nixpkgs> {}}: let
+{ pkgs ? import <nixpkgs> { } }:
+let
   settings = {
     "accessibility" = {
       "high_contrast" = false;
@@ -227,7 +228,7 @@
           "box_width" = 1560.0;
           "cx" = 820.0;
           "cy" = 968.0;
-          "enabled" = true;
+          "enabled" = false;
           "output" = "@MONITOR@";
           "placement_height" = 1000.0;
           "placement_width" = 1600.0;
@@ -1084,7 +1085,7 @@
         "hide_when_no_media" = true;
         "max_length" = 220.0;
         "min_length" = 80.0;
-        "rotate_album_art" = true;
+        "rotate_album_art" = false;
         "title_scroll" = "none";
         "type" = "media";
       };
@@ -1126,40 +1127,39 @@
       };
     };
   };
-  settingsToml = (pkgs.formats.toml {}).generate "noctalia-settings.toml" settings;
+  settingsToml = (pkgs.formats.toml { }).generate "noctalia-settings.toml" settings;
 in
-  (pkgs.writeShellScriptBin "noctalia-restore-settings" ''
-    set -eu
-    PATH=${pkgs.coreutils}/bin:$PATH
-    umask 077
-    if [ "$#" -ne 1 ]; then
-      echo "Usage: noctalia-restore-settings MONITOR_NAME" >&2
+(pkgs.writeShellScriptBin "noctalia-restore-settings" ''
+  set -eu
+  PATH=${pkgs.coreutils}/bin:$PATH
+  umask 077
+  if [ "$#" -ne 1 ]; then
+    echo "Usage: noctalia-restore-settings MONITOR_NAME" >&2
+    exit 2
+  fi
+  monitor="$1"
+  case "$monitor" in
+    ""|*[!A-Za-z0-9_.-]*)
+      echo "Invalid monitor name: $monitor" >&2
       exit 2
-    fi
-    monitor="$1"
-    case "$monitor" in
-      ""|*[!A-Za-z0-9_.-]*)
-        echo "Invalid monitor name: $monitor" >&2
-        exit 2
-        ;;
-    esac
-    if [ -n "''${NOCTALIA_STATE_HOME:-}" ]; then
-      dir="$NOCTALIA_STATE_HOME/noctalia"
-    elif [ -n "''${XDG_STATE_HOME:-}" ]; then
-      dir="$XDG_STATE_HOME/noctalia"
-    else
-      dir="$HOME/.local/state/noctalia"
-    fi
-    mkdir -p "$dir"
-    if [ -e "$dir/settings.toml" ]; then
-      cp "$dir/settings.toml" "$dir/settings.toml.bak-$(date +%Y%m%d-%H%M%S)"
-    fi
-    tmp=$(mktemp "$dir/.settings.toml.XXXXXX")
-    # config.nix is host-independent; replace its monitor placeholder at restore time.
-    ${pkgs.gnused}/bin/sed "s/@MONITOR@/$monitor/g" ${settingsToml} > "$tmp"
-    chmod 600 "$tmp"
-    mv -f "$tmp" "$dir/settings.toml"
-    touch "$dir/.setup-complete"
-    echo "Noctalia settings restored. Restart Noctalia to activate plugins."
-  '')
-  // {inherit settings;}
+      ;;
+  esac
+  if [ -n "''${NOCTALIA_STATE_HOME:-}" ]; then
+    dir="$NOCTALIA_STATE_HOME/noctalia"
+  elif [ -n "''${XDG_STATE_HOME:-}" ]; then
+    dir="$XDG_STATE_HOME/noctalia"
+  else
+    dir="$HOME/.local/state/noctalia"
+  fi
+  mkdir -p "$dir"
+  if [ -e "$dir/settings.toml" ]; then
+    cp "$dir/settings.toml" "$dir/settings.toml.bak-$(date +%Y%m%d-%H%M%S)"
+  fi
+  tmp=$(mktemp "$dir/.settings.toml.XXXXXX")
+  # config.nix is host-independent; replace its monitor placeholder at restore time.
+  ${pkgs.gnused}/bin/sed "s/@MONITOR@/$monitor/g" ${settingsToml} > "$tmp"
+  chmod 600 "$tmp"
+  mv -f "$tmp" "$dir/settings.toml"
+  touch "$dir/.setup-complete"
+  echo "Noctalia settings restored. Restart Noctalia to activate plugins."
+'') // { inherit settings; }

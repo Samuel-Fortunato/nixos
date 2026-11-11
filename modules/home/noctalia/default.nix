@@ -36,11 +36,6 @@
     else value;
 
   noctaliaSettings = remapMonitor (import ./config.nix {inherit pkgs;}).settings;
-
-  noctaliaSeed =
-    (pkgs.formats.toml {}).generate
-    "noctalia-settings.toml"
-    noctaliaSettings;
 in {
   imports = [./watcher.nix];
 
