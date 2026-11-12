@@ -564,10 +564,10 @@ let
       ];
     };
     "nightlight" = {
-      "enabled" = false;
+      "enabled" = true;
       "force" = false;
       "temperature_day" = 6500;
-      "temperature_night" = 4000;
+      "temperature_night" = 3000;
     };
     "notification" = {
       "background_opacity" = 0.97;
