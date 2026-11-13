@@ -1,7 +1,18 @@
-{ config, lib, ... }: {
+{
+  config,
+  lib,
+  ...
+}: {
   options.my.modules.lazygit.enable = lib.mkEnableOption "Lazygit";
 
   config = lib.mkIf config.my.modules.lazygit.enable {
+    assertions = [
+      {
+        assertion = config.my.modules.git.enable;
+        message = "my.modules.lazygit requires my.modules.git.enable = true";
+      }
+    ];
+
     programs.lazygit = {
       enable = true;
 
