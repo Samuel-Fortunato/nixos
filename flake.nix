@@ -10,12 +10,18 @@
     };
 
     umbriel.url = "github:noctalia-dev/umbriel/cachix";
+
+    nixos-wsl = {
+      url = "github:nix-community/NixOS-WSL/main";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
     nixpkgs,
     home-manager,
-	 umbriel,
+    umbriel,
+    nixos-wsl,
     ...
   }: {
     # NixOS system configurations
@@ -25,7 +31,7 @@
         modules = [
           ./hosts/laptop
           ./configuration.nix
-			 umbriel.nixosModules.default
+          umbriel.nixosModules.default
         ];
       };
 
@@ -33,6 +39,15 @@
         system = "x86_64-linux";
         modules = [
           ./hosts/vm
+          ./configuration.nix
+        ];
+      };
+      nixos-wsl = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+
+        modules = [
+          nixos-wsl.nixosModules.default
+          ./hosts/wsl
           ./configuration.nix
         ];
       };
@@ -71,6 +86,23 @@
 
         extraSpecialArgs = {
           monitorName = "Virtual-1";
+        };
+      };
+
+      "samuel@nixos-wsl" = home-manager.lib.homeManagerConfiguration {
+        pkgs = import nixpkgs {
+          system = "x86_64-linux";
+          config.allowUnfree = true;
+        };
+
+        modules = [
+          ./modules/home
+          ./hosts/wsl/home.nix
+          {programs.home-manager.enable = true;}
+        ];
+
+        extraSpecialArgs = {
+          monitorName = "WSL";
         };
       };
     };
