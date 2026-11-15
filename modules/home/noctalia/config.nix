@@ -105,7 +105,7 @@ let
         "radius_top_left" = 0;
         "radius_top_right" = 0;
         "reserve_space" = true;
-        "scale" = 1.2;
+        "scale" = 1.4;
         "shadow" = true;
         "show_on_workspace_switch" = true;
         "show_tooltip" = true;
@@ -226,12 +226,12 @@ let
         "desktop-widget-0000000000000001" = {
           "box_height" = 48.0;
           "box_width" = 1560.0;
-          "cx" = 820.0;
-          "cy" = 968.0;
+          "cx" = 984.0;
+          "cy" = 1161.6;
           "enabled" = false;
           "output" = "@MONITOR@";
-          "placement_height" = 1000.0;
-          "placement_width" = 1600.0;
+          "placement_height" = 1200.0;
+          "placement_width" = 1920.0;
           "rotation" = 0.0;
           "settings" = {
             "background" = false;
@@ -247,12 +247,12 @@ let
         "desktop-widget-0000000000000002" = {
           "box_height" = 0.0;
           "box_width" = 0.0;
-          "cx" = 1411.0;
-          "cy" = 874.0;
+          "cx" = 1693.2;
+          "cy" = 1048.8;
           "enabled" = true;
           "output" = "@MONITOR@";
-          "placement_height" = 1000.0;
-          "placement_width" = 1600.0;
+          "placement_height" = 1200.0;
+          "placement_width" = 1920.0;
           "rotation" = 0.0;
           "settings" = {
             "album_art_background" = true;
@@ -468,12 +468,12 @@ let
         "lockscreen-login-box@@MONITOR@" = {
           "box_height" = 196.0;
           "box_width" = 810.0;
-          "cx" = 800.0;
-          "cy" = 786.0;
+          "cx" = 960.0;
+          "cy" = 943.2;
           "enabled" = true;
           "output" = "@MONITOR@";
-          "placement_height" = 1000.0;
-          "placement_width" = 1600.0;
+          "placement_height" = 1200.0;
+          "placement_width" = 1920.0;
           "rotation" = 0.0;
           "settings" = {
             "background_color" = "surface_container";
@@ -526,12 +526,12 @@ let
         "lockscreen-widget-0000000000000001" = {
           "box_height" = 256.0;
           "box_width" = 512.0;
-          "cx" = 693.0;
-          "cy" = 372.0;
+          "cx" = 831.6;
+          "cy" = 446.4;
           "enabled" = true;
           "output" = "@MONITOR@";
-          "placement_height" = 1000.0;
-          "placement_width" = 1600.0;
+          "placement_height" = 1200.0;
+          "placement_width" = 1920.0;
           "rotation" = 0.0;
           "settings" = {
             "background" = false;
@@ -542,12 +542,12 @@ let
         "lockscreen-widget-0000000000000002" = {
           "box_height" = 256.0;
           "box_width" = 256.0;
-          "cx" = 1077.0;
-          "cy" = 372.0;
+          "cx" = 1292.4;
+          "cy" = 446.4;
           "enabled" = true;
           "output" = "@MONITOR@";
-          "placement_height" = 1000.0;
-          "placement_width" = 1600.0;
+          "placement_height" = 1200.0;
+          "placement_width" = 1920.0;
           "rotation" = 0.0;
           "settings" = {
             "background" = false;
@@ -1033,6 +1033,10 @@ let
         "title_scroll" = "none";
         "type" = "active_window";
       };
+      "battery" = {
+        "font_scale" = 0.6;
+        "type" = "battery";
+      };
       "cat" = {
         "input_devices" = [
           "/dev/input/by-id/usb-ITE_Tech._Inc._ITE_Device_8258_-event-kbd"
@@ -1093,7 +1097,7 @@ let
         "type" = "media";
       };
       "network" = {
-        "font_scale" = 0.8;
+        "font_scale" = 0.6;
         "type" = "network";
       };
       "network_rx" = {
@@ -1123,6 +1127,10 @@ let
       "temp" = {
         "stat" = "cpu_temp";
         "type" = "sysmon";
+      };
+      "volume" = {
+        "font_scale" = 0.6;
+        "type" = "volume";
       };
       "workspaces" = {
         "active_pill_size" = 2.0;

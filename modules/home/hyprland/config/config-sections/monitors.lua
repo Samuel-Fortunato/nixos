@@ -4,7 +4,7 @@
 ------------------
 
 -- See https://wiki.hypr.land/Configuring/Basics/Monitors/
-local monitorScaleFactor = 1.2
+local monitorScaleFactor = 1
 hl.monitor({
 	output   = "",
 	mode     = "highres",
