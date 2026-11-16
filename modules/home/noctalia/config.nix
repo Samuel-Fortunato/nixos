@@ -1034,7 +1034,7 @@ let
         "type" = "active_window";
       };
       "battery" = {
-        "font_scale" = 0.6;
+        "font_scale" = 0.8;
         "type" = "battery";
       };
       "cat" = {
@@ -1129,7 +1129,7 @@ let
         "type" = "sysmon";
       };
       "volume" = {
-        "font_scale" = 0.6;
+        "font_scale" = 0.8;
         "type" = "volume";
       };
       "workspaces" = {
