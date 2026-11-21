@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   imports = [
     ./hardware-configuration.nix
   ];
@@ -9,7 +8,7 @@
     hostName = "nixos-laptop";
     networkmanager.enable = true;
   };
-  
+
   # Optional custom NixOS modules
   my.modules.razer.enable = true;
 
@@ -46,7 +45,7 @@
       modesetting.enable = true;
       open = true;
       powerManagement.enable = false;
-		moduleParams.nvidia.NVreg_UseKernelSuspendNotifiers = 1;
+      moduleParams.nvidia.NVreg_UseKernelSuspendNotifiers = 1;
     };
 
     bluetooth = {
@@ -57,18 +56,23 @@
 
   # System services
   services = {
+    udev.extraRules = ''
+      SUBSYSTEM=="usb", ATTR{idVendor}=="0cd5", ATTR{idProduct}=="0001", \
+        MODE="0660", GROUP="labjack"
+    '';
+
     # Graphical environment
     displayManager.noctalia-greeter.enable = true;
     # displayManager.ly.enable = true;
-    xserver.videoDrivers = [ "nvidia" ];
+    xserver.videoDrivers = ["nvidia"];
 
     # Audio and desktop integration
     pipewire.enable = true;
     accounts-daemon.enable = true;
     udisks2.enable = true;
 
-	 # keyring
-	 gnome.gnome-keyring.enable = true;
+    # keyring
+    gnome.gnome-keyring.enable = true;
 
     # Power management
     power-profiles-daemon.enable = true;
@@ -88,7 +92,7 @@
   # Programs
   programs = {
     hyprland.enable = true;
-	 umbriel.enable = true;
+    umbriel.enable = true;
     steam.enable = true;
     gpu-screen-recorder.enable = true;
     virt-manager.enable = true;
@@ -97,11 +101,15 @@
   # Security and permissions
   security.polkit.enable = true;
 
-  users.users.samuel.extraGroups = [
-    "libvirtd"
-    "dialout"
-    "input" # Noctalia Bongo Cat
-  ];
+  users = {
+    groups.labjack = {};
+    users.samuel.extraGroups = [
+      "libvirtd"
+      "dialout"
+      "input" # Noctalia Bongo Cat
+      "labjack"
+    ];
+  };
 
   # Virtualization
   virtualisation = {
@@ -112,7 +120,7 @@
 
       qemu = {
         swtpm.enable = true;
-        vhostUserPackages = [ pkgs.virtiofsd ];
+        vhostUserPackages = [pkgs.virtiofsd];
       };
     };
   };
