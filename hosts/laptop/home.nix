@@ -22,5 +22,8 @@
 
 	 # Razer mouse controller (polychromatic)
 	 razer.enable = true;
+
+	 # kicad
+	 kicad.enable = true;
   };
 }

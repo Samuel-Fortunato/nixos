@@ -20,6 +20,7 @@ let
     codex = pkgs.codex;
     evtest = pkgs.evtest;
 	 seahorse = pkgs.seahorse;
+	 kicad = pkgs.kicad;
   };
 in
 {
