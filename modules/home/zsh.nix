@@ -43,6 +43,7 @@
         ncf = "nvim ~/.config/nvim/";
         cd = "z";
         cat = "bat";
+		  ":q" = "exit";
       };
 
       siteFunctions = {
