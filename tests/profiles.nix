@@ -34,6 +34,7 @@
   laptop = (mkHome ../hosts/laptop/home.nix).config;
   vm = (mkHome ../hosts/vm/home.nix).config;
   wsl = (mkHome ../hosts/wsl/home.nix).config;
+  yaziOnly = (mkHome {my.modules.yazi.enable = true;}).config;
 
   withoutGit = builtins.tryEval (mkHome {
     my.profiles.development.enable = true;
@@ -92,6 +93,10 @@ in
   assert !wsl.my.modules.gh.enable;
   assert !wsl.my.modules.hyprland.enable;
   assert !wsl.my.modules.noctalia.enable;
+  assert builtins.length wsl.programs.yazi.settings.opener.edit == 1;
+  assert !(wsl.programs.yazi.settings.opener ? desktop-link);
+  assert !(yaziOnly.programs.yazi.settings.opener ? edit);
+  assert builtins.length laptop.programs.yazi.settings.opener.edit == 2;
   assert !withoutGit.success;
   assert !withoutHyprland.success;
   assert !withoutNoctalia.success;

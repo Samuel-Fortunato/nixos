@@ -23,9 +23,10 @@ fully portable runtime.
 
 - LazyGit asserts that Git is enabled; music wallpaper asserts that Hyprland and
   Noctalia are enabled. XDG associations already follow selected applications.
-- Hyprland launchers refer to specific applications, and Yazi openers refer to
-  Neovim, Kitty and desktop utilities. Disabling those applications can leave
-  individual launchers or openers unavailable even when evaluation succeeds.
+- Hyprland launchers refer to specific applications. Disabling those
+  applications can leave individual launchers unavailable even when evaluation
+  succeeds. Yazi's Neovim, Kitty and desktop shortcut openers follow the
+  corresponding module selections.
 - Neovim bootstraps plugins through Git and includes MATLAB, ESP32 and Zathura
   integrations. These require separate
   portability work and runtime testing, especially for WSL.
