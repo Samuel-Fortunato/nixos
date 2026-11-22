@@ -3,6 +3,12 @@ return {
   lazy = false,
   priority = 1000,
   config = function()
-    require("matugen").setup()
+	  local ok, matugen = pcall(require, "matugen")
+
+	  if ok then
+		  matugen.setup()
+	  else
+		  vim.cmd.colorscheme("habamax")
+	  end
   end,
 }

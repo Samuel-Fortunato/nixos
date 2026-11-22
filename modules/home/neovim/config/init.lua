@@ -2,9 +2,13 @@
 -- vim.g.loaded_netrw = 1
 -- vim.g.loaded_netrwPlugin = 1
 
--- Start a named server socket for remote theme reloading
+-- Neovim server socket
 local socket_dir = vim.fn.stdpath("run")
-if vim.fn.isdirectory(socket_dir) == 0 then
+
+-- Fallback for environments without a writable runtime directory
+if vim.fn.isdirectory(socket_dir) == 0
+    or vim.fn.filewritable(socket_dir) ~= 2 then
+    socket_dir = vim.fn.stdpath("state") .. "/run"
     vim.fn.mkdir(socket_dir, "p")
 end
 
