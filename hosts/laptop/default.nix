@@ -1,13 +1,15 @@
 {pkgs, ...}: {
   imports = [
     ./hardware-configuration.nix
+    ../../profiles/nixos/graphical.nix
   ];
 
   # Host identity and networking
   networking = {
     hostName = "nixos-laptop";
-    networkmanager.enable = true;
   };
+
+  my.profiles.graphical.enable = true;
 
   # Optional custom NixOS modules
   my.modules.razer.enable = true;
@@ -35,7 +37,6 @@
   # Hardware
   hardware = {
     graphics = {
-      enable = true;
       extraPackages = with pkgs; [
         intel-media-driver
       ];
@@ -66,11 +67,6 @@
     # displayManager.ly.enable = true;
     xserver.videoDrivers = ["nvidia"];
 
-    # Audio and desktop integration
-    pipewire.enable = true;
-    accounts-daemon.enable = true;
-    udisks2.enable = true;
-
     # keyring
     gnome.gnome-keyring.enable = true;
 
@@ -91,15 +87,11 @@
 
   # Programs
   programs = {
-    hyprland.enable = true;
     umbriel.enable = true;
     steam.enable = true;
     gpu-screen-recorder.enable = true;
     virt-manager.enable = true;
   };
-
-  # Security and permissions
-  security.polkit.enable = true;
 
   users = {
     groups.labjack = {};
@@ -128,8 +120,6 @@
   # System packages
   environment.systemPackages = with pkgs; [
     swtpm
-    wl-clipboard
-    glib
   ];
 
   # Windows dual-boot partition

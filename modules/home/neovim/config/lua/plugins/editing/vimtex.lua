@@ -2,7 +2,9 @@ return {
 	"lervag/vimtex",
 	lazy = false,
 	init = function()
-		vim.g.vimtex_view_method = "zathura_simple"
+		if vim.fn.executable("zathura") == 1 then
+			vim.g.vimtex_view_method = "zathura_simple"
+		end
 		vim.g.vimtex_view_forward_search_on_pdf_update = true
 		vim.g.vimtex_imaps_leader = "'"
 

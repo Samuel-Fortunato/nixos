@@ -1,5 +1,8 @@
 return {
   'idossha/matlab.nvim',
+  cond = function()
+    return vim.fn.executable(vim.fn.expand("~/.local/bin/matlab-distrobox")) == 1
+  end,
   ft = 'matlab',
   opts = {
     executable = vim.fn.expand("~/.local/bin/matlab-distrobox"),

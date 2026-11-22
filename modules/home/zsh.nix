@@ -53,6 +53,11 @@
             return 1
           fi
 
+          if ! command -v wl-copy >/dev/null 2>&1; then
+            print -u2 "copy: wl-copy is not available"
+            return 1
+          fi
+
           { "$@"; } 2>&1 | tee >(wl-copy)
           return ''${pipestatus[1]}
         '';

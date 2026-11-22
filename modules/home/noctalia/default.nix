@@ -20,7 +20,9 @@
       pkgs.coreutils
       pkgs.nix
     ];
-    text = builtins.readFile ./accept-settings.sh;
+    text = ''
+      export NOCTALIA_REPO=${lib.escapeShellArg config.my.modules.noctalia.exporter.repoPath}
+    '' + lib.removePrefix "#!/usr/bin/env bash\n" (builtins.readFile ./accept-settings.sh);
   };
 
   uuctl-noctalia = pkgs.writeShellScriptBin "uuctl" ''
@@ -51,6 +53,7 @@ in {
   options.my.modules.noctalia.enable = lib.mkEnableOption "Noctalia desktop shell";
 
   config = lib.mkIf config.my.modules.noctalia.enable {
+    my.modules.noctalia.exporter.enable = lib.mkDefault true;
     programs.noctalia = {
       enable = true;
       systemd.enable = true;

@@ -1,5 +1,8 @@
 return {
 	"Aietes/esp32.nvim",
+	cond = function()
+		return vim.fn.executable("idf.py") == 1
+	end,
 	lazy = false,
 	dependencies = {
 		"folke/snacks.nvim",
