@@ -360,7 +360,7 @@ let
           "enabled" = true;
           "locked_timeout" = 0.0;
           "resume_command" = "";
-          "timeout" = 600.0;
+          "timeout" = 180.0;
         };
         "lock-and-suspend" = {
           "action" = "lock_and_suspend";
@@ -376,7 +376,7 @@ let
           "enabled" = true;
           "locked_timeout" = 0.0;
           "resume_command" = "";
-          "timeout" = 660.0;
+          "timeout" = 300.0;
         };
       };
       "behavior_order" = [
