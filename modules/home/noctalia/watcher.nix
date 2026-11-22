@@ -30,7 +30,7 @@ in
     enable = lib.mkEnableOption "Noctalia settings exporter";
     repoPath = lib.mkOption {
       type = lib.types.str;
-      default = "/etc/nixos";
+      default = config.my.repositoryPath;
       description = "Writable configuration checkout used by the Noctalia exporter.";
     };
   };

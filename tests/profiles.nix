@@ -35,6 +35,7 @@
   vm = (mkHome ../hosts/vm/home.nix).config;
   wsl = (mkHome ../hosts/wsl/home.nix).config;
   yaziOnly = (mkHome {my.modules.yazi.enable = true;}).config;
+  alternateCheckout = (mkHome {my.repositoryPath = "/tmp/nixos-checkout";}).config;
 
   withoutGit = builtins.tryEval (mkHome {
     my.profiles.development.enable = true;
@@ -90,6 +91,7 @@ in
   assert !vm.my.modules.noctalia.exporter.enable;
   assert laptop.systemd.user.services ? noctalia-settings-export;
   assert !(vm.systemd.user.services ? noctalia-settings-export);
+  assert alternateCheckout.my.modules.noctalia.exporter.repoPath == "/tmp/nixos-checkout";
   assert enabled wsl ["zsh" "starship" "git" "neovim" "lazygit" "ripgrep" "yazi"];
   assert !wsl.my.modules.fastfetch.enable;
   assert !wsl.my.modules.btop.enable;

@@ -21,13 +21,20 @@ in
 {
   imports = modules;
 
-  # Keep the rest of your existing configuration here
-  xdg.configFile."home-manager".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos";
+  options.my.repositoryPath = lib.mkOption {
+    type = lib.types.str;
+    default = "/etc/nixos";
+    description = "Path to the writable configuration checkout.";
+  };
 
-  home = {
-    username = "samuel";
-    homeDirectory = "/home/samuel";
-    backupFileExtension = "bak";
-    stateVersion = "26.05";
+  config = {
+    xdg.configFile."home-manager".source = config.lib.file.mkOutOfStoreSymlink config.my.repositoryPath;
+
+    home = {
+      username = "samuel";
+      homeDirectory = "/home/samuel";
+      backupFileExtension = "bak";
+      stateVersion = "26.05";
+    };
   };
 }

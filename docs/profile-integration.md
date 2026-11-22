@@ -33,7 +33,9 @@ fully portable runtime.
   integrations in their target environments.
 - The Zsh clipboard helper requires `wl-copy` and reports when it is absent.
   The Noctalia exporter is enabled explicitly on the laptop; its configurable
-  checkout path defaults to `/etc/nixos` and must be writable when used.
+  checkout path defaults to `my.repositoryPath` (`/etc/nixos` by default) and
+  must be writable when used. The Home Manager configuration symlink uses the
+  same `my.repositoryPath`, which hosts can override.
 - The CLI profile enables Zsh without Neovim. Its `ncf` alias invokes `nvim`,
   so that alias needs Neovim even though the rest of the shell does not. The
   `homMan` helper invokes the standalone `home-manager` command and activates
