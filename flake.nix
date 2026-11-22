@@ -12,67 +12,45 @@
     umbriel.url = "github:noctalia-dev/umbriel/cachix";
   };
 
-  outputs = {
-    nixpkgs,
-    home-manager,
-	 umbriel,
-    ...
-  }: {
-    # NixOS system configurations
-    nixosConfigurations = {
-      nixos-laptop = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          ./hosts/laptop
-          ./configuration.nix
-			 umbriel.nixosModules.default
-        ];
-      };
-
-      nixos-vm = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          ./hosts/vm
-          ./configuration.nix
-        ];
-      };
-    };
-
-    # Standalone Home Manager configurations
-    homeConfigurations = {
-      "samuel@nixos-laptop" = home-manager.lib.homeManagerConfiguration {
-        pkgs = import nixpkgs {
+  outputs = { nixpkgs, home-manager, umbriel, ... }:
+    let
+      hosts = {
+        nixos-laptop = {
           system = "x86_64-linux";
-          config.allowUnfree = true;
-        };
-
-        modules = [
-          ./modules/home
-          ./hosts/laptop/home.nix
-          {programs.home-manager.enable = true;}
-        ];
-
-        extraSpecialArgs = {
+          directory = ./hosts/laptop;
           monitorName = "eDP-1";
+          extraModules = [ umbriel.nixosModules.default ];
+        };
+        nixos-vm = {
+          system = "x86_64-linux";
+          directory = ./hosts/vm;
+          monitorName = "Virtual-1";
+          extraModules = [ ];
         };
       };
 
-      "samuel@nixos-vm" = home-manager.lib.homeManagerConfiguration {
+      mkNixosHost = host: nixpkgs.lib.nixosSystem {
+        inherit (host) system;
+        modules = [ host.directory ./configuration.nix ] ++ host.extraModules;
+      };
+
+      mkHomeHost = host: home-manager.lib.homeManagerConfiguration {
         pkgs = import nixpkgs {
-          system = "x86_64-linux";
+          inherit (host) system;
           config.allowUnfree = true;
         };
-
         modules = [
           ./modules/home
-          ./hosts/vm/home.nix
-          {programs.home-manager.enable = true;}
+          (host.directory + "/home.nix")
+          { programs.home-manager.enable = true; }
         ];
-
-        extraSpecialArgs = {
-          monitorName = "Virtual-1";
-        };
+        extraSpecialArgs = { inherit (host) monitorName; };
       };
+    in {
+      nixosConfigurations = nixpkgs.lib.mapAttrs (_: mkNixosHost) hosts;
+      homeConfigurations = nixpkgs.lib.mapAttrs' (name: host: {
+        name = "samuel@${name}";
+        value = mkHomeHost host;
+      }) hosts;
     };
-  };
 }
