@@ -5,6 +5,15 @@
   monitorName,
   ...
 }: let
+  noctaliaCaffeineLock = pkgs.writeShellApplication {
+    name = "noctalia-caffeine-lock";
+    runtimeInputs = with pkgs; [
+      coreutils
+      gnugrep
+      systemd
+    ];
+    text = builtins.readFile ./caffeine-lock.sh;
+  };
   noctaliaAccept = pkgs.writeShellApplication {
     name = "noctalia-accept";
     runtimeInputs = [
@@ -65,6 +74,8 @@ in {
       # Wallpaper Widget
       imagemagick
     ];
+
+    home.file.".local/bin/noctalia-caffeine-lock".source = "${noctaliaCaffeineLock}/bin/noctalia-caffeine-lock";
 
     home.activation.noctaliaSettingsRestore = lib.hm.dag.entryAfter ["linkGeneration"] ''
       stateDir="''${NOCTALIA_STATE_HOME:-''${XDG_STATE_HOME:-$HOME/.local/state}}/noctalia"
