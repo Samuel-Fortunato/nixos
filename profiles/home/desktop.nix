@@ -1,4 +1,8 @@
-{ config, lib, ... }: {
+{
+  config,
+  lib,
+  ...
+}: {
   options.my.profiles.desktop.enable = lib.mkEnableOption "Hyprland and desktop applications";
 
   config = lib.mkIf config.my.profiles.desktop.enable {
@@ -21,6 +25,7 @@
       litemdview.enable = lib.mkDefault true;
       proton-pass.enable = lib.mkDefault true;
       evtest.enable = lib.mkDefault true;
+      fonts.enable = lib.mkDefault true;
     };
   };
 }
