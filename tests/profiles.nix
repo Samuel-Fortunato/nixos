@@ -86,6 +86,10 @@ in
   assert enabled vm sharedFeatures;
   assert laptop.my.modules.noctalia.musicWallpaper.enable;
   assert vm.my.modules.noctalia.musicWallpaper.enable;
+  assert laptop.my.modules.noctalia.exporter.enable;
+  assert !vm.my.modules.noctalia.exporter.enable;
+  assert laptop.systemd.user.services ? noctalia-settings-export;
+  assert !(vm.systemd.user.services ? noctalia-settings-export);
   assert enabled wsl ["zsh" "starship" "git" "neovim" "lazygit" "ripgrep" "yazi"];
   assert !wsl.my.modules.fastfetch.enable;
   assert !wsl.my.modules.btop.enable;

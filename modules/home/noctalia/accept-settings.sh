@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-repo="${1:-/etc/nixos}"
+repo="${1:-${NOCTALIA_REPO:-/etc/nixos}}"
 dir="${repo%/}/modules/home/noctalia"
 current="$dir/config.nix"
 generated="$dir/config.generated.nix"
