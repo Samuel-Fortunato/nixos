@@ -1,8 +1,9 @@
 {pkgs, ...}: {
   imports = [
     ./hardware-configuration.nix
-	 ./graphics.nix
-	 ./virtualization.nix
+    ./graphics.nix
+    ./virtualization.nix
+    ./power.nix
   ];
 
   # Host identity and networking
@@ -55,20 +56,6 @@
 
     # keyring
     gnome.gnome-keyring.enable = true;
-
-    # Power management
-    power-profiles-daemon.enable = true;
-
-    upower = {
-      enable = true;
-      allowRiskyCriticalPowerAction = true;
-      criticalPowerAction = "Suspend";
-    };
-
-    logind.settings.Login = {
-      HandlePowerKey = "suspend";
-      HandleLidSwitch = "ignore";
-    };
   };
 
   # Programs
