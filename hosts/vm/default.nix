@@ -2,7 +2,6 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ../../profiles/nixos/graphical.nix
   ];
 
   my.profiles.graphical.enable = true;

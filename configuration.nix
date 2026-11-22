@@ -3,8 +3,12 @@
   lib,
   ...
 }: {
-  imports = builtins.filter (path: lib.hasSuffix ".nix" (toString path))
-    (lib.filesystem.listFilesRecursive ./modules/nixos);
+  imports =
+    builtins.filter (path: lib.hasSuffix ".nix" (toString path))
+    (
+      lib.filesystem.listFilesRecursive ./modules/nixos
+      ++ lib.filesystem.listFilesRecursive ./profiles/nixos
+    );
 
   # Nix configuration
   nixpkgs.config.allowUnfree = true;

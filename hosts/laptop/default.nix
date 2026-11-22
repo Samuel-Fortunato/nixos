@@ -1,18 +1,17 @@
 {pkgs, ...}: {
   imports = [
     ./hardware-configuration.nix
-    ../../profiles/nixos/graphical.nix
+	 ./graphics.nix
   ];
 
   # Host identity and networking
-  networking = {
-    hostName = "nixos-laptop";
+  networking.hostName = "nixos-laptop";
+
+  # System features
+  my = {
+    profiles.graphical.enable = true;
+    modules.razer.enable = true;
   };
-
-  my.profiles.graphical.enable = true;
-
-  # Optional custom NixOS modules
-  my.modules.razer.enable = true;
 
   # Bootloader and kernel
   boot = {
@@ -36,19 +35,6 @@
 
   # Hardware
   hardware = {
-    graphics = {
-      extraPackages = with pkgs; [
-        intel-media-driver
-      ];
-    };
-
-    nvidia = {
-      modesetting.enable = true;
-      open = true;
-      powerManagement.enable = false;
-      moduleParams.nvidia.NVreg_UseKernelSuspendNotifiers = 1;
-    };
-
     bluetooth = {
       enable = true;
       powerOnBoot = true;
@@ -65,7 +51,6 @@
     # Graphical environment
     displayManager.noctalia-greeter.enable = true;
     # displayManager.ly.enable = true;
-    xserver.videoDrivers = ["nvidia"];
 
     # keyring
     gnome.gnome-keyring.enable = true;
