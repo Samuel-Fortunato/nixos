@@ -33,6 +33,7 @@
 
   laptop = (mkHome ../hosts/laptop/home.nix).config;
   vm = (mkHome ../hosts/vm/home.nix).config;
+  wsl = (mkHome ../hosts/wsl/home.nix).config;
 
   withoutGit = builtins.tryEval (mkHome {
     my.profiles.development.enable = true;
@@ -84,6 +85,13 @@ in
   assert enabled vm sharedFeatures;
   assert laptop.my.modules.noctalia.musicWallpaper.enable;
   assert vm.my.modules.noctalia.musicWallpaper.enable;
+  assert enabled wsl ["zsh" "starship" "git" "neovim" "lazygit" "ripgrep" "yazi"];
+  assert !wsl.my.modules.fastfetch.enable;
+  assert !wsl.my.modules.btop.enable;
+  assert !wsl.my.modules.tmux.enable;
+  assert !wsl.my.modules.gh.enable;
+  assert !wsl.my.modules.hyprland.enable;
+  assert !wsl.my.modules.noctalia.enable;
   assert !withoutGit.success;
   assert !withoutHyprland.success;
   assert !withoutNoctalia.success;

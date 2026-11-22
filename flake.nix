@@ -10,12 +10,18 @@
     };
 
     umbriel.url = "github:noctalia-dev/umbriel/cachix";
+
+    nixos-wsl = {
+      url = "github:nix-community/NixOS-WSL/main";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
     nixpkgs,
     home-manager,
     umbriel,
+    nixos-wsl,
     ...
   }: let
     hosts = {
@@ -30,6 +36,12 @@
         directory = ./hosts/vm;
         monitorName = "Virtual-1";
         extraModules = [];
+      };
+      nixos-wsl = {
+        system = "x86_64-linux";
+        directory = ./hosts/wsl;
+        monitorName = "WSL";
+        extraModules = [nixos-wsl.nixosModules.default];
       };
     };
 
