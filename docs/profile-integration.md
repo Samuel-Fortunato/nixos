@@ -27,9 +27,10 @@ fully portable runtime.
   applications can leave individual launchers unavailable even when evaluation
   succeeds. Yazi's Neovim, Kitty and desktop shortcut openers follow the
   corresponding module selections.
-- Neovim bootstraps plugins through Git and includes MATLAB, ESP32 and Zathura
-  integrations. These require separate
-  portability work and runtime testing, especially for WSL.
+- Neovim bootstraps plugins through Git. Its MATLAB, ESP32 and Zathura
+  integrations check for their tools at startup; the MATLAB language server
+  also needs its expected server file and Distrobox environment. Test these
+  integrations in their target environments.
 - The Zsh clipboard helper requires `wl-copy` and reports when it is absent;
   the Noctalia exporter assumes a writable checkout at `/etc/nixos` and is tied
   to the `eDP-1` monitor.

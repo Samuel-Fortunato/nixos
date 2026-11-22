@@ -35,6 +35,7 @@
         pkg-config
 
         # Utilities
+        git # lazy.nvim bootstrap
         ripgrep
         ghostscript
         fd
