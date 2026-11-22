@@ -10,7 +10,5 @@
     fastfetch.enable = false;
     btop.enable = false;
     tmux.enable = false;
-    gh.enable = false;
-    yazi.enable = true;
   };
 }

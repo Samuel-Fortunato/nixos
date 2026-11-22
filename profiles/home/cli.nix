@@ -10,6 +10,7 @@
       ripgrep.enable = lib.mkDefault true;
       btop.enable = lib.mkDefault true;
       tmux.enable = lib.mkDefault true;
+      yazi.enable = lib.mkDefault true;
     };
   };
 }

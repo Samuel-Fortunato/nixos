@@ -13,7 +13,6 @@
     fonts.enable = true;
     matlab.enable = true;
     codex.enable = true;
-    proton-drive.enable = false;
     mega-sync.enable = true;
     razer.enable = true;
     kicad.enable = true;
