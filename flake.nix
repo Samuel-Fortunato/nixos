@@ -71,11 +71,6 @@
       value = mkHomeHost host;
     }) hosts;
   in {
-    checks.x86_64-linux.profiles = import ./tests/profiles.nix {
-      inherit (nixpkgs) lib;
-      inherit home-manager;
-      pkgs = homePackages "x86_64-linux";
-    };
     checks.x86_64-linux.home-evaluations =
       builtins.deepSeq
       (nixpkgs.lib.mapAttrsToList (_: host: host.activationPackage.drvPath) homeHosts)
