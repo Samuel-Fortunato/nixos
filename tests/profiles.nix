@@ -22,6 +22,8 @@
       my.modules.fastfetch.enable = false;
     }).config;
 
+  cliOnly = (mkHome {my.profiles.cli.enable = true;}).config;
+
   desktop =
     (mkHome {
       my.profiles.desktop.enable = true;
@@ -68,6 +70,11 @@ in
   assert !cli.my.modules.hyprland.enable;
   assert !cli.my.modules.noctalia.enable;
   assert assertionsPass cli;
+  assert cliOnly.my.modules.zsh.enable;
+  assert !cliOnly.my.modules.neovim.enable;
+  assert !cliOnly.my.modules.hyprland.enable;
+  assert !cliOnly.my.modules.noctalia.enable;
+  assert assertionsPass cliOnly;
   assert desktop.my.modules.hyprland.enable;
   assert desktop.my.modules.noctalia.enable;
   assert !desktop.my.modules.chrome.enable;

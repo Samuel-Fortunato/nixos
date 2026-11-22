@@ -32,6 +32,10 @@ yet a guarantee of a fully portable runtime.
   portability work and runtime testing, especially for WSL.
 - The Zsh clipboard helper assumes `wl-copy`; the Noctalia exporter assumes a
   writable checkout at `/etc/nixos` and is tied to the `eDP-1` monitor.
+- The CLI profile enables Zsh without Neovim. Its `ncf` alias invokes `nvim`,
+  so that alias needs Neovim even though the rest of the shell does not. The
+  `homMan` helper invokes the standalone `home-manager` command and activates
+  the configuration when called.
 
 These are runtime assumptions or existing assertions, not new dependencies added
 by the profiles. They are recorded here for follow-up without changing working
