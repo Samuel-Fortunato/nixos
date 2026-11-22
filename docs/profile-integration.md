@@ -30,8 +30,9 @@ fully portable runtime.
 - Neovim bootstraps plugins through Git and includes MATLAB, ESP32 and Zathura
   integrations. These require separate
   portability work and runtime testing, especially for WSL.
-- The Zsh clipboard helper assumes `wl-copy`; the Noctalia exporter assumes a
-  writable checkout at `/etc/nixos` and is tied to the `eDP-1` monitor.
+- The Zsh clipboard helper requires `wl-copy` and reports when it is absent;
+  the Noctalia exporter assumes a writable checkout at `/etc/nixos` and is tied
+  to the `eDP-1` monitor.
 - The CLI profile enables Zsh without Neovim. Its `ncf` alias invokes `nvim`,
   so that alias needs Neovim even though the rest of the shell does not. The
   `homMan` helper invokes the standalone `home-manager` command and activates
