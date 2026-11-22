@@ -10,7 +10,6 @@
   };
 
   my.modules = {
-    noctalia.exporter.enable = true;
     fonts.enable = true;
     matlab.enable = true;
     codex.enable = true;

@@ -3,6 +3,7 @@
 
   config = lib.mkIf config.my.profiles.cli.enable {
     my.modules = {
+      neovim.enable = lib.mkDefault true;
       zsh.enable = lib.mkDefault true;
       starship.enable = lib.mkDefault true;
       fastfetch.enable = lib.mkDefault true;

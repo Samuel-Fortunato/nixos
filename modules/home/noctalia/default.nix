@@ -53,6 +53,7 @@ in {
   options.my.modules.noctalia.enable = lib.mkEnableOption "Noctalia desktop shell";
 
   config = lib.mkIf config.my.modules.noctalia.enable {
+    my.modules.noctalia.exporter.enable = lib.mkDefault true;
     programs.noctalia = {
       enable = true;
       systemd.enable = true;
