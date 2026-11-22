@@ -42,3 +42,11 @@ fully portable runtime.
 These are runtime assumptions or existing assertions, not new dependencies added
 by the profiles. They are recorded here for follow-up without changing working
 application configuration in this phase.
+
+The system-wide Zsh and Neovim provide the login shell and a system editor;
+standalone Home Manager configures the user's shell and editor. The MEGA module
+runs MEGAcmd, not the graphical client, and does not create sync pairs. The
+disabled Proton Drive module is experimental: it runs an unattended rclone
+bisync timer and requires a separately initialized remote and careful testing.
+The unconditional `tree` and Noto font packages remain part of the home
+baseline; enabling the fonts module additionally configures Fontconfig.

@@ -5,12 +5,11 @@
   ...
 }:
 {
-  options.my.modules.mega-sync.enable = lib.mkEnableOption "MEGA Synchronization";
+  options.my.modules.mega-sync.enable = lib.mkEnableOption "MEGAcmd server (sync pairs are configured separately)";
 
   config = lib.mkIf config.my.modules.mega-sync.enable {
     home.packages = [
       pkgs.megacmd
-
     ];
 
     systemd.user.services.megacmd = {

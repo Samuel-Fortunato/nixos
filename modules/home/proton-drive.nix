@@ -5,7 +5,7 @@
   ...
 }:
 {
-  options.my.modules.proton-drive.enable = lib.mkEnableOption "Proton Drive synchronization";
+  options.my.modules.proton-drive.enable = lib.mkEnableOption "experimental Proton Drive bisync (requires an initialized rclone remote)";
   config = lib.mkIf config.my.modules.proton-drive.enable {
     home.packages = [ pkgs.rclone ];
 
