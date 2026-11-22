@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }: {
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
   options.my.profiles.graphical.enable =
     lib.mkEnableOption "Shared graphical NixOS environment";
 
@@ -12,6 +17,7 @@
       udisks2.enable = lib.mkDefault true;
 
       displayManager.noctalia-greeter.enable = lib.mkDefault true;
+      gnome.gnome-keyring.enable = lib.mkDefault true;
     };
     programs.hyprland.enable = lib.mkDefault true;
     security.polkit.enable = lib.mkDefault true;
