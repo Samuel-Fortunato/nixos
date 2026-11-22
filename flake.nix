@@ -33,6 +33,11 @@
       };
     };
 
+    homePackages = system: import nixpkgs {
+      inherit system;
+      config.allowUnfree = true;
+    };
+
     mkNixosHost = host:
       nixpkgs.lib.nixosSystem {
         inherit (host) system;
@@ -41,10 +46,7 @@
 
     mkHomeHost = host:
       home-manager.lib.homeManagerConfiguration {
-        pkgs = import nixpkgs {
-          inherit (host) system;
-          config.allowUnfree = true;
-        };
+        pkgs = homePackages host.system;
         modules = [
           ./modules/home
           (host.directory + "/home.nix")
@@ -56,10 +58,7 @@
     checks.x86_64-linux.profiles = import ./tests/profiles.nix {
       inherit (nixpkgs) lib;
       inherit home-manager;
-      pkgs = import nixpkgs {
-        system = "x86_64-linux";
-        config.allowUnfree = true;
-      };
+      pkgs = homePackages "x86_64-linux";
     };
 
     nixosConfigurations = nixpkgs.lib.mapAttrs (_: mkNixosHost) hosts;
