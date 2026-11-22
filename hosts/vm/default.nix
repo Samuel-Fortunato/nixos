@@ -23,13 +23,7 @@
   };
 
   # System services
-  services = {
-    # Virtual machine integration
-    qemuGuest.enable = true;
-
-    # Graphical environment
-    displayManager.ly.enable = true;
-  };
+  services.qemuGuest.enable = true;
 
   # System compatibility
   system.stateVersion = "26.05";

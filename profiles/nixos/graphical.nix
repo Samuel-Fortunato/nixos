@@ -10,6 +10,8 @@
       pipewire.enable = lib.mkDefault true;
       accounts-daemon.enable = lib.mkDefault true;
       udisks2.enable = lib.mkDefault true;
+
+      displayManager.noctalia-greeter.enable = lib.mkDefault true;
     };
     programs.hyprland.enable = lib.mkDefault true;
     security.polkit.enable = lib.mkDefault true;

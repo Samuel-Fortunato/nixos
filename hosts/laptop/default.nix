@@ -49,13 +49,6 @@
       SUBSYSTEM=="usb", ATTR{idVendor}=="0cd5", ATTR{idProduct}=="0001", \
         MODE="0660", GROUP="labjack"
     '';
-
-    # Graphical environment
-    displayManager.noctalia-greeter.enable = true;
-    # displayManager.ly.enable = true;
-
-    # keyring
-    gnome.gnome-keyring.enable = true;
   };
 
   # Programs
