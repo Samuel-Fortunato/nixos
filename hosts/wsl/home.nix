@@ -1,6 +1,4 @@
 {...}: {
-  imports = [../../profiles/home];
-
   my.profiles.cli.enable = true;
   my.profiles.development.enable = true;
   my.profiles.academic.enable = true;

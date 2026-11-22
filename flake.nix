@@ -45,10 +45,11 @@
       };
     };
 
-    homePackages = system: import nixpkgs {
-      inherit system;
-      config.allowUnfree = true;
-    };
+    homePackages = system:
+      import nixpkgs {
+        inherit system;
+        config.allowUnfree = true;
+      };
 
     mkNixosHost = host:
       nixpkgs.lib.nixosSystem {
@@ -59,17 +60,22 @@
     mkHomeHost = host:
       home-manager.lib.homeManagerConfiguration {
         pkgs = homePackages host.system;
+
         modules = [
           ./modules/home
+          ./profiles/home
           (host.directory + "/home.nix")
           {programs.home-manager.enable = true;}
         ];
+
         extraSpecialArgs = {inherit (host) monitorName;};
       };
-    homeHosts = nixpkgs.lib.mapAttrs' (name: host: {
-      name = "samuel@${name}";
-      value = mkHomeHost host;
-    }) hosts;
+    homeHosts =
+      nixpkgs.lib.mapAttrs' (name: host: {
+        name = "samuel@${name}";
+        value = mkHomeHost host;
+      })
+      hosts;
   in {
     checks.x86_64-linux.home-evaluations =
       builtins.deepSeq

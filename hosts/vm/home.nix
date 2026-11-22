@@ -1,6 +1,4 @@
 { ... }: {
-  imports = [ ../../profiles/home ];
-
   my.profiles = {
     cli.enable = true;
     desktop.enable = true;
