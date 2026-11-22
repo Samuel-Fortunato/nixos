@@ -66,19 +66,24 @@
         ];
         extraSpecialArgs = {inherit (host) monitorName;};
       };
+    homeHosts = nixpkgs.lib.mapAttrs' (name: host: {
+      name = "samuel@${name}";
+      value = mkHomeHost host;
+    }) hosts;
   in {
     checks.x86_64-linux.profiles = import ./tests/profiles.nix {
       inherit (nixpkgs) lib;
       inherit home-manager;
       pkgs = homePackages "x86_64-linux";
     };
+    checks.x86_64-linux.home-evaluations =
+      builtins.deepSeq
+      (nixpkgs.lib.mapAttrsToList (_: host: host.activationPackage.drvPath) homeHosts)
+      ((homePackages "x86_64-linux").runCommand "home-evaluations" {} ''
+        touch "$out"
+      '');
 
     nixosConfigurations = nixpkgs.lib.mapAttrs (_: mkNixosHost) hosts;
-    homeConfigurations =
-      nixpkgs.lib.mapAttrs' (name: host: {
-        name = "samuel@${name}";
-        value = mkHomeHost host;
-      })
-      hosts;
+    homeConfigurations = homeHosts;
   };
 }
