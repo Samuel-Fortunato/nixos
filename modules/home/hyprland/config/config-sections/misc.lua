@@ -13,5 +13,14 @@ hl.config({
 	},
 	xwayland = {
 		force_zero_scaling = true
-	}
+	},
 })
+
+-- Virtio-GPU compatibility workarounds
+if os.getenv("HYPRLAND_VIRTIO_WORKAROUND") == "1" then
+    hl.config({
+        quirks = {
+            skip_non_kms_dmabuf_formats = false,
+        }
+    })
+end
