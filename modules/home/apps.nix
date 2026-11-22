@@ -18,7 +18,6 @@ let
     calculator = pkgs.gnome-calculator;
     showtime = pkgs.showtime;
     codex = pkgs.codex;
-    evtest = pkgs.evtest;
 	 seahorse = pkgs.seahorse;
 	 kicad = pkgs.kicad;
   };

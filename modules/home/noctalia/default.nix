@@ -76,6 +76,9 @@ in {
 
       # Wallpaper Widget
       imagemagick
+
+		# Bongo Cat
+		evtest
     ];
 
     home.file.".local/bin/noctalia-caffeine-lock".source = "${noctaliaCaffeineLock}/bin/noctalia-caffeine-lock";
