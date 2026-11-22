@@ -1,8 +1,10 @@
-{ ... }:
-{
-  imports = [
-    ../../profiles/home/daily-desktop.nix
-  ];
+{ ... }: {
+  imports = [ ../../profiles/home ];
 
-  # No VM-specific modules enabled.
+  my.profiles = {
+    cli.enable = true;
+    development.enable = true;
+    desktop.enable = true;
+    media.enable = true;
+  };
 }

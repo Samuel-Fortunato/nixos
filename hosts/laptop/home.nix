@@ -1,29 +1,21 @@
-{ ... }:
-{
-  imports = [
-    ../../profiles/home/daily-desktop.nix
-  ];
+{ ... }: {
+  imports = [ ../../profiles/home ];
+
+  my.profiles = {
+    cli.enable = true;
+    development.enable = true;
+    desktop.enable = true;
+    media.enable = true;
+    academic.enable = true;
+  };
 
   my.modules = {
-    # Fonts
     fonts.enable = true;
-
-    # Productivity
-    onlyoffice.enable = true;
-    latex.enable = true;
-
-    # Development tools
     matlab.enable = true;
     codex.enable = true;
-
-    # Cloud synchronization
     proton-drive.enable = false;
     mega-sync.enable = true;
-
-	 # Razer mouse controller (polychromatic)
-	 razer.enable = true;
-
-	 # kicad
-	 kicad.enable = true;
+    razer.enable = true;
+    kicad.enable = true;
   };
 }
