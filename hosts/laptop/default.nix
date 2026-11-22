@@ -2,6 +2,7 @@
   imports = [
     ./hardware-configuration.nix
 	 ./graphics.nix
+	 ./virtualization.nix
   ];
 
   # Host identity and networking
@@ -75,37 +76,16 @@
     umbriel.enable = true;
     steam.enable = true;
     gpu-screen-recorder.enable = true;
-    virt-manager.enable = true;
   };
 
   users = {
     groups.labjack = {};
     users.samuel.extraGroups = [
-      "libvirtd"
       "dialout"
       "input" # Noctalia Bongo Cat
       "labjack"
     ];
   };
-
-  # Virtualization
-  virtualisation = {
-    podman.enable = true;
-
-    libvirtd = {
-      enable = true;
-
-      qemu = {
-        swtpm.enable = true;
-        vhostUserPackages = [pkgs.virtiofsd];
-      };
-    };
-  };
-
-  # System packages
-  environment.systemPackages = with pkgs; [
-    swtpm
-  ];
 
   # Windows dual-boot partition
   fileSystems."/mnt/windows" = {
