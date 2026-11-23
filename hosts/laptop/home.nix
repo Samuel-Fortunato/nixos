@@ -13,5 +13,9 @@
     mega-sync.enable = true;
     razer.enable = true;
     kicad.enable = true;
+	 desktop-commander = {
+	   enable = true;
+		autoStart = true;
+	 };
   };
 }
