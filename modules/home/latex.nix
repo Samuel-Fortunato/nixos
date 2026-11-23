@@ -16,6 +16,9 @@
         beamertheme-metropolis
         standalone
 
+        pgf
+        pgfopts
+
         booktabs
         mdwtools
         fontspec
@@ -27,9 +30,13 @@
         lipsum
         cleveref
         circuitikz
+		  enumitem
+		  txfonts
+		  newtx
+		  titlesec
 
-        pgf
-        pgfopts
+		  babel-portuges
+		  hyphen-portuguese
       ]
   );
 in {
