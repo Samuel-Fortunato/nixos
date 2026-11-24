@@ -33,6 +33,11 @@ return {
 						return
 					end
 
+					-- Let VimTeX handle LaTeX syntax highlighting.
+					if lang == "latex" then
+						return
+					end
+
 					local ok, err = pcall(vim.treesitter.start, buf, lang)
 
 					if not ok then
