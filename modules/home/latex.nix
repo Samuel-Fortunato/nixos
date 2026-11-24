@@ -34,6 +34,7 @@
 		  txfonts
 		  newtx
 		  titlesec
+		  caption
 
 		  babel-portuges
 		  hyphen-portuguese
