@@ -18,6 +18,9 @@
 
       displayManager.noctalia-greeter.enable = lib.mkDefault true;
       gnome.gnome-keyring.enable = lib.mkDefault true;
+
+      tumbler.enable = lib.mkDefault true;
+      gvfs.enable = lib.mkDefault true;
     };
     programs.hyprland.enable = lib.mkDefault true;
     security.polkit.enable = lib.mkDefault true;
