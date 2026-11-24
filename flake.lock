@@ -36,6 +36,27 @@
         "type": "github"
       }
     },
+    "minegrub-theme": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1790090837,
+        "narHash": "sha256-2qP9aYUmFTmMYenLfbfYJ8P+XUGJYJFDdbQBheasr8k=",
+        "owner": "Lxtharia",
+        "repo": "minegrub-theme",
+        "rev": "142f67baed783b4f6774f316476f46ff7ab1823a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Lxtharia",
+        "ref": "main",
+        "repo": "minegrub-theme",
+        "type": "github"
+      }
+    },
     "nixos-wsl": {
       "inputs": {
         "flake-compat": "flake-compat",
@@ -90,6 +111,7 @@
     "root": {
       "inputs": {
         "home-manager": "home-manager",
+        "minegrub-theme": "minegrub-theme",
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs",
         "umbriel": "umbriel"

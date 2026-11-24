@@ -15,6 +15,11 @@
       url = "github:nix-community/NixOS-WSL/main";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    minegrub-theme = {
+      url = "github:Lxtharia/minegrub-theme/main";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -22,6 +27,7 @@
     home-manager,
     umbriel,
     nixos-wsl,
+    minegrub-theme,
     ...
   }: let
     hosts = {
@@ -54,7 +60,13 @@
     mkNixosHost = host:
       nixpkgs.lib.nixosSystem {
         inherit (host) system;
-        modules = [host.directory ./configuration.nix] ++ host.extraModules;
+        modules =
+          [
+            ./configuration.nix
+            host.directory
+            minegrub-theme.nixosModules.default
+          ]
+          ++ host.extraModules;
       };
 
     mkHomeHost = host:
