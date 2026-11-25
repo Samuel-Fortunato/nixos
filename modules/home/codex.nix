@@ -10,6 +10,7 @@
   config = lib.mkIf config.my.modules.codex.enable {
     home.packages = with pkgs; [
       codex
+		bubblewrap
 
       # Utilities for agent-assisted development
       python3
