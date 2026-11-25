@@ -17,7 +17,6 @@ let
     udiskie = pkgs.udiskie;
     calculator = pkgs.gnome-calculator;
     showtime = pkgs.showtime;
-    codex = pkgs.codex;
 	 seahorse = pkgs.seahorse;
 	 kicad = pkgs.kicad;
   };
