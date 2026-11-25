@@ -6,6 +6,7 @@
       git.enable = lib.mkDefault true;
       lazygit.enable = lib.mkDefault true;
       gh.enable = lib.mkDefault true;
+		direnv.enable = lib.mkDefault true;
     };
   };
 }
