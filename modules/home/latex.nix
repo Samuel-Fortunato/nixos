@@ -35,6 +35,7 @@
 		  newtx
 		  titlesec
 		  caption
+		  float
 
 		  babel-portuges
 		  hyphen-portuguese
