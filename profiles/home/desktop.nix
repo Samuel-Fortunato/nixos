@@ -25,6 +25,7 @@
       litemdview.enable = lib.mkDefault true;
       proton-pass.enable = lib.mkDefault true;
       fonts.enable = lib.mkDefault true;
+      chatgpt.enable = lib.mkDefault true;
     };
   };
 }

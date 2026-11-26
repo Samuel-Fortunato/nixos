@@ -19,6 +19,7 @@ let
     showtime = pkgs.showtime;
 	 seahorse = pkgs.seahorse;
 	 kicad = pkgs.kicad;
+	 chatgpt = pkgs.chatgpt;
   };
 in
 {
