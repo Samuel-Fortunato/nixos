@@ -36,6 +36,8 @@
 		  titlesec
 		  caption
 		  float
+		  siunitx
+		  xurl
 
 		  babel-portuges
 		  hyphen-portuguese
