@@ -5,40 +5,21 @@
 -- Refer to https://wiki.hypr.land/Configuring/Basics/Variables/
 hl.config({
 	general = {
-		gaps_in  = 3,
-		gaps_out = 5,
-
+		gaps_in       = 3,
+		gaps_out      = 5,
+		border_size   = 2,
 
 		allow_tearing = true,
 		layout        = "dwindle",
 	},
 
 	decoration = {
-		rounding       = 10,
-		rounding_power = 2,
+		rounding = 30,
+		rounding_power = 1,
 
-		-- Change transparency of focused and unfocused windows
-		-- active_opacity     = 0.95,
-		-- inactive_opacity   = 0.85,
+		-- active_opacity = 0.65,
+		-- inactive_opacity = 0.55,
 		-- fullscreen_opacity = 1.0,
-
-		shadow         = {
-			enabled      = true,
-			range        = 4,
-			render_power = 3,
-			color        = 0xee1a1a1a,
-		},
-
-		blur           = {
-			enabled  = true,
-			size     = 3,
-			passes   = 2,
-			vibrancy = 0.1696,
-		},
-	},
-
-	animations = {
-		enabled = true,
 	},
 
 	xwayland = {
