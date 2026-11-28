@@ -92,7 +92,7 @@ let
         "font_scale" = 1.0;
         "font_weight" = 500;
         "hover_highlight" = true;
-        "layer" = "overlay";
+        "layer" = "auto";
         "margin_edge" = 0;
         "margin_ends" = 0;
         "margin_opposite_edge" = 0;
@@ -579,7 +579,7 @@ let
       "follow_focused_output" = false;
       "history_retention_hours" = 0;
       "keep_dismissed_in_history" = false;
-      "layer" = "top";
+      "layer" = "overlay";
       "max_visible" = 0;
       "monitors" = [];
       "offset_x" = 20;

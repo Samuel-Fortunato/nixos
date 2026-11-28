@@ -144,10 +144,11 @@ hl.bind(mainMod .. "+P", hl.dsp.exec_cmd(noctalia .. "panel-toggle profidev/hypr
 
 hl.bind(mainMod .. "+SUPER_l", hl.dsp.submap("double-click"), { release = true })
 hl.bind(mainMod .. "+SUPER_l", hl.dsp.exec_cmd(noctalia .. "panel-close control-center"), { release = true })
-hl.bind(mainMod .. "+SUPER_l", hl.dsp.exec_cmd("sleep 0.4 && hyprctl dispatch 'hl.dsp.submap(\"reset\")'"), { release = true })
+hl.bind(mainMod .. "+SUPER_l", hl.dsp.exec_cmd("sleep 0.4 && hyprctl dispatch 'hl.dsp.submap(\"reset\")'"),
+	{ release = true })
 
 hl.define_submap("double-click", function()
-    hl.bind(mainMod .. "+SUPER_l", hl.dsp.exec_cmd(noctalia .. "panel-open control-center"), { release = true })
+	hl.bind(mainMod .. "+SUPER_l", hl.dsp.exec_cmd(noctalia .. "panel-open control-center"), { release = true })
 end)
 
 -- hl.bind(mainMod .. "+SUPER_l", hl.dsp.submap("double-click"))
@@ -169,4 +170,13 @@ hl.bind(mainMod .. "+comma", hl.dsp.exec_cmd(noctalia .. "settings-toggle"))
 
 hl.bind("ALT + Tab", hl.dsp.exec_cmd(noctalia .. "window-switcher hold"))
 hl.bind("CTRL + ESCAPE", hl.dsp.exec_cmd(noctalia .. "panel-toggle control-center system"))
-hl.bind(mainMod .. " + BACKSLASH", hl.dsp.exec_cmd(noctalia .. "bar-toggle"))
+
+hl.on("input.keyboard.key", function(keycode, _, state)
+	if keycode ~= 133 then return end  -- Left Super
+
+	if state == 1 then
+		hl.exec_cmd(noctalia .. "bar-layer-set overlay")
+	elseif state == 0 then
+		hl.exec_cmd(noctalia .. "bar-layer-set auto")
+	end
+end)
