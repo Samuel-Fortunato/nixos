@@ -5,10 +5,12 @@
 let
   settings = {
     "accessibility" = {
+      "font_scale" = 1.0;
       "high_contrast" = false;
       "ui_scale" = 1.0;
     };
     "audio" = {
+      "colorize_icons" = false;
       "enable_notification_sounds" = true;
       "enable_overdrive" = false;
       "enable_power_sounds" = true;
@@ -17,6 +19,7 @@ let
       "enable_volume_sounds" = true;
       "sound_theme" = "freedesktop";
       "sound_volume" = 0.5;
+      "spectrum_frame_rate" = 60;
     };
     "backdrop" = {
       "blur_intensity" = 0.5;
@@ -27,6 +30,7 @@ let
       "default" = {
         "auto_hide" = false;
         "auto_hide_delay_ms" = 0;
+        "auto_hide_reserve_space" = false;
         "background_opacity" = 1.0;
         "border" = "outline_variant";
         "border_width" = 0.0;
@@ -133,8 +137,11 @@ let
     };
     "brightness" = {
       "enable_ddcutil" = false;
+      "enable_scheduled_brightness" = false;
       "ignore_mmids" = [];
       "minimum_brightness" = 0.01;
+      "scheduled_day_brightness" = 1.0;
+      "scheduled_night_brightness" = 0.5;
       "sync_all_monitors" = false;
     };
     "calendar" = {
@@ -172,9 +179,9 @@ let
         "hide_past_events" = true;
         "past_events_threshold_minutes" = 0;
         "show_events_card" = true;
+        "show_events_location" = false;
         "show_week_numbers" = false;
       };
-      "circular_avatar" = true;
       "hidden_tabs" = [
         "media"
         "calendar"
@@ -272,12 +279,17 @@ let
       "active_opacity" = 1.0;
       "active_scale" = 1.0;
       "auto_hide" = false;
+      "auto_hide_reveal_delay_ms" = 250;
       "background_opacity" = 0.89;
       "border" = "outline_variant";
       "border_width" = 0.0;
+      "colorize_icons" = false;
+      "compositor_blur" = true;
       "concave_edge_corners" = true;
       "cross_axis_padding" = 8;
       "enabled" = false;
+      "icon_saturation" = 1.0;
+      "icon_shadow" = false;
       "icon_size" = 48;
       "inactive_opacity" = 0.85;
       "inactive_scale" = 0.85;
@@ -390,6 +402,12 @@ let
       "cancel" = [
         "Escape"
       ];
+      "category_next" = [
+        "Ctrl+Tab"
+      ];
+      "category_previous" = [
+        "Ctrl+Shift+ISO_Left_Tab"
+      ];
       "copy" = [
         "Ctrl+c"
       ];
@@ -410,6 +428,9 @@ let
       ];
       "save" = [
         "Ctrl+s"
+      ];
+      "select_all" = [
+        "Ctrl+a"
       ];
       "tab_next" = [
         "Tab"
@@ -438,12 +459,14 @@ let
       "allow_empty_password" = false;
       "blur_intensity" = 0.5;
       "blurred_desktop" = true;
+      "dnd" = false;
       "edge_smoothness" = 0.3;
       "enabled" = true;
       "fingerprint" = false;
       "grace_period_seconds" = 0;
       "lock_before_suspend" = true;
       "monitors" = [];
+      "tint_color" = "surface";
       "tint_intensity" = 0.3;
       "transition" = [
         "fade"
@@ -575,19 +598,23 @@ let
       "border_color" = "outline_variant";
       "border_width" = 1.0;
       "collapse_on_dismiss" = true;
+      "colorize_icons" = false;
       "enable_daemon" = true;
       "follow_focused_output" = false;
+      "group_by_app" = true;
       "history_retention_hours" = 0;
       "keep_dismissed_in_history" = false;
       "layer" = "overlay";
       "max_visible" = 0;
       "monitors" = [];
+      "newest_on_edge" = false;
       "offset_x" = 20;
       "offset_y" = 8;
       "position" = "top_right";
       "scale" = 1.0;
       "show_actions" = true;
       "show_app_name" = true;
+      "show_progress_bar" = true;
       "width" = 360;
     };
     "osd" = {
@@ -608,6 +635,7 @@ let
         "keyboard_layout" = true;
         "lock_keys" = true;
         "media" = true;
+        "media_volume" = true;
         "nightlight" = true;
         "power_profile" = true;
         "privacy" = true;
@@ -679,10 +707,10 @@ let
         "enabled" = true;
         "speed" = 1.0;
       };
-      "app_icon_colorize" = false;
       "avatar_path" = "/home/samuel/Pictures/avatar.png";
       "button_borders" = true;
       "card_borders" = true;
+      "circular_avatar" = false;
       "clipboard_auto_paste" = "auto";
       "clipboard_confirm_clear_history" = true;
       "clipboard_enabled" = true;
@@ -706,6 +734,7 @@ let
         "auto_paste" = "auto";
         "categories" = false;
         "category_icons_only" = false;
+        "colorize_icons" = false;
         "compact" = false;
         "default_view" = "recent";
         "dmenu" = {};
@@ -769,6 +798,7 @@ let
       };
       "password_style" = "default";
       "polkit_agent" = true;
+      "polkit_colorize_icons" = false;
       "popup_borders" = true;
       "popup_shadows" = true;
       "privacy" = {
@@ -781,9 +811,11 @@ let
         "enabled" = false;
         "size" = 32;
       };
+      "screen_time_colorize_icons" = false;
       "screen_time_enabled" = true;
       "screenshot" = {
         "annotate" = false;
+        "append_mode_suffix" = true;
         "close_on_copy" = true;
         "close_on_save" = true;
         "confirm_region" = true;
@@ -897,6 +929,7 @@ let
       "umbriel_overview_close_on_launch_enabled" = false;
       "umbriel_overview_type_to_launch_enabled" = false;
       "window_switcher" = {
+        "colorize_icons" = false;
         "current_workspace_only" = true;
         "mru" = true;
         "show_all_outputs" = true;
@@ -991,6 +1024,7 @@ let
           };
         };
       };
+      "terminal_colors" = "palette";
       "wallpaper_scheme" = "faithful";
     };
     "wallpaper" = {
@@ -998,6 +1032,7 @@ let
         "enabled" = false;
         "interval_seconds" = 600;
         "order" = "random";
+        "pause_on_fullscreen" = false;
         "recursive" = false;
       };
       "directory" = "/home/samuel/Pictures/Wallpapers/";
@@ -1008,6 +1043,7 @@ let
       "fill_color" = "";
       "fill_mode" = "crop";
       "per_monitor_directories" = false;
+      "sync_transitions" = true;
       "transition" = [
         "fade"
         "wipe"
@@ -1027,6 +1063,7 @@ let
     };
     "widget" = {
       "active_window" = {
+        "colorize_icons" = false;
         "icon_size" = 14.0;
         "max_length" = 260.0;
         "min_length" = 80.0;
@@ -1124,9 +1161,17 @@ let
         "interactive" = false;
         "type" = "spacer";
       };
+      "taskbar" = {
+        "colorize_icons" = false;
+        "type" = "taskbar";
+      };
       "temp" = {
         "stat" = "cpu_temp";
         "type" = "sysmon";
+      };
+      "tray" = {
+        "colorize_icons" = false;
+        "type" = "tray";
       };
       "volume" = {
         "font_scale" = 0.8;
@@ -1134,6 +1179,7 @@ let
       };
       "workspaces" = {
         "active_pill_size" = 2.0;
+        "colorize_icons" = false;
         "type" = "workspaces";
       };
     };
