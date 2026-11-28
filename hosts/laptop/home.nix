@@ -11,6 +11,7 @@
     matlab.enable = true;
     codex.enable = true;
     mega-sync.enable = true;
+    bath-royale-backup.enable = true;
     razer.enable = true;
     kicad.enable = true;
 	 desktop-commander = {
